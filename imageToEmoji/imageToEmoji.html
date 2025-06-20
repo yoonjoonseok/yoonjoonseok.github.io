@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>이미지 이모지 변환기 (로컬)</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ 이미지 → 이모지 변환기</h1>
+        <form id="emojiForm">
+            <label for="cols">가로 픽셀 수:</label>
+            <input type="number" id="cols" value="30" min="1" max="100" />
+            <label for="rows">세로 픽셀 수:</label>
+            <input type="number" id="rows" value="30" min="1" max="100" />
+            <label for="imageInput">이미지 선택:</label>
+            <input type="file" id="imageInput" accept="image/*" />
+            <button type="submit">변환</button>
+        </form>
+        <div id="dropArea" class="drop-area">또는 이미지를 여기에 드래그 앤 드롭하세요</div>
+        <div id="output" class="output"></div>
+    </div>
+</body>
+</html>
