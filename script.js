@@ -1,46 +1,56 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas?.getContext("2d");
-if (ctx) {
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.getElementById("navbar");
+  if (nav) {
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => {
+        nav.innerHTML = html;
+      });
+  }
+
+  const canvas = document.getElementById("canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
   let radius = canvas.height / 2;
   ctx.translate(radius, radius);
   radius *= 0.9;
   timeInit();
   setInterval(() => drawClock(ctx, radius), 1000);
-  setInterval(getLeftTimeText, 1000);
+  setInterval(updateLeftTime, 1000);
+});
+
+function updateLeftTime() {
+  const el = document.getElementById("leftTimeText");
+  if (!el) return;
+  const ms = getTimeDiff();
+  const { hours, minutes, seconds } = convertMS(ms);
+  el.textContent = ms < 0
+    ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ"
+    : `퇴근까지 ${hours > 0 ? hours + "시간 " : ""}${minutes > 0 ? minutes + "분 " : ""}${seconds}초 남았따리 ㅋㅋ`;
 }
 
-function calculateTimeDifference() {
-  const selectedTimeInput = document.getElementById("workTime");
-  let selectedTimeValue = selectedTimeInput?.value || "17:30";
+function getTimeDiff() {
+  const val = document.getElementById("workTime")?.value || "17:30";
+  const [h, m] = val.split(":");
   const now = new Date();
-  const selectedDate = new Date();
-  const [h, m] = selectedTimeValue.split(":");
-  selectedDate.setHours(+h, +m, 0, 0);
-  return selectedDate.getTime() - now.getTime();
+  const target = new Date();
+  target.setHours(+h, +m, 0, 0);
+  return target - now;
 }
 
-function millisecondsToTime(ms) {
-  let seconds = Math.floor((ms / 1000) % 60);
-  let minutes = Math.floor((ms / (1000 * 60)) % 60);
-  let hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+function convertMS(ms) {
+  const seconds = Math.floor((ms / 1000) % 60);
+  const minutes = Math.floor((ms / (1000 * 60)) % 60);
+  const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
   return { hours, minutes, seconds };
 }
 
 function timeInit() {
-  const today = new Date();
-  if (today.getDay() === 5) {
+  const now = new Date();
+  if (now.getDay() === 5) {
     const input = document.getElementById("workTime");
     if (input) input.value = "16:30";
   }
-}
-
-function getLeftTimeText() {
-  const el = document.getElementById("leftTimeText");
-  if (!el) return;
-  const diff = calculateTimeDifference();
-  const { hours, minutes, seconds } = millisecondsToTime(diff);
-  el.textContent = diff < 0 ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ" :
-    `퇴근까지 ${hours > 0 ? hours + "시간 " : ""}${minutes > 0 ? minutes + "분 " : ""}${seconds}초 남았따리 ㅋㅋ`;
 }
 
 function drawClock(ctx, radius) {
@@ -71,8 +81,8 @@ function drawNumbers(ctx, radius) {
   ctx.font = radius * 0.15 + "px arial";
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
-  for(let num = 1; num < 13; num++){
-    let ang = num * Math.PI / 6;
+  for (let num = 1; num < 13; num++) {
+    const ang = num * Math.PI / 6;
     ctx.rotate(ang);
     ctx.translate(0, -radius * 0.85);
     ctx.rotate(-ang);
@@ -83,7 +93,7 @@ function drawNumbers(ctx, radius) {
   }
 }
 
-function drawTime(ctx, radius){
+function drawTime(ctx, radius) {
   const now = new Date();
   let hour = now.getHours();
   let minute = now.getMinutes();

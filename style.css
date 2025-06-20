@@ -1,63 +1,72 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f0f2f5;
   color: #333;
 }
 
-nav {
-  background: #fff;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 30px;
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: white;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-nav h1 {
-  color: #007BFF;
-  font-size: 1.5em;
-  margin: 0;
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
 }
 
-nav a {
+.navbar a {
+  color: white;
   margin-left: 20px;
   text-decoration: none;
-  color: #333;
   font-weight: 500;
 }
 
-nav a:hover {
-  color: #007BFF;
+.navbar a:hover {
+  text-decoration: underline;
 }
 
-main {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-#canvas {
-  background-color: #eee;
+.card {
+  background: white;
   border-radius: 10px;
-  margin-top: 30px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
 }
 
-#workTime {
-  margin-top: 20px;
+canvas {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+input[type="time"] {
   padding: 10px;
-  font-size: 1em;
+  margin-top: 10px;
+  font-size: 1rem;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 #leftTimeText {
-  font-size: 30px;
-  font-weight: bold;
-  color: #007BFF;
   margin-top: 20px;
+  font-size: 1.4rem;
+  color: #007bff;
+  font-weight: bold;
 }
