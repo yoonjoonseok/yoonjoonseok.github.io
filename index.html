@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>퇴근 타이머</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav>
+    <h1>퇴근 타이머</h1>
+    <div>
+      <a href="index.html">홈</a>
+      <a href="schedule.html">일정</a>
+      <a href="about.html">소개</a>
+    </div>
+  </nav>
+  <main>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <div>
+      <label for="workTime">퇴근 시간:</label>
+      <input type="time" id="workTime" value="17:30" min="16:00" max="18:00">
+    </div>
+    <div id="leftTimeText">퇴근까지 계산 중...</div>
+  </main>
+</body>
+</html>
