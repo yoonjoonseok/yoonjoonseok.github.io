@@ -5,6 +5,13 @@
 <canvas id="canvas" width="400" height="400" style="background-color:#333">
 Sorry, your browser does not support canvas.
 </canvas>
+퇴근 시간
+<input type="time" id="workTime" value="17:30" min="16:00" max="18:00">
+<marquee direction="down" width="100%" height="100%" behavior="alternate" class="bloc">
+  <marquee behavior="alternate">
+    <span id = "leftTimeText" style="font-size: 50px;">이것은 큰 글씨입니다.</span>
+  </marquee>
+</marquee>
 
 <script>
 const canvas = document.getElementById("canvas");
@@ -12,7 +19,63 @@ const ctx = canvas.getContext("2d");
 let radius = canvas.height / 2;
 ctx.translate(radius, radius);
 radius = radius * 0.90
+timeInit();
 setInterval(drawClock, 1000);
+setInterval(getLeftTimeText, 1000);
+
+function calculateTimeDifference() {
+  const selectedTimeInput = document.getElementById("workTime");
+  const selectedTimeValue = selectedTimeInput.value; 
+
+  if (!selectedTimeValue) {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      selectedTimeValue = `${hours}:${minutes}`;
+  }
+
+  const now = new Date();
+  const selectedDate = new Date();
+  const [selectedHour, selectedMinute] = selectedTimeValue.split(':');
+  selectedDate.setHours(parseInt(selectedHour, 10));
+  selectedDate.setMinutes(parseInt(selectedMinute, 10));
+  selectedDate.setSeconds(0);
+  selectedDate.setMilliseconds(0);
+
+  const timeDifferenceMs = selectedDate.getTime() - now.getTime();
+  return timeDifferenceMs;
+}
+
+function millisecondsToTime(ms) {
+  let seconds = Math.floor((ms / 1000) % 60);
+  let minutes = Math.floor((ms / (1000 * 60)) % 60);
+  let hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+  return {
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
+  };
+}
+
+function timeInit(){
+  const today = new Date();
+  const dayOfWeek = today.getDay(); 
+
+  if (dayOfWeek === 5) { 
+    const timeInput = document.getElementById('workTime');
+    timeInput.value = "16:30"; 
+  }
+}
+
+function getLeftTimeText(){
+  const element = document.getElementById("leftTimeText");
+  const timeDifference = calculateTimeDifference();
+  const hms = millisecondsToTime(timeDifference);
+
+  const leftTimeText = timeDifference < 0 ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ" : "퇴근까지 " + (hms.hours > 0 ? hms.hours + "시간 " : "") + (hms.minutes > 0 ? hms.minutes + "분 " : "") + hms.seconds + "초 남았따리 ㅋㅋ";
+  element.textContent = leftTimeText;
+}
 
 function drawClock() {
   drawFace(ctx, radius);
