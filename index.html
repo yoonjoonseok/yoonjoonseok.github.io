@@ -1,37 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>퇴근 카운트다운</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #222;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      width: 100%;
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    main {
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #canvas {
+      background-color: #333;
+      border-radius: 10px;
+      margin-top: 30px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    }
+
+    #workTime {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .bloc {
+      margin-top: 30px;
+      height: 100px;
+      color: #ffeb3b;
+    }
+
+    #leftTimeText {
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+  </style>
+</head>
 <body>
 
-<canvas id="canvas" width="400" height="400" style="background-color:#333">
-Sorry, your browser does not support canvas.
-</canvas>
-퇴근 시간
-<input type="time" id="workTime" value="17:30" min="16:00" max="18:00">
-<marquee direction="down" width="100%" height="100%" behavior="alternate" class="bloc">
-  <marquee behavior="alternate">
-    <span id = "leftTimeText" style="font-size: 50px;">이것은 큰 글씨입니다.</span>
+<nav>
+  <h1>퇴근 타이머</h1>
+  <div>
+    <a href="#">홈</a>
+    <a href="#">오늘의 일정</a>
+    <a href="#">남은 시간</a>
+    <a href="#">연락처</a>
+  </div>
+</nav>
+
+<main>
+  <canvas id="canvas" width="300" height="300"></canvas>
+
+  <div>
+    <label for="workTime">퇴근 시간:</label>
+    <input type="time" id="workTime" value="17:30" min="16:00" max="18:00">
+  </div>
+
+  <marquee direction="down" width="100%" behavior="alternate" class="bloc">
+    <marquee behavior="alternate">
+      <span id="leftTimeText">퇴근까지 계산 중...</span>
+    </marquee>
   </marquee>
-</marquee>
+</main>
+
+<footer>
+  © 2025 퇴근 타이머 | 제작자: 나
+</footer>
 
 <script>
+// 기존 JavaScript 코드 그대로 유지
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let radius = canvas.height / 2;
 ctx.translate(radius, radius);
-radius = radius * 0.90
+radius = radius * 0.90;
 timeInit();
 setInterval(drawClock, 1000);
 setInterval(getLeftTimeText, 1000);
 
 function calculateTimeDifference() {
   const selectedTimeInput = document.getElementById("workTime");
-  const selectedTimeValue = selectedTimeInput.value; 
+  let selectedTimeValue = selectedTimeInput.value;
 
   if (!selectedTimeValue) {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      selectedTimeValue = `${hours}:${minutes}`;
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    selectedTimeValue = `${hours}:${minutes}`;
   }
 
   const now = new Date();
@@ -58,7 +162,7 @@ function millisecondsToTime(ms) {
   };
 }
 
-function timeInit(){
+function timeInit() {
   const today = new Date();
   const dayOfWeek = today.getDay(); 
 
@@ -68,12 +172,18 @@ function timeInit(){
   }
 }
 
-function getLeftTimeText(){
+function getLeftTimeText() {
   const element = document.getElementById("leftTimeText");
   const timeDifference = calculateTimeDifference();
   const hms = millisecondsToTime(timeDifference);
 
-  const leftTimeText = timeDifference < 0 ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ" : "퇴근까지 " + (hms.hours > 0 ? hms.hours + "시간 " : "") + (hms.minutes > 0 ? hms.minutes + "분 " : "") + hms.seconds + "초 남았따리 ㅋㅋ";
+  const leftTimeText = timeDifference < 0
+    ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ"
+    : "퇴근까지 " + 
+      (hms.hours > 0 ? hms.hours + "시간 " : "") + 
+      (hms.minutes > 0 ? hms.minutes + "분 " : "") + 
+      hms.seconds + "초 남았따리 ㅋㅋ";
+
   element.textContent = leftTimeText;
 }
 
@@ -122,17 +232,12 @@ function drawTime(ctx, radius){
     let hour = now.getHours();
     let minute = now.getMinutes();
     let second = now.getSeconds();
-    //hour
-    hour=hour%12;
-    hour=(hour*Math.PI/6)+
-    (minute*Math.PI/(6*60))+
-    (second*Math.PI/(360*60));
+    hour = hour % 12;
+    hour = (hour*Math.PI/6) + (minute*Math.PI/(6*60)) + (second*Math.PI/(360*60));
     drawHand(ctx, hour, radius*0.5, radius*0.07);
-    //minute
-    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    minute = (minute*Math.PI/30) + (second*Math.PI/(30*60));
     drawHand(ctx, minute, radius*0.8, radius*0.07);
-    // second
-    second=(second*Math.PI/30);
+    second = (second*Math.PI/30);
     drawHand(ctx, second, radius*0.9, radius*0.02);
 }
 
