@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div class="container">
-  <h1>🖼️ 이미지에서 텍스트 추출 (OCR)</h1>
-  <div id="dropArea" class="drop-area">이미지를 여기에 드래그 앤 드롭하세요</div>
-  <textarea id = 'output' value = "" style="width: 100%;"></textarea>
+    <h1>🖼️ 이미지에서 텍스트 추출 (OCR)</h1>
+    <div id="dropArea" class="drop-area">이미지를 여기에 드래그 앤 드롭하세요</div>
+    <textarea id='output' value="" style="width: 100%;"></textarea>
   </div>
   <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
 </body>
 <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
   .drop-area {
     margin-top: 20px;
     padding: 30px;
@@ -21,56 +44,57 @@
     text-align: center;
     color: #007bff;
     border-radius: 10px;
-}
+  }
 
-.drop-area.hover {
+  .drop-area.hover {
     background-color: #e0f0ff;
-}
+  }
 </style>
 <script>
-  function recognize(file){
+  function recognize(file) {
     Tesseract.recognize(
-        file,
-        'eng+kor', // 영어일 경우 eng, 둘 다: eng+kor
-        { logger: m => { console.log(m) } }  // 인식 진행 상태 관련 로그
-      )
-      .then(({ data: { text } }) => { 
+      file,
+      'eng+kor', // 영어일 경우 eng, 둘 다: eng+kor
+      { logger: m => { console.log(m) } }  // 인식 진행 상태 관련 로그
+    )
+      .then(({ data: { text } }) => {
         console.log(text);
         const rowCount = text.split(/\r\n|\r|\n/).length;
         const targetTextarea = document.getElementById("output");
         targetTextarea.value = text;
 
-        if(rowCount < 4)
-          targetTextarea.style.height="52px"; //특정 줄 수 보다 작아지면 height가 이것보다 작아지지 않았으면 한다
+        if (rowCount < 4)
+          targetTextarea.style.height = "52px"; //특정 줄 수 보다 작아지면 height가 이것보다 작아지지 않았으면 한다
         else
-          targetTextarea.style.height= (rowCount * 18) + "px";
+          targetTextarea.style.height = (rowCount * 18) + "px";
         return text;
       })
-      .catch (err => { console.error(err); });
+      .catch(err => { console.error(err); });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     const dropArea = document.getElementById("dropArea");
 
     dropArea.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropArea.classList.add("hover");
+      e.preventDefault();
+      dropArea.classList.add("hover");
     });
 
     dropArea.addEventListener("dragleave", () => {
-        dropArea.classList.remove("hover");
+      dropArea.classList.remove("hover");
     });
 
     dropArea.addEventListener("drop", (e) => {
-        e.preventDefault();
-        dropArea.classList.remove("hover");
-        const file = e.dataTransfer.files[0];
-        if (!file || !file.type.startsWith("image/")) {
-            output.textContent = "이미지 파일을 올려주세요.";
-            return;
-        }
-        recognize(file);
+      e.preventDefault();
+      dropArea.classList.remove("hover");
+      const file = e.dataTransfer.files[0];
+      if (!file || !file.type.startsWith("image/")) {
+        output.textContent = "이미지 파일을 올려주세요.";
+        return;
+      }
+      recognize(file);
     });
-});
+  });
 </script>
+
 </html>
