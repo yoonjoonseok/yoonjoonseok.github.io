@@ -16,8 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
   radius *= 0.9;
   timeInit();
   setInterval(() => drawClock(ctx, radius), 1000);
+
+  const elements = document.querySelectorAll('#leftTimeText');
+    elements.forEach(element => {
+      const randomDelay = Math.random() * 2; // 0에서 2초 사이의 무작위 값
+      element.style.animationDelay = `${randomDelay}s`;
+    });
+
   setInterval(updateLeftTime, 1000);
 });
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 function updateLeftTime() {
   //const el = document.getElementById("leftTimeText");
