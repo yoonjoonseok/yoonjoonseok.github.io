@@ -15,7 +15,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .logo {
@@ -49,7 +49,7 @@ body {
   background: white;
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   text-align: center;
   max-width: 800px;
 }
@@ -71,6 +71,43 @@ input[type="time"] {
 #leftTimeText {
   margin-top: 20px;
   font-size: 1.4rem;
-  color: #007bff;
+  /*color: #007bff;*/
   font-weight: bold;
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbowLink {
+  0% {
+    color: #ff2a2a;
+  }
+
+  15% {
+    color: #ff7a2a;
+  }
+
+  30% {
+    color: #ffc52a;
+  }
+
+  45% {
+    color: #43ff2a;
+  }
+
+  60% {
+    color: #2a89ff;
+  }
+
+  75% {
+    color: #202082;
+  }
+
+  90% {
+    color: #6b2aff;
+  }
+
+  100% {
+    color: #e82aff;
+  }
 }
