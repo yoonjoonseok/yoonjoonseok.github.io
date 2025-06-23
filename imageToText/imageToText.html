@@ -6,22 +6,71 @@
   <title>Document</title>
 </head>
 <body>
-  <img id="sample_img" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA4MDJfMTM0%2FMDAxNTk2MzQ4NTQ5NjU1.PDJoH6WtY-78VtgfBhjBVQNRwv32ozkdVU6my3wTu3wg.LIV8COXKBSPavR2cPlTbbcwrmykOp3XujfZiJw36LpUg.JPEG.freund0%2F1596348547338.jpg&type=l340_165">
-  <button onclick="handleClick()">버튼</button>
-
+  <div class="container">
+  <h1>🖼️ 이미지에서 텍스트 추출 (OCR)</h1>
+  <div id="dropArea" class="drop-area">이미지를 여기에 드래그 앤 드롭하세요</div>
+  <textarea id = 'output' value = "" style="width: 100%;"></textarea>
+  </div>
   <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
-  <script>
-    const handleClick = () => {
-      Tesseract.recognize(
-        document.querySelector('#sample_img'),
-        'kor', // 영어일 경우 eng, 둘 다: eng+kor
+</body>
+<style>
+  .drop-area {
+    margin-top: 20px;
+    padding: 30px;
+    border: 2px dashed #007bff;
+    text-align: center;
+    color: #007bff;
+    border-radius: 10px;
+}
+
+.drop-area.hover {
+    background-color: #e0f0ff;
+}
+</style>
+<script>
+  function recognize(file){
+    Tesseract.recognize(
+        file,
+        'eng+kor', // 영어일 경우 eng, 둘 다: eng+kor
         { logger: m => { console.log(m) } }  // 인식 진행 상태 관련 로그
       )
       .then(({ data: { text } }) => { 
-        console.log(text);  // 이미지에서 추출된 텍스트
+        console.log(text);
+        const rowCount = text.split(/\r\n|\r|\n/).length;
+        const targetTextarea = document.getElementById("output");
+        targetTextarea.value = text;
+
+        if(rowCount < 4)
+          targetTextarea.style.height="52px"; //특정 줄 수 보다 작아지면 height가 이것보다 작아지지 않았으면 한다
+        else
+          targetTextarea.style.height= (rowCount * 18) + "px";
+        return text;
       })
-      .catch (err => { console.error(err); })
-      }
-  </script>
-</body>
+      .catch (err => { console.error(err); });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropArea = document.getElementById("dropArea");
+
+    dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropArea.classList.add("hover");
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("hover");
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropArea.classList.remove("hover");
+        const file = e.dataTransfer.files[0];
+        if (!file || !file.type.startsWith("image/")) {
+            output.textContent = "이미지 파일을 올려주세요.";
+            return;
+        }
+        recognize(file);
+    });
+});
+</script>
 </html>
