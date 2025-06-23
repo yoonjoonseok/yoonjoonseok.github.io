@@ -8,10 +8,14 @@
 </head>
 <body>
   <div id="navbar"></div>
-  <main class="container">
+  <main class="container" style="display: flex;">
+    <div>
+    <img src="resource/a.gif" width="300" style="position: relative;top: 20%;margin: 100px;">
+    </div>
+    <div>
     <section class="card">
       <h2>⏰ 퇴근 타이머</h2>
-      <canvas id="canvas" width="300" height="300"></canvas>
+      <div><canvas id="canvas" width="300" height="300"></canvas></div>
       <label for="workTime">퇴근 시간 설정</label>
       <input type="time" id="workTime" value="17:30" min="16:00" max="18:00" />
       <div id="leftTimeText">퇴근까지 계산 중...</div>
@@ -23,6 +27,10 @@
       <marquee id="leftTimeText" behavior="alternate">퇴근까지 계산 중...</marquee>
       </marquee>
     </section>
+    </div>
+    <div>
+      <img src="resource/a.gif" width="300" style="position: relative;top: 20%;margin: 100px;">
+    </div>
   </main>
 </body>
 </html>
