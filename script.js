@@ -20,13 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function updateLeftTime() {
-  const el = document.getElementById("leftTimeText");
-  if (!el) return;
+  //const el = document.getElementById("leftTimeText");
+  const elements = document.querySelectorAll('#leftTimeText');
+  if (!elements) return;
   const ms = getTimeDiff();
   const { hours, minutes, seconds } = convertMS(ms);
-  el.textContent = ms < 0
+  const textContent = ms < 0
     ? "퇴근따리 퇴근따 ㅋㅋㄹㅃㅃ"
     : `퇴근까지 ${hours > 0 ? hours + "시간 " : ""}${minutes > 0 ? minutes + "분 " : ""}${seconds}초 남았따리 ㅋㅋ`;
+  for(let i = 0; i < elements.length; i++){
+      elements[i].textContent = textContent;
+  }
 }
 
 function getTimeDiff() {
@@ -61,7 +65,7 @@ function drawClock(ctx, radius) {
 
 function drawFace(ctx, radius) {
   const grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#eee');
+  grad.addColorStop(0, '#000');
   grad.addColorStop(0.5, '#fff');
   grad.addColorStop(1, '#eee');
   ctx.beginPath();
