@@ -11,11 +11,98 @@
   <div class="container">
     <h1>🖼️ 이미지에서 텍스트 추출 (OCR)</h1>
     <div id="dropArea" class="drop-area">이미지를 여기에 드래그 앤 드롭하세요</div>
-    <textarea id='output' value="" style="width: 100%;"></textarea>
+      <div class="loader" style="display: none;">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+      </div>
+    <textarea id='output' style="width: 90%;margin: 20px;">혹은 사진 복사 후 여기에 붙여넣기</textarea>
   </div>
   <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
 </body>
 <style>
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    animation: spin .6s linear infinite reverse;
+  }
+
+  .ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    animation: spin 1s infinite ease-in-out
+  }
+
+  .ball:after {
+    position: absolute;
+    content: '';
+    background-color: #007bff;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    top: 0;
+  }
+
+  .ball:nth-child(2) {
+    animation-delay: -0.1s;
+  }
+
+  .ball:nth-child(3) {
+    animation-delay: -0.2s;
+  }
+
+  .ball:nth-child(4) {
+    animation-delay: -0.3s;
+  }
+
+  .ball:nth-child(5) {
+    animation-delay: -0.4s;
+  }
+
+  .ball:nth-child(6) {
+    animation-delay: -0.5s;
+  }
+
+  .ball:nth-child(7) {
+    animation-delay: -0.6s;
+  }
+
+  .ball:nth-child(8) {
+    animation-delay: -0.7s;
+  }
+
+  .ball:nth-child(9) {
+    animation-delay: -0.8s;
+  }
+
+  .ball:nth-child(10) {
+    animation-delay: -0.9s;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
   body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -51,7 +138,24 @@
   }
 </style>
 <script>
+  const container = document.getElementById('output');
+  container.addEventListener('paste', async (event) => {
+    event.preventDefault(); // 기본 붙여넣기 동작 방지
+
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') === 0) {
+        const blob = items[i].getAsFile();
+        recognize(blob);
+        break; // 첫 번째 이미지 파일만 처리
+      }
+    }
+
+  });
+
   function recognize(file) {
+    document.getElementsByClassName("loader")[0].style.display = "inline";
     Tesseract.recognize(
       file,
       'eng+kor', // 영어일 경우 eng, 둘 다: eng+kor
@@ -67,6 +171,7 @@
           targetTextarea.style.height = "52px"; //특정 줄 수 보다 작아지면 height가 이것보다 작아지지 않았으면 한다
         else
           targetTextarea.style.height = (rowCount * 18) + "px";
+        document.getElementsByClassName("loader")[0].style.display = "none";
         return text;
       })
       .catch(err => { console.error(err); });
