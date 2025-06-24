@@ -1,4 +1,21 @@
-/* Start https://www.cursors-4u.com */ * {cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;} /* End https://www.cursors-4u.com */
+.default       { cursor: url('/resource/cursor/일반 선택.cur'), default; }
+    .pointer       { cursor: url('/resource/cursor/연결선택.ani'), pointer; }
+    .text          { cursor: url('/resource/cursor/텍스트 선택.cur'), text; }
+    /*.move          { cursor: url('/resource/cursor/이동.ani'), move; }*/
+    .wait          { cursor: url('/resource/cursor/백그라운드 작업.ani'), wait; }
+    .help          { cursor: url('/resource/cursor/도움말 선택.ani'), help; }
+    .not-allowed   { cursor: url('/resource/cursor/사용할 수 없음.ani'), not-allowed; }
+    .progress      { cursor: url('/resource/cursor/사용중.ani'), progress; }
+    .grab          { cursor: url('/resource/cursor/이동.ani'), grab; }
+    .grabbing      { cursor: url('/resource/cursor/이동.ani'), grabbing; }
+
+    .ew-resize     { cursor: url('/resource/cursor/수평 크기 조절.ani'), ew-resize; }
+    .ns-resize     { cursor: url('/resource/cursor/수직 크기 조절.ani'), ns-resize; }
+    .nwse-resize   { cursor: url('/resource/cursor/대각선 방향 크기 조절1.ani'), nwse-resize; }
+    .nesw-resize   { cursor: url('/resource/cursor/대각선 방향 크기 조절2.ani'), nesw-resize; }
+
+    .canvas-tool   { cursor: url('/resource/cursor/필기.cur'), auto; }
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
