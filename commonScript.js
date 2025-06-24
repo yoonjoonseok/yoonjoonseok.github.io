@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     help:      '/resource/cursor/일반 선택.cur',
     notAllowed:'/resource/cursor/일반 선택.cur',
     resizeEW:  '/resource/cursor/일반 선택.cur',
-    resizeNS:  '/resource/cursor/일반 선택.cur',
+    resizeNS:  '/resource/cursor/일반 선택.cur'
   };
 
   const state = new Set();
