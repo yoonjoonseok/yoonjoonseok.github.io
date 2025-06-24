@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 (() => {
   const classMap = {
-    default:   '/resource/cursor/일반 선택.cur',
+    /*default:   '/resource/cursor/일반 선택.cur',
     pointer:   '/resource/cursor/연결선택.ani',
     text:      '/resource/cursor/텍스트 선택.cur',
     grabbing:  '/resource/cursor/이동.ani',
@@ -28,7 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
     help:      '/resource/cursor/도움말 선택.ani',
     notAllowed:'/resource/cursor/사용할 수 없음.ani',
     resizeEW:  '/resource/cursor/수직 크기 조절.ani',
-    resizeNS:  '/resource/cursor/수평 크기 조절.ani',
+    resizeNS:  '/resource/cursor/수평 크기 조절.ani',*/
+    default:   '/resource/cursor/일반 선택.cur',
+    pointer:   '/resource/cursor/일반 선택.cur',
+    text:      '/resource/cursor/일반 선택.cur',
+    grabbing:  '/resource/cursor/일반 선택.cur',
+    grab:      '/resource/cursor/일반 선택.cur',
+    wait:      '/resource/cursor/일반 선택.cur',
+    help:      '/resource/cursor/일반 선택.cur',
+    notAllowed:'/resource/cursor/일반 선택.cur',
+    resizeEW:  '/resource/cursor/일반 선택.cur',
+    resizeNS:  '/resource/cursor/일반 선택.cur',
   };
 
   const state = new Set();
