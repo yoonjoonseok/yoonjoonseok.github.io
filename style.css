@@ -80,3 +80,11 @@ input[type="time"] {
     color: #e82aff;
   }
 }
+
+@keyframes vibrate {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
