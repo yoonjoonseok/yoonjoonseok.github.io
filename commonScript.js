@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById("navbar");
-  const loader = document.getElementByClass("loader")[0];
+  const loader = document.getElementByClassName("loader")[0];
   if (nav) {
     fetch("/common/navbar/navbar.html")
       .then(res => res.text())
