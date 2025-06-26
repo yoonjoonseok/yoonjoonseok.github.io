@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     default:   '/resource/cursor/일반선택.cur',
     pointer:   '/resource/cursor/연결선택.ani',
     text:      '/resource/cursor/텍스트_선택.cur',
-    grabbing:  '/resource/cursor/이동.gif',
-    /*grab:      '/resource/cursor/이동.gif',*/
+    /*grabbing:  '/resource/cursor/이동.gif',*/
+    grab:      '/resource/cursor/이동.gif',
     wait:      '/resource/cursor/사용중.ani',
     help:      '/resource/cursor/도움말 선택.ani',
     notAllowed:'/resource/cursor/사용할 수 없음.ani',
