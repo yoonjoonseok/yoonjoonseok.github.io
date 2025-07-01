@@ -208,28 +208,11 @@ function toggleRoadview(position){
     });
 }
 
-function moveForward() {
-    const rvPosition = roadview.getPosition();
-
-    // 현재 위치에서 이동 가능한 다음 pano 검색
-    roadviewClient.getNearestPanoId(rvPosition, 50, function(panoId) {
-      if (!panoId) return;
-
-    console.log(roadview);
-
-      // 현재 로드뷰의 링크 정보 가져오기
-      const links = roadview.getLinks(); // 현재 위치에서 갈 수 있는 방향들
-
-      if (links.length === 0) return;
-
-      // 가장 앞쪽 링크 선택 (또는 원하는 방향으로 필터링)
-      const nextLink = links[0];
-
-      // 다음 panoId로 이동
-      roadview.setPanoId(nextLink.panoId, rvPosition);
-    });
-  }
-setInterval(() => moveForward(), 1000);
+function overClick(){
+    const div = document.getElementsByClassName("over")[0];
+    div.click();
+}
+setInterval(() => overClick(), 1000);
     
 </script>
 </body>
