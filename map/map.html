@@ -215,6 +215,8 @@ function moveForward() {
     roadviewClient.getNearestPanoId(rvPosition, 50, function(panoId) {
       if (!panoId) return;
 
+    console.log(roadview);
+
       // 현재 로드뷰의 링크 정보 가져오기
       const links = roadview.getLinks(); // 현재 위치에서 갈 수 있는 방향들
 
