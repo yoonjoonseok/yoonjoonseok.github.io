@@ -171,9 +171,8 @@ kakao.maps.event.addListener(roadview, 'init', function() {
         map.setCenter(position);
 
     });
-});
 
-kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent){
     
     // 현재 클릭한 부분의 좌표를 리턴 
     var position = mouseEvent.latLng; 
@@ -201,6 +200,7 @@ function toggleRoadview(position){
         }
     });
 }
+});
 
 </script>
 </body>
