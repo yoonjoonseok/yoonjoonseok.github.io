@@ -208,26 +208,23 @@ function toggleRoadview(position){
     });
 }
 
-function overClick(){
-    const elements = document.querySelectorAll('div[id^="_ar_"]');
-    elements.forEach(element => {
-    const width = element.offsetWidth;
-    const height = element.offsetHeight;
-
-    console.log(element);
-    console.log(width);
-    console.log(height);
-
-  if (width > 30 && height > 30) {
-    console.log("click");
-    element.classList.add('over');
-    element.click();
-  }
-});
-    //const div = document.getElementsByClassName("over")[0];
-    //div.click();
+function simulateKeyPress(keyCode) {
+  const event = new KeyboardEvent('keydown', {
+    key: String.fromCharCode(keyCode),
+    code: 'Key' + String.fromCharCode(keyCode),
+    which: keyCode,
+    keyCode: keyCode,
+    charCode: keyCode,
+    bubbles: true,
+    cancelable: true,
+    view: window,
+  });
+  document.dispatchEvent(event);
 }
-setInterval(() => overClick(), 1000);
+
+const intervalId = setInterval(() => {
+  simulateKeyPress(38); // 'A' 키 코드
+}, 1000);
     
 </script>
 </body>
