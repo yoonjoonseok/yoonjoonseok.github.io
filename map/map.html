@@ -209,10 +209,18 @@ function toggleRoadview(position){
 }
 
 function overClick(){
-    const div1 = document.getElementById("roadview");
-    div1.click();
-    const div = document.getElementsByClassName("over")[0];
-    div.click();
+    const elements = document.querySelectorAll('div[id^="_ar_"]');
+    elements.forEach(element => {
+    const width = element.offsetWidth;
+    const height = element.offsetHeight;
+
+  if (width > 30 && height > 30) {
+    element.click();
+      break;
+  }
+});
+    //const div = document.getElementsByClassName("over")[0];
+    //div.click();
 }
 setInterval(() => overClick(), 1000);
     
