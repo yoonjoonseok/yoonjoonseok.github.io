@@ -63,6 +63,12 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
 <script>
+let timerId = setInterval(() => overClick(), 1000);
+function overClick(){
+    const div = document.getElementsByClassName("over")[0];
+    console.log(div);
+    div.click();
+}
 //지도위에 현재 로드뷰의 위치와, 각도를 표시하기 위한 map walker 아이콘 생성 클래스
 function MapWalker(position){
 
