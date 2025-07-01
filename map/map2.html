@@ -177,6 +177,7 @@ kakao.maps.event.addListener(roadview, 'init', function() {
     // 현재 클릭한 부분의 좌표를 리턴 
     var position = mouseEvent.latLng; 
 
+    console.log(position);
     mapWalker.setPosition(position);
     toggleRoadview(position); //로드뷰를 토글합니다
 });
