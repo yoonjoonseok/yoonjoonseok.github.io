@@ -73,7 +73,10 @@ function speedUp(){
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
-	document.getElementById("score").textContent = score;
+	var highScore = document.getElementById("score").textContent;
+	if(highScore < score){
+		highScore = score;
+	}
         velocityX = -2;
 	return;
     }
