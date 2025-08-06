@@ -116,7 +116,11 @@ function update() {
         addDataToTable({"score" : score});
         sortTable(1,"scroe");
         velocityX = -2;
-        return;
+        if(confirm("한판 더?")){
+		    return;
+	    }else{
+		    alert("접어");
+	    }
     }
     context.clearRect(0, 0, board.width, board.height);
 
