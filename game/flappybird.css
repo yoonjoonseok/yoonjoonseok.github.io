@@ -1,0 +1,9 @@
+body {
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#board {
+    /* background-color: skyblue; */
+    background-image: url("https://blog.kakaocdn.net/dna/dmi2Wd/btsJdx62gHf/AAAAAAAAAAAAAAAAAAAAAEzUatG7Q2e4WSamKMKzzxx3iTcJb-Gi7NDLOam41PuU/img.webp?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1756652399&allow_ip=&allow_referer=&signature=qXowl1gYdxZkFdvrFpu%2BTYz0%2Bbc%3D");
+}
