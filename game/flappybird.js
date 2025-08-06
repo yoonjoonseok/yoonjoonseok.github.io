@@ -36,6 +36,8 @@ let gravity = 0.4;
 
 let gameOver = false;
 let score = 0;
+var highScore = localStorage.getItem('highScore') === null ? 0 : localStorage.getItem('highScore');
+document.getElementById("score").textContent = highScore;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -73,7 +75,6 @@ function speedUp(){
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
-	var highScore = localStorage.getItem('highScore') === null ? 0 : localStorage.getItem('highScore');
 	if(score > highScore){
 		localStorage.setItem('highScore', score);
 		document.getElementById("score").textContent = score;
