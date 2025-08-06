@@ -73,12 +73,9 @@ function speedUp(){
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
+	document.getElementById("score").textContent = score;
         velocityX = -2;
-        if(confirm("한판 더?")){
-		    return;
-	    }else{
-		    alert("접어");
-	    }
+	return;
     }
     context.clearRect(0, 0, board.width, board.height);
 
