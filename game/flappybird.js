@@ -114,7 +114,7 @@ function update() {
     requestAnimationFrame(update);
     if (gameOver) {
         addDataToTable({"score" : score});
-        sortTable(1,"scroe");
+        sortTable(0,"asc");
         velocityX = -2;
         if(confirm("한판 더?")){
 		    return;
