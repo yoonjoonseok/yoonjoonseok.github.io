@@ -66,6 +66,46 @@ window.onload = function() {
     document.addEventListener("keydown", moveBird);
 }
 
+function addDataToTable(data) {
+  const tableBody = document.querySelector("#myTable tbody"); // 테이블의 body 요소 선택
+  const newRow = tableBody.insertRow(); // 새로운 행 추가
+
+  // 데이터 객체의 각 키에 대해 반복
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      const newCell = newRow.insertCell(); // 새로운 셀 추가
+      newCell.textContent = data[key]; // 셀에 데이터 값 할당
+    }
+  }
+}
+
+function sortTable(column, order) {
+  const table = document.getElementById("myTable");
+  const tbody = table.querySelector("tbody");
+  const rows = Array.from(tbody.rows); // NodeList를 Array로 변환
+
+  // 정렬 함수
+  const compare = (rowA, rowB) => {
+    const cellA = rowA.cells[column].textContent;
+    const cellB = rowB.cells[column].textContent;
+
+    // 숫자 비교 (필요에 따라 문자열 비교로 변경)
+    if (isNaN(cellA) || isNaN(cellB)) {
+      // 문자열 비교
+      return order === "asc" ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    } else {
+      // 숫자 비교
+      return order === "asc" ? Number(cellA) - Number(cellB) : Number(cellB) - Number(cellA);
+    }
+  };
+
+  // 정렬
+  rows.sort(compare);
+
+  // 정렬된 행을 테이블에 다시 추가
+  rows.forEach(row => tbody.appendChild(row));
+}
+
 function speedUp(){
     velocityX -= 0.1;
 }
@@ -73,6 +113,8 @@ function speedUp(){
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
+        addDataToTable({"score" : score});
+        sortTable(1,"scroe");
         velocityX = -2;
         return;
     }
