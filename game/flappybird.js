@@ -67,7 +67,7 @@ window.onload = function() {
 }
 
 function speedUp(){
-    velocityX -= 0.1;
+    velocityX -= 1;
 }
 
 function update() {
