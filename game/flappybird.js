@@ -36,6 +36,7 @@ let gravity = 0.4;
 
 let gameOver = false;
 let score = 0;
+var highScore = 0;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -73,9 +74,9 @@ function speedUp(){
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
-	var highScore = document.getElementById("score").textContent;
-	if(highScore < score){
+	if(score > highScore){
 		highScore = score;
+		document.getElementById("score").textContent = score;
 	}
         velocityX = -2;
 	return;
