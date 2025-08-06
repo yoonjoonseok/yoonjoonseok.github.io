@@ -67,12 +67,13 @@ window.onload = function() {
 }
 
 function speedUp(){
-    velocityX -= 1;
+    velocityX -= 0.1;
 }
 
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
+        velocityX = -2;
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
