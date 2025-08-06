@@ -36,7 +36,7 @@ let gravity = 0.4;
 
 let gameOver = false;
 let score = 0;
-var highScore = localStorage.getItem('highScore') === null ? 0 : localStorage.getItem('highScore');
+var highScore = localStorage.getItem('highScore') == null ? 0 : localStorage.getItem('highScore');
 document.getElementById("score").textContent = highScore;
 
 window.onload = function() {
