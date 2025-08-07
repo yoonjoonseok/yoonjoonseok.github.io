@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById("navbar");
   const loader = document.getElementById("loader");
-  if (nav || new URL(window.location.href).searchParams.get('menu') == 'y') {
+  if (nav && new URL(window.location.href).searchParams.get('menu') == 'y') {
     fetch("/common/navbar/navbar.html")
       .then(res => res.text())
       .then(html => {
