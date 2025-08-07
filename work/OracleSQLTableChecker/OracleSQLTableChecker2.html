@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle SQL 테이블 조회 생성기</title>
+<script src="/commonScript.js" defer></script>
+    <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <style>
+    body { font-family: monospace; padding: 20px; background: #f4f4f4; }
+    textarea { width: 100%; height: 200px; font-family: monospace; }
+    pre code { display: block; overflow-x: auto; padding: 1em; background: #fff; border: 1px solid #ccc; }
+    button { margin-top: 10px; padding: 5px 10px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+<div id="navbar"></div>
+<div class="container">
+  <h1>Oracle SQL 테이블 조회 쿼리 자동 생성기</h1>
+  <textarea id="sqlInput" placeholder="SELECT 문을 여기에 입력하세요..."></textarea>
+  <button onclick="generateQueries()">테이블별 SELECT 쿼리 생성</button>
+  <h2>생성된 쿼리</h2>
+  <pre><code id="output" class="sql"></code></pre>
+
+  <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.2.0/dist/sql-formatter.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script>
+    function removeComments(sql) {
+      return sql
+        .replace(/--.*(?=\n|$)/g, '')
+        .replace(/\/\*[\s\S]*?\*\//g, '');
+    }
+
+    function extractTables(sql) {
+      const tableRegex = /(from|join)\s+([\w\.\"]+)(\s+(as)?\s*\w+)?/gi;
+      const tables = new Map();
+      let match;
+      while ((match = tableRegex.exec(sql)) !== null) {
+        const name = match[2].replace(/"/g, '');
+        const aliasMatch = /\s+(as)?\s*(\w+)/i.exec(match[3] || '')
+        const alias = aliasMatch ? aliasMatch[2] : null;
+        tables.set(name.toLowerCase(), { name, alias });
+      }
+      return Array.from(tables.values());
+    }
+
+    function extractConditions(sql) {
+      const whereMatch = sql.match(/where([\s\S]*?)(group\s+by|order\s+by|having|$)/i);
+      const joinMatches = [...sql.matchAll(/on\s+([^\n\r;]*)/gi)];
+      const conditions = [];
+      if (whereMatch) conditions.push(...whereMatch[1].split(/and/i));
+      joinMatches.forEach(j => conditions.push(...j[1].split(/and/i)));
+      return conditions.map(c => c.trim()).filter(c => c);
+    }
+
+    function generateQueries() {
+      const rawSql = document.getElementById("sqlInput").value;
+      const cleanSql = removeComments(rawSql);
+      const tables = extractTables(cleanSql);
+      const conditions = extractConditions(cleanSql);
+
+      const tableConds = {};
+      tables.forEach(t => tableConds[t.name] = []);
+
+      conditions.forEach(cond => {
+        const lc = cond.toLowerCase();
+        tables.forEach(({ name, alias }) => {
+          if (lc.includes(name.toLowerCase() + ".") || (alias && lc.includes(alias.toLowerCase() + "."))) {
+            tableConds[name].push(cond);
+          }
+        });
+      });
+
+      const queries = tables.map(({ name }) => {
+        const conds = tableConds[name];
+        const where = conds.length ? `\nWHERE ${conds.join("\n  AND ")}` : "";
+        return `SELECT * FROM ${name}${where}\nAND ROWNUM = 1;`;
+      });
+
+      const formatted = queries.map(q => window.sqlFormatter.format(q, { language: 'sql' })).join("\n\n");
+      document.getElementById("output").textContent = formatted;
+      hljs.highlightAll();
+    }
+  </script>
+</div>
+</body>
+</html>
