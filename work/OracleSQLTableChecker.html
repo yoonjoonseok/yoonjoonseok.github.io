@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oracle SQL Table Checker</title>
+    <script src="/commonScript.js" defer></script>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+    body { font-family: monospace; background: #1e1e1e; color: #dcdcdc; padding: 20px; }
+    textarea { width: 100%; height: 200px; background: #252526; color: #dcdcdc; border: 1px solid #3c3c3c; padding: 10px; }
+    button { padding: 10px 20px; margin: 10px 0; }
+    pre { background: #1e1e1e; border: 1px solid #3c3c3c; padding: 10px; white-space: pre-wrap; word-break: break-word; }
+    .copy-button { float: right; margin-left: 10px; }
+    </style>  
+</head>
+<body>
+    <div id="navbar"></div>
+    <div class="container">
+<h1>Oracle SQL Table Checker</h1>
+  <textarea id="sqlInput" placeholder="Enter your Oracle SQL SELECT statement here..."></textarea>
+  <br>
+  <button onclick="processSQL()">Generate Table-wise SELECT Queries</button>
+  <div id="output"></div>
+
+  <script>
+    function removeComments(sql) {
+      return sql.replace(/--.*?$|\/\*.*?\*\//gms, '').trim();
+    }
+
+    function extractTableInfo(sql) {
+      const tableRegex = /\b(from|join)\s+([\w.]+)(?:\s+(\w+))?/gi;
+      const tables = [];
+      let match;
+      while ((match = tableRegex.exec(sql)) !== null) {
+        const [, , name, alias] = match;
+        tables.push({ name, alias });
+      }
+      return tables;
+    }
+
+    function extractSubqueries(sql) {
+      const subqueries = [];
+      let depth = 0;
+      let buffer = '';
+      for (let i = 0; i < sql.length; i++) {
+        const char = sql[i];
+        if (char === '(' && sql.slice(i + 1).match(/^\s*select/i)) {
+          if (depth === 0) buffer = '';
+          depth++;
+        }
+        if (depth > 0) buffer += char;
+        if (char === ')') {
+          depth--;
+          if (depth === 0) subqueries.push(buffer);
+        }
+      }
+      return subqueries;
+    }
+
+    function extractConditions(sql) {
+      const conditionRegex = /\bwhere\b(.+?)(group\s+by|order\s+by|having|union|minus|intersect|$)/gsi;
+      const onRegex = /\bon\b\s+([^\)]+)(?=\)|\s+(inner|left|right|full|where|group|order|having|union|minus|intersect|$))/gsi;
+      const conditions = [];
+      let match;
+      while ((match = conditionRegex.exec(sql)) !== null) {
+        conditions.push(...match[1].split(/\band\b/i));
+      }
+      while ((match = onRegex.exec(sql)) !== null) {
+        conditions.push(...match[1].split(/\band\b/i));
+      }
+      return conditions.map(c => c.trim()).filter(Boolean);
+    }
+
+    function generateQueries(sql, tables, conditions) {
+      const tableConditions = {};
+      tables.forEach(table => {
+        tableConditions[table.name] = [];
+      });
+
+      conditions.forEach(cond => {
+        try {
+          const lower = cond.toLowerCase();
+          tables.forEach(table => {
+            const tname = table.name.toLowerCase();
+            const alias = (table.alias || '').toLowerCase();
+            if (lower.includes(tname + ".") || (alias && lower.includes(alias + "."))) {
+              tableConditions[table.name].push(cond);
+            }
+          });
+        } catch (e) {
+          console.warn("조건 처리 오류", e, cond);
+        }
+      });
+
+      let output = '';
+      for (const table of tables) {
+        const conditions = tableConditions[table.name];
+        const whereClause = conditions && conditions.length > 0
+          ? `WHERE ${conditions.join(" AND ")}`
+          : '';
+        output += `<div><button class="copy-button" onclick="copyToClipboard(this)">📋 Copy</button>`;
+        output += `<pre><code class="sql">SELECT * FROM ${table.name} ${whereClause} ${whereClause ? 'AND' : 'WHERE'} ROWNUM = 1;</code></pre></div>`;
+      }
+      return output;
+    }
+
+    function processSQL() {
+      const rawSQL = document.getElementById("sqlInput").value;
+      const sql = removeComments(rawSQL);
+      const subqueries = extractSubqueries(sql);
+
+      const allSQLs = [sql, ...subqueries];
+      const allTables = [];
+      const allConditions = [];
+
+      allSQLs.forEach(innerSQL => {
+        const tables = extractTableInfo(innerSQL);
+        const conditions = extractConditions(innerSQL);
+        allTables.push(...tables);
+        allConditions.push(...conditions);
+      });
+
+      const html = generateQueries(sql, allTables, allConditions);
+      document.getElementById("output").innerHTML = html;
+    }
+
+    function copyToClipboard(button) {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = "✅ Copied";
+        setTimeout(() => (button.innerText = "📋 Copy"), 1500);
+      });
+    }
+  </script>
+</body>
+    </div>
+</body>
+</html>
