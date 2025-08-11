@@ -10,6 +10,10 @@
     let birdX = boardWidth / 8;
     let birdY = boardHeight / 2;
     let birdImg;
+    let birdImg1;
+    let birdImg2;
+    let birdImg3;
+    let currentBirdImg;
 
     let bird = {
         x: birdX,
@@ -50,6 +54,10 @@
     var highScore = parseInt(localStorage.getItem('highScore')) || 0;
     document.getElementById("score").textContent = highScore;
 
+    let frameIndex = 0;
+    const frames = []; // 프레임 정보를 저장할 배열
+    let isLoaded = false;
+
     window.onload = function () {
         board = document.getElementById("board");
         board.height = boardHeight;
@@ -62,23 +70,31 @@
 
         //load images
         birdImg = new Image();
-        //birdImg.crossOrigin = "anonymous";
         birdImg.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/flappybird.png";
-        //birdImg.src = "./flappybird.png";
+
+        //load images
+        birdImg1 = new Image();
+        birdImg1.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/flappybird1.png";
+
+        //load images
+        birdImg2 = new Image();
+        birdImg2.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/flappybird2.png";
+
+        //load images
+        birdImg3 = new Image();
+        birdImg3.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/flappybird3.png";
+
         birdImg.onload = function () {
             context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
         }
 
         topPipeImg = new Image();
-        //topPipeImg.crossOrigin = "anonymous";
         topPipeImg.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/toppipe.png";
 
         bottomPipeImg = new Image();
-        //bottomPipeImg.crossOrigin = "anonymous";
         bottomPipeImg.src = "https://raw.githubusercontent.com/ImKennyYip/flappy-bird/refs/heads/master/bottompipe.png";
 
         itemImg = new Image();
-        //itemImg.crossOrigin = "anonymous";
         itemImg.src = "https://png.pngtree.com/png-clipart/20240501/ourmid/pngtree-red-booster-bubble-png-image_12350593.png";
 
         requestAnimationFrame(update);
@@ -152,7 +168,13 @@
         velocityY += gravity;
         // bird.y += velocityY;
         bird.y = Math.max(bird.y + velocityY, 0); //apply gravity to current bird.y, limit the bird.y to top of the canvas
-        context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+        switch (getRandomInt(1,4)) {
+            case 1:  currentBirdImg = birdImg1; break;
+            case 2:  currentBirdImg = birdImg2; break;
+            case 2:  currentBirdImg = birdImg3; break;
+            default: currentBirdImg = birdImg; break;
+        }
+        context.drawImage(currentBirdImg, bird.x, bird.y, bird.width, bird.height);
 
         if (bird.y > board.height) {
             gameOver = true;
@@ -171,6 +193,12 @@
         if (gameOver) {
             context.fillText("GAME OVER", 5, 90);
         }
+    }
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; //최댓값 포함
     }
 
     function beInvincible() {
