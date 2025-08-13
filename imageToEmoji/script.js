@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropArea = document.getElementById("dropArea");
     const output = document.getElementById("output");
     const form = document.getElementById("emojiForm");
+    const textAreaOutput = document.getElementById("textAreaOutput");
 
     dropArea.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -22,6 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         processImage(file);
     });
+
+    textAreaOutput.addEventListener('paste', async (event) => {
+    event.preventDefault(); // 기본 붙여넣기 동작 방지
+
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') === 0) {
+        const blob = items[i].getAsFile();
+        processImage(blob);
+        break; // 첫 번째 이미지 파일만 처리
+      }
+    }
+
+  });
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -54,14 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     const dist = (c1, c2) =>
                         Math.sqrt((c1[0] - c2[0])**2 + (c1[1] - c2[1])**2 + (c1[2] - c2[2])**2);
                     const colors = {
-                        "⬜": [255, 255, 255],
-                        "⬛": [0, 0, 0],
-                        "🟥": [255, 0, 0],
-                        "🟦": [0, 0, 255],
-                        "🟩": [0, 255, 0],
-                        "🟧": [255, 165, 0],
-                        "🟪": [128, 0, 128],
-                        "🟫": [139, 69, 19]
+                        "⬜": [242, 242, 242],
+                        "⬛": [56, 56, 56],
+                        "🟥": [232, 18, 36],
+                        "🟦": [0, 120, 215],
+                        "🟩": [22, 198, 12],
+                        "🟧": [247, 99, 12],
+                        "🟪": [136, 108, 228],
+                        "🟫": [142, 86, 46]
                     };
                     let min = Infinity, selected = "⬜";
                     for (const [emoji, rgb] of Object.entries(colors)) {
