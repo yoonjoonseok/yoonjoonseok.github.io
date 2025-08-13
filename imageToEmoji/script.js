@@ -43,8 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const fileInput = document.getElementById("imageInput");
-        file = fileInput.files[0];
+        if(!file){
+            const fileInput = document.getElementById("imageInput");
+            file = fileInput.files[0];
+        }
+
         if (!file || !file.type.startsWith("image/")) {
             output.textContent = "이미지 파일을 선택해주세요.";
             return;
