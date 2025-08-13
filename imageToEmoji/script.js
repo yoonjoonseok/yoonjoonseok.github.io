@@ -1,3 +1,5 @@
+var file;
+
 document.addEventListener("DOMContentLoaded", () => {
     const dropArea = document.getElementById("dropArea");
     const output = document.getElementById("output");
@@ -16,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dropArea.addEventListener("drop", (e) => {
         e.preventDefault();
         dropArea.classList.remove("hover");
-        const file = e.dataTransfer.files[0];
+        file = e.dataTransfer.files[0];
         if (!file || !file.type.startsWith("image/")) {
             output.textContent = "이미지 파일을 올려주세요.";
             return;
@@ -31,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let i = 0; i < items.length; i++) {
       if (items[i].type.indexOf('image') === 0) {
-        const blob = items[i].getAsFile();
-        processImage(blob);
+        file = items[i].getAsFile();
+        processImage(file);
         break; // 첫 번째 이미지 파일만 처리
       }
     }
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const fileInput = document.getElementById("imageInput");
-        const file = fileInput.files[0];
+        file = fileInput.files[0];
         if (!file || !file.type.startsWith("image/")) {
             output.textContent = "이미지 파일을 선택해주세요.";
             return;
