@@ -52,6 +52,19 @@ document.addEventListener("DOMContentLoaded", () => {
         processImage(file);
     });
 
+    const copyButton = document.getElementById('copyButton');
+
+    copyButton.addEventListener("click", function(e) {  
+        const textToCopy = document.getElementById('output');
+
+        // 텍스트 선택
+        textToCopy.select();
+        textToCopy.setSelectionRange(0, 99999); // 모바일에서도 동작하도록 범위 설정
+
+        // 클립보드에 복사
+        document.execCommand('copy');
+    });
+
     function processImage(file) {
         const cols = parseInt(document.getElementById("cols").value);
         const rows = parseInt(document.getElementById("rows").value);
