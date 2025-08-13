@@ -55,14 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const copyButton = document.getElementById('copyButton');
 
     copyButton.addEventListener("click", function(e) {  
-        const textToCopy = document.getElementById('output');
-
-        // 텍스트 선택
-        textToCopy.select();
-        textToCopy.setSelectionRange(0, 99999); // 모바일에서도 동작하도록 범위 설정
-
-        // 클립보드에 복사
-        document.execCommand('copy');
+        window.navigator.clipboard.writeText(document.getElementById('output').textContent);
     });
 
     function processImage(file) {
