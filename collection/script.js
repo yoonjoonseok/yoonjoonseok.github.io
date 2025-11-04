@@ -18,6 +18,7 @@ function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, p
   const selectSortElement = document.getElementById('selectSort');
   const isCollectedCheckbox = document.getElementById('isCollectedCheckbox');
   const statusCheckbox = document.getElementById('statusCheckbox');
+  const searchBox = document.getElementById('searchBox');
   const resultsContainer = document.getElementById('results');
   
   var selectedOptions;
@@ -25,13 +26,19 @@ function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, p
   var middleCategory;
   var minorCategory;
   var filteredData;
+  var keyword;
 
   function filterAndDisplay(){
+    filteredData = itemList;
+    keyword = trim(searchBox.value);
+    if(keyword.length > 0){
+      filteredData = filteredData.filter(item => item.name.includes(keyword));
+    }
     selectedOptions = Array.from(selectElement.options).filter(option => option.selected);
     majorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'majorCategory').map(item => item.value); 
     middleCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'middleCategory').map(item => item.value);
     minorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'minorCategory').map(item => item.value);
-    filteredData = itemList.filter(item => majorCategory.includes(item.majorCategory) || middleCategory.includes(item.middleCategory) || minorCategory.includes(item.minorCategory));
+    filteredData = filteredData.filter(item => majorCategory.includes(item.majorCategory) || middleCategory.includes(item.middleCategory) || minorCategory.includes(item.minorCategory));
 
     if(isCollectedCheckbox.checked){
       filteredData = filteredData.filter(item => item.isCollected === 'Y');
