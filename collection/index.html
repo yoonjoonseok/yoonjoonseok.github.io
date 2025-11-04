@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>소장품</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div style="display:flex;">
+      <div style="display:flex;flex-direction:column;align-items:center;padding:30px;">
+        <div>
+            <select id="selectSort" name="sort">
+              <option value="releaseDateAsc">발매일 ↑</option>
+              <option value="releaseDateDesc">발매일 ↓</option>
+              <option value="nameAsc">이름 ↑</option>
+              <option value="nameDesc">이름 ↓</option>
+            </select>
+        </div>
+        <div>
+          <input type="checkbox" id="isCollectedCheckbox" name="isCollectedCheckbox" checked/>
+          <label for="isCollectedCheckbox">수집 여부</label>
+        </div>
+        <div>
+          <input type="checkbox" id="statusCheckbox" name="statusCheckbox"/>
+          <label for="statusCheckbox">미개봉</label>
+        </div>
+        <select id="for" multiple name="items" size="40">
+          <option selected value="닌텐도" data-name="majorCategory" style="font-weight: 900;">닌텐도</option>
+          <option value="Switch2" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Switch2</option>
+          <option value="Switch2하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="Switch2소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="Switch2주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>
+          <option value="Switch" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Switch</option>
+          <option value="Switch하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="Switch소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="Switch주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>
+          <option value="WiiU" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;WiiU</option>
+          <option value="WiiU소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="3DS" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;3DS</option>
+          <option value="3DS하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="3DS소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="3DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>
+          <option value="Wii" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Wii</option>
+          <option value="Wii하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="Wii소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="Wii주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>
+          <option value="DS" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;DS</option>
+          <option value="DS하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="DS소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>
+          <option value="GBA" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;GBA</option>
+          <option value="GBA하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="GBA소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="GBC" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;GBC</option>
+          <option value="GBC하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="GBC소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="GB" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;GB</option>
+          <option value="GB하드웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
+          <option value="GB소프트웨어" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
+          <option value="Amiibo" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Amiibo</option>
+          <option value="LEGO" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;LEGO</option>
+          <option value="LEGOSuperMario" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오</option>
+        </select>
+      </div>
+      <div id="results" style="display:flex;width:100%;flex-wrap: wrap;text-align: center;gap: 16px;">
+      </div>
+    </div>
+  </body>
+</html>
