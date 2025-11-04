@@ -87,4 +87,5 @@ function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, p
   selectSortElement.addEventListener('change', filterAndDisplay);
   isCollectedCheckbox.addEventListener('change', filterAndDisplay);
   statusCheckbox.addEventListener('change', filterAndDisplay);
+  searchBox.addEventListener('change', filterAndDisplay);
   filterAndDisplay();
