@@ -6,7 +6,7 @@ var arr = [
 ['마리오 카트 Wii','닌텐도','Wii','Wii소프트웨어','2009.04.30','58000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_mario_cart.jpg'],
 ['춤춰라 메이드 인 와리오','닌텐도','Wii','Wii소프트웨어','2009.06.18','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_madeinwario.jpg'],
 ['젤다의 전설 황혼의 공주','닌텐도','Wii','Wii소프트웨어','2009.08.27','54000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_zelda_legend.jpg'],
-['마리오와 소닉 밴쿠버 동계올림픽','닌텐도','Wii','Wii소프트웨어','2009.11.19','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_vancouverOlympic.jpg'],
+['마리오와 소닉 밴쿠버 동계올림픽','닌텐도','Wii','Wii소프트웨어','2009.11.19','44000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_vancouverOlympic.jpg'],
 ['타운으로 놀러가요 동물의 숲','닌텐도','Wii','Wii소프트웨어','2010.01.28','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_wiianimal.jpg'],
 ['마리오 파워 사커','닌텐도','Wii','Wii소프트웨어','2010.03.18','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_mariopowersoccer.jpg'],
 ['대난투 스매시브라더스 X','닌텐도','Wii','Wii소프트웨어','2010.04.29','49000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_smashbrosx.jpg'],
