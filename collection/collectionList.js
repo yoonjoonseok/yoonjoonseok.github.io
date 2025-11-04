@@ -18,7 +18,7 @@ var arr = [
 ['털실 커비 이야기','닌텐도','Wii','Wii소프트웨어','2011.09.01','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_kirby_yarn.jpg'],
 ['피크민','닌텐도','Wii','Wii소프트웨어','2011.10.27','39000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_pikmin.jpg'],
 ['젤다의 전설 스카이워드 소드 ','닌텐도','Wii','Wii소프트웨어','2011.11.24','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_zelda_sword.jpg'],
-['젤다의 전설 스카이워드 소드 젤다 25주년 패키지','닌텐도','Wii','Wii소프트웨어','2011.11.24','68000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_zelda_sword.jpg'],
+['젤다의 전설 스카이워드 소드 젤다 25주년 패키지','닌텐도','Wii','Wii소프트웨어','2011.11.24','68000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/zelda25.jpg'],
 ['마리오와 소닉 런던 올림픽','닌텐도','Wii','Wii소프트웨어','2012.06.21','44000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_mslOlympic2012.jpg'],
 ['별의 커비 Wii','닌텐도','Wii','Wii소프트웨어','2012.09.06','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_starkirbyWii.jpg'],
 ['마리오 파티 9','닌텐도','Wii','Wii소프트웨어','2013.04.11','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_marioparty9.jpg'],
