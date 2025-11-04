@@ -30,7 +30,7 @@ function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, p
 
   function filterAndDisplay(){
     filteredData = itemList;
-    keyword = trim(searchBox.value);
+    keyword = searchBox.value.trim();
     if(keyword.length > 0){
       filteredData = filteredData.filter(item => item.name.includes(keyword));
     }
