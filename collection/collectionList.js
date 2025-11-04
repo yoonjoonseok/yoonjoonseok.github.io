@@ -8,7 +8,7 @@ var arr = [
   ['슈퍼 마리오 64 DS','닌텐도','DS','DS소프트웨어','2007.07.26','39000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_mario64.gif'],
   ['포켓몬 불가사의 던전 파랑 구조대','닌텐도','DS','DS소프트웨어','2007.08.30','33000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_pocketblue.gif'],
   ['별의 커비 도팡 일당의 습격','닌텐도','DS','DS소프트웨어','2007.09.13','33000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_star.gif'],
-  ['숫자로 찾는 그림 퍼즐 피크로스 DS','닌텐도','DS','DS소프트웨어','2007.09.20','20000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_mario.gif'],
+  ['숫자로 찾는 그림 퍼즐 피크로스 DS','닌텐도','DS','DS소프트웨어','2007.09.20','20000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_picrossDS.gif'],
   ['도와줘! 리듬 히어로','닌텐도','DS','DS소프트웨어','2007.10.11','39000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_rhythm.gif'],
   ['요시 아일랜드 DS','닌텐도','DS','DS소프트웨어','2007.11.08','33000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_yoshi.gif'],
   ['메트로이드 프라임 헌터즈','닌텐도','DS','DS소프트웨어','2007.12.06','39000₩','KR','미개봉','Y','-','/resource/image/nintendo/DS/KOR/Software/tab01_metroid.gif'],
