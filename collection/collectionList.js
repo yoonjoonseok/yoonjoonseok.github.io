@@ -15,7 +15,7 @@ var arr = [
 ['타운으로 놀러가요 동물의 숲','닌텐도','Wii','WiiSW','2010.01.28','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_wiianimal.jpg'],
 ['마리오 파워 사커','닌텐도','Wii','WiiSW','2010.03.18','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_mariopowersoccer.jpg'],
 ['대난투 스매시브라더스 X','닌텐도','Wii','WiiSW','2010.04.29','49000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_smashbrosx.jpg'],
-['뉴 슈퍼 마리오 브라더스 Wii','닌텐도','Wii','WiiSW','2010.08.07','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_NSMB_Wii.jpg'],
+['뉴 슈퍼 마리오 브라더스 Wii','닌텐도','Wii','WiiSW','2010.08.07','44000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_NSMB_Wii.jpg'],
 ['링크의 사격 트레이닝+Wii 재퍼','닌텐도','Wii','WiiSW','2010.10.28','39000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_Link_shoot_training.jpg'],
 ['슈퍼 마리오 25주년 스페셜 에디션','닌텐도','Wii','WiiSW','2010.12.11','30000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_m25th_special_edition.jpg'],
 ['슈퍼 마리오 Wii 2: 갤럭시 어드벤처 투게더','닌텐도','Wii','WiiSW','2011.01.20','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_smwii2_galaxy.jpg'],
