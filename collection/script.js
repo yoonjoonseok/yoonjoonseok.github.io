@@ -77,10 +77,12 @@ function displayResults(data) {
     var imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
     var img = document.createElement('img');
-    img.style.display = 'none';
     img.src = item.imageUrl;
     let realImg = new Image();
     realImg.src = item.imageUrl;
+    img.style.visibility = 'hidden';
+    img.style.opacity = '0';
+    img.style.transition = 'opacity 0.2s ease';
     img.onload = function () {
       let width = img.width;
       let height = img.height;
@@ -92,7 +94,8 @@ function displayResults(data) {
       if (item.status === '미보유') {
       img.classList.add('monochrome');
       }
-      img.style.display = 'block';
+      img.style.visibility = 'visible';
+      img.style.opacity = '1';
     };
     imgContainer.appendChild(img);
     div.appendChild(imgContainer);
