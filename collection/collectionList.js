@@ -2,7 +2,7 @@
 var arr = [
   ['메이플스토리DS+닌텐도 DSi 스페셜 에디션','닌텐도','DS','DSHW','2010.04.15','237000₩','KR','미보유','N','-','/resource/image/nintendo/DS/KOR/Hardware/dsimaple.jpg'],
   ['닌텐도 DSi 레시라무･제크로무 에디션 <블랙>','닌텐도','DS','DSHW','2011.04.21','227000₩','KR','개봉','Y','-','/resource/image/nintendo/DS/KOR/Hardware/dsipokemonblack.jpg'],
-  ['닌텐도 DSi 레시라무･제크로무 에디션 <화이트>','닌텐도','DS','DSHW','2011.04.21','227000₩','KR','개봉','Y','-','/resource/image/nintendo/DS/KOR/Hardware/dsipokemonvwhite.jpg'],
+  ['닌텐도 DSi 레시라무･제크로무 에디션 <화이트>','닌텐도','DS','DSHW','2011.04.21','227000₩','KR','개봉','Y','-','/resource/image/nintendo/DS/KOR/Hardware/dsipokemonwhite.jpg'],
   ['마리오와 소닉 베이징 올림픽','닌텐도','Wii','WiiSW','2008.05.29','44000₩','KR','미개봉','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_mario_sonic.jpg'],
   ['뉴 슈퍼 마리오브라더스 Wii 패키지','닌텐도','Wii','WiiHW','2010.12.11','188000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Hardware/wii_mario_package.jpg'],
 ['슈퍼 마리오 Wii 갤럭시 어드벤처','닌텐도','Wii','WiiSW','2008.09.04','44000₩','KR','미보유','Y','-','/resource/image/nintendo/Wii/KOR/Software/goods_supermario.jpg'],
