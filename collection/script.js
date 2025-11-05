@@ -65,6 +65,8 @@ function filterAndDisplay() {
   }
 
   count.innerText = filteredData.length+'건';
+  amount.innerText = filteredData.reduce((accumulator, currentValue) => {
+  return accumulator + parseInt(currentValue.price.slice(0, -1));}, 0).toLocaleString() + '원';
 
   displayResults(filteredData);
 }
