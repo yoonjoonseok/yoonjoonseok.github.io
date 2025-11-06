@@ -17,8 +17,11 @@ var itemList = arr.map(item => new Item(item[0], item[1], item[2], item[3], item
 const selectElement = document.getElementById('for');
 const selectSortElement = document.getElementById('selectSort');
 const isCollectedCheckbox = document.getElementById('isCollectedCheckbox');
+const isHadCheckbox = document.getElementById('isHadCheckbox');
 const statusCheckbox = document.getElementById('statusCheckbox');
 const searchBox = document.getElementById('searchBox');
+const nationSelectElement = document.getElementById('nation');
+const remarkSelectElement = document.getElementById('remarks');
 const resultsContainer = document.getElementById('results');
 const count = document.getElementById('count');
 
@@ -28,47 +31,97 @@ var middleCategory;
 var minorCategory;
 var filteredData;
 var keyword;
+var selectedRemark;
 
 function filterAndDisplay() {
   filteredData = itemList;
+  filteredData = filteringKeyword(filteredData, keyword);
+  filteredData = filteringCategory(filteredData);
+  filteredData = filteringCheckbox(filteredData);
+  filteredData = filteringNation(filteredData);
+  filteredData = filteringRemarks(filteredData);
+  filteredData = filteredDataSort(filteredData);
+  displayResults(filteredData);
+}
+
+function filteringKeyword(filteredData, keyword) {
   keyword = searchBox.value.trim();
   if (keyword.length > 0) {
-    filteredData = filteredData.filter(item => item.name.includes(keyword));
+    return filteredData.filter(item => item.name.includes(keyword));
   }
+  return filteredData;
+}
+
+function filteringCategory(filteredData) {
   selectedOptions = Array.from(selectElement.options).filter(option => option.selected);
   majorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'majorCategory').map(item => item.value);
   middleCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'middleCategory').map(item => item.value);
   minorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'minorCategory').map(item => item.value);
-  filteredData = filteredData.filter(item => majorCategory.includes(item.majorCategory) || middleCategory.includes(item.middleCategory) || minorCategory.includes(item.minorCategory));
+  return filteredData.filter(item => majorCategory.includes(item.majorCategory) || middleCategory.includes(item.middleCategory) || minorCategory.includes(item.minorCategory));
+}
 
+function filteringCheckbox(filteredData) {
   if (isCollectedCheckbox.checked) {
     filteredData = filteredData.filter(item => item.isCollected === 'Y');
+  }
+
+  if (isHadCheckbox.checked) {
+    filteredData = filteredData.filter(item => item.status !== '미보유');
   }
 
   if (statusCheckbox.checked) {
     filteredData = filteredData.filter(item => item.status === '미개봉');
   }
+  return filteredData;
+}
 
-  switch (selectSortElement.value) {
-    case 'releaseDateAsc':
-      filteredData = filteredData.toSorted((a, b) => a.releaseDate.localeCompare(b.releaseDate));
-      break;
-    case 'releaseDateDesc':
-      filteredData = filteredData.toSorted((a, b) => b.releaseDate.localeCompare(a.releaseDate));
-      break;
-    case 'nameAsc':
-      filteredData = filteredData.toSorted((a, b) => a.name.localeCompare(b.name));
-      break;
-    case 'nameDesc':
-      filteredData = filteredData.toSorted((a, b) => b.name.localeCompare(a.name));
-      break;
+function filteringNation(filteredData) {
+  const selectedNation = nationSelectElement.value;
+  if (selectedNation != 'All') {
+    return filteredData.filter(item => item.nation === selectedNation);
+  } return filteredData;
+}
+
+function filteringRemarks(filteredData) {
+  const selectedRemark = remarkSelectElement.value;
+  changeRemarkOptions(selectedRemark);
+  if (selectedRemark != 'All') {
+    return filteredData.filter(item => item.remarks === selectedRemark);
+  }
+  return filteredData;
+}
+
+function changeRemarkOptions(selectedRemark) {
+  const uniqueRemarks = [...new Set(filteredData.map(item => item.remarks))];
+
+  remarkSelectElement.options.length = 0;
+
+  var option = document.createElement('option');
+  option.innerText = 'All';
+  option.value = 'All';
+  remarkSelectElement.append(option);
+
+  for (var i = 0; i < uniqueRemarks.length; i++) {
+    var option = document.createElement('option');
+    option.innerText = uniqueRemarks[i];
+    option.value = uniqueRemarks[i];
+    remarkSelectElement.append(option);
   }
 
-  count.innerText = filteredData.length+'건';
-  amount.innerText = filteredData.reduce((accumulator, currentValue) => {
-  return accumulator + parseInt(currentValue.price.slice(0, -1));}, 0).toLocaleString() + '원';
+  remarkSelectElement.value = selectedRemark;
+}
 
-  displayResults(filteredData);
+function filteredDataSort(filteredData) {
+  switch (selectSortElement.value) {
+    case 'releaseDateAsc':
+      return filteredData.toSorted((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+    case 'releaseDateDesc':
+      return filteredData.toSorted((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+    case 'nameAsc':
+      return filteredData.toSorted((a, b) => a.name.localeCompare(b.name));
+    case 'nameDesc':
+      return filteredData.toSorted((a, b) => b.name.localeCompare(a.name));
+  }
 }
 
 function displayResults(data) {
@@ -94,7 +147,7 @@ function displayResults(data) {
         img.classList.add('long-img');
       }
       if (item.status === '미보유') {
-      img.classList.add('monochrome');
+        img.classList.add('monochrome');
       }
       img.style.visibility = 'visible';
       img.style.opacity = '1';
@@ -111,11 +164,22 @@ function displayResults(data) {
     div.appendChild(textDiv);
     resultsContainer.appendChild(div);
   });
+  renderingSum(filteredData);
+}
+
+function renderingSum(filteredData) {
+  count.innerText = filteredData.length + '건';
+  amount.innerText = filteredData.reduce((accumulator, currentValue) => {
+    return accumulator + parseInt(currentValue.price.slice(0, -1));
+  }, 0).toLocaleString() + '원';
 }
 
 selectElement.addEventListener('change', filterAndDisplay);
 selectSortElement.addEventListener('change', filterAndDisplay);
 isCollectedCheckbox.addEventListener('change', filterAndDisplay);
+isHadCheckbox.addEventListener('change', filterAndDisplay);
 statusCheckbox.addEventListener('change', filterAndDisplay);
 searchBox.addEventListener('input', filterAndDisplay);
+nationSelectElement.addEventListener('change', filterAndDisplay);
+remarkSelectElement.addEventListener('change', filterAndDisplay);
 filterAndDisplay();

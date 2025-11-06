@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>소장품</title>
   <script src="/collection/collectionList.js"></script>
   <script src="/collection/script.js" defer></script>
   <link rel="stylesheet" href="/collection/styles.css" />
 </head>
+
 <body>
   <div class="header">
     <div class="header-left">
@@ -18,14 +20,23 @@
         <label for="isCollectedCheckbox">수집 여부</label>
       </div>
       <div>
+        <input type="checkbox" id="isHadCheckbox" name="isHadCheckbox" />
+        <label for="isHadCheckbox">보유만</label>
+      </div>
+      <div>
         <input type="checkbox" id="statusCheckbox" name="statusCheckbox" />
-        <label for="statusCheckbox">미개봉</label>
+        <label for="statusCheckbox">미개봉만</label>
       </div>
       <input id="searchBox" type="text">
-      <select id="nation" name="nation">
-        <option value="All">All</option>
+      <label for="nation">국가</label>
+      <select class="nationSelect" id="nation" name="nation">
+        <option value="All" selected>All</option>
         <option value="KR">KR</option>
         <option value="JP">JP</option>
+      </select>
+      <label for="remarks">분류</label>
+      <select class="remarksSelect" id="remarks" name="remarks">
+        <option value="All">All</option>
       </select>
       <select id="selectSort" name="sort">
         <option value="releaseDateAsc">발매일 ↑</option>
@@ -33,18 +44,21 @@
         <option value="nameAsc">이름 ↑</option>
         <option value="nameDesc">이름 ↓</option>
       </select>
-      <label id="count"></label>
+      <label id="count" style="width: 80px;"></label>
     </div>
   </div>
   <div class="main-container">
     <div class="category">
       <select id="for" multiple name="items" size="40">
-        <option selected value="닌텐도" data-name="majorCategory" style="font-weight: 900;color:white;background-color: red;">Nintendo</option>
-        <option value="pokemon" data-name="middleCategory" style="font-weight: bold;color:yellow;background-color: blue;">&nbsp;&nbsp;&nbsp;포켓몬</option>
+        <option selected value="닌텐도" data-name="majorCategory"
+          style="font-weight: 900;color:white;background-color: red;">Nintendo</option>
+        <option value="pokemon" data-name="middleCategory"
+          style="font-weight: bold;color:yellow;background-color: blue;">&nbsp;&nbsp;&nbsp;포켓몬</option>
         <option value="scaleworld" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스케일 월드</option>
         <option value="moncolle" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;몬콜레</option>
         <option value="gotcha" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가챠</option>
-        <option value="LEGO" data-name="middleCategory" style="font-weight: bold; color:yellow;background-color: red;">&nbsp;&nbsp;&nbsp;LEGO</option>
+        <option value="LEGO" data-name="middleCategory" style="font-weight: bold; color:yellow;background-color: red;">
+          &nbsp;&nbsp;&nbsp;LEGO</option>
         <option value="LEGOSM" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오</option>
         <option value="SWITCH2" data-name="middleCategory"
           style="font-weight: bold; color:white;background-color: red;">&nbsp;&nbsp;&nbsp;SWITCH 2
@@ -79,10 +93,12 @@
         <option value="DSHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
         <option value="DSSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
         <!--<option value="DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="GC" data-name="middleCategory" style="font-weight: bold; color:blueviolet;background-color: black;">
+        <option value="GC" data-name="middleCategory"
+          style="font-weight: bold; color:blueviolet;background-color: black;">
           &nbsp;&nbsp;&nbsp;GameCube</option>
         <option value="GCSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="GBA" data-name="middleCategory" style="font-weight: bold; color:white;background-color: blueviolet;">
+        <option value="GBA" data-name="middleCategory"
+          style="font-weight: bold; color:white;background-color: blueviolet;">
           &nbsp;&nbsp;&nbsp;Game Boy Advance
         </option>
         <option value="GBAHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
