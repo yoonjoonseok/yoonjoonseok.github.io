@@ -21,7 +21,7 @@ var arr = [
 ['New 닌텐도 3DS XL 피카츄 에디션','닌텐도','3DS','3DSHW','2017.03.04','235000₩','KR','미개봉','Y','New 3DS XL','/resource/image/nintendo/3DS/KOR/Hardware/New 닌텐도 3DS XL 피카츄 에디션.jpg'],
 ['New 닌텐도 2DS XL 몬스터볼 에디션','닌텐도','3DS','3DSHW','2017.11.17','175000₩','KR','개봉','Y','New 2DS XL','/resource/image/nintendo/3DS/KOR/Hardware/New 닌텐도 2DS XL 몬스터볼 에디션.jpg'],
 ['New 닌텐도 2DS XL 피카츄 에디션','닌텐도','3DS','3DSHW','2018.02.08','175000₩','KR','개봉','Y','New 2DS XL','/resource/image/nintendo/3DS/KOR/Hardware/New 닌텐도 2DS XL 피카츄 에디션.jpg'],
-['Nintendo Switch 휴대용 케이스 슈퍼 마리오 오디세이 에디션','닌텐도','SWITCH','SWITCHHW','2018.04.26','27800₩','KR','미개봉','Y','Switch 휴대용 케이스','/resource/image/nintendo/SWITCH/Hardware/Nintendo Switch 휴대용 케이스 슈퍼 마리오 오디세이 에디션.jpg'],
+['Nintendo Switch 휴대용 케이스 슈퍼 마리오 오디세이 에디션','닌텐도','SWITCH','SWITCHHW','2018.04.26','27800₩','KR','미개봉','Y','Switch 휴대용 케이스','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch 휴대용 케이스 슈퍼 마리오 오디세이 에디션.jpg'],
 ['New 닌텐도 2DS XL 튀어나와요 동물의 숲 amiibo+ 패키지','닌텐도','3DS','3DSHW','2018.07.19','185000₩','KR','미개봉','Y','New 2DS XL','/resource/image/nintendo/3DS/KOR/Hardware/New 닌텐도 2DS XL 튀어나와요 동물의 숲 amiibo+ 패키지.jpg'],
 ['New 닌텐도 2DS XL 마리오 카트 7 패키지','닌텐도','3DS','3DSHW','2018.09.13','185000₩','KR','미개봉','Y','New 2DS XL','/resource/image/nintendo/3DS/KOR/Hardware/New 닌텐도 2DS XL 마리오 카트 7 패키지.jpg'],
 ['Nintendo Switch 포켓몬스터 Let\'s Go! 피카츄 세트','닌텐도','SWITCH','SWITCHHW','2018.11.16','464800₩','KR','미개봉','Y','Switch','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch 포켓몬스터 Let\'s Go! 피카츄 세트.jpg'],
