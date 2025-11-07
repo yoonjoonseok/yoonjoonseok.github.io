@@ -50,6 +50,7 @@
     padding: 10px;
     width: 175px;
     height: 190px;
+    transform: perspective(350px) rotateY(0deg) rotateX(0deg);
 }
 
 .img-container {
