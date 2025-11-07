@@ -167,7 +167,9 @@ function displayResults(data) {
   renderingSum(filteredData);
 
   
-  var container = document.querySelector('.card')
+  var cards = document.querySelectorAll('.card')
+
+  cards.forEach(container => {
   //var overlay = document.querySelector('.overlay')
   container.addEventListener('mousemove', function(e){
     var x = e.offsetX
@@ -185,8 +187,7 @@ function displayResults(data) {
     container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
   })
 
-
-
+  });
 }
 
 function renderingSum(filteredData) {
