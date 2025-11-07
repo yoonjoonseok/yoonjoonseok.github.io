@@ -94,12 +94,12 @@ function filteringRemarks(filteredData) {
 function changeRemarkOptions(selectedRemark) {
   const uniqueRemarks = [...new Set(filteredData.map(item => item.remarks))];
 
-  remarkSelectElement.options.length = 0;
+  remarkSelectElement.options.length = 1;
 
-  var option = document.createElement('option');
+  /*var option = document.createElement('option');
   option.innerText = 'All';
   option.value = 'All';
-  remarkSelectElement.append(option);
+  remarkSelectElement.append(option);*/
 
   for (var i = 0; i < uniqueRemarks.length; i++) {
     var option = document.createElement('option');
