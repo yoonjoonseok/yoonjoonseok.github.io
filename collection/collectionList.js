@@ -65,7 +65,7 @@ var arr = [
 ['슈퍼 마리오 3D 랜드','닌텐도','3DS','3DSSW','2012.04.28','42000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/슈퍼 마리오 3D 랜드.jpg'],
 ['마리오 카트 7','닌텐도','3DS','3DSSW','2012.05.31','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/마리오 카트 7.jpg'],
 ['마리오와 소닉 런던 올림픽','닌텐도','3DS','3DSSW','2012.06.21','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/마리오와 소닉 런던 올림픽.jpg'],
-['슈퍼 포켓몬 대격돌','닌텐도','3DS','3DSSW','2012.07.12','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/슈퍼 포켓몬 대격돌.jpg'],
+['슈퍼 포켓몬 대격돌','닌텐도','3DS','3DSSW','2012.07.12','44000₩','KR','미보유','Y','실물','/resource/image/nintendo/3DS/KOR/Software/슈퍼 포켓몬 대격돌.jpg'],
 ['스타폭스 64 3D','닌텐도','3DS','3DSSW','2012.08.30','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/스타폭스 64 3D.jpg'],
 ['젤다의 전설 시간의 오카리나 3D','닌텐도','3DS','3DSSW','2012.09.27','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/젤다의 전설 시간의 오카리나 3D.jpg'],
 ['뉴 슈퍼 마리오 브라더스 2','닌텐도','3DS','3DSSW','2012.12.06','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/뉴 슈퍼 마리오 브라더스 2.jpg'],
