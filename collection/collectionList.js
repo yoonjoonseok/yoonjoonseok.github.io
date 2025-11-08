@@ -1,5 +1,26 @@
 //[name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl]
 var arr = [
+  ['Nintendo Entertainment System™','닌텐도','LEGO','LEGOSM','2020.08.01','360000₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/Nintendo Entertainment System™.jpg'],
+['슈퍼 마리오 64 물음표블록','닌텐도','LEGO','LEGOSM','2021.10.01','229900₩','KR','미보유','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/슈퍼 마리오 64 물음표블록.jpg'],
+['힘센 쿠파™','닌텐도','LEGO','LEGOSM','2022.10.01','349900₩','KR','미보유','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/힘센 쿠파™.png'],
+['뻐끔플라워','닌텐도','LEGO','LEGOSM','2023.11.06','96900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/뻐끔플라워.png'],
+['슈퍼 마리오 월드™ : 마리오와 요시','닌텐도','LEGO','LEGOSM','2024.10.01','179900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/슈퍼 마리오 월드™  마리오와 요시.png'],
+['마리오 카트™: 마리오 & 스탠더드카트','닌텐도','LEGO','LEGOSM','2025.05.15','239900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ 마리오 & 스탠더드카트.png'],
+['Game Boy™','닌텐도','LEGO','LEGOSM','2025.10.01','89900₩','KR','미보유','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/Game Boy™.png'],
+['레고® 마리오™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 마리오™ 와 모험!.jpg'],
+['레고® 루이지™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 루이지™ 와 모험!.png'],
+['레고® 피치와™ 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 피치와™ 모험!.jpg'],
+['마리오 카트™ – 스탠더드카트','닌텐도','LEGO','LEGOSM','2024.12.18','29900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 스탠더드카트.png'],
+['마리오 카트™ – 동키콩과 DK 점보','닌텐도','LEGO','LEGOSM','2024.12.18','49900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 동키콩과 DK 점보.png'],
+['마리오 카트™ – 베이비마리오 대 베이비루이지','닌텐도','LEGO','LEGOSM','2024.12.18','44900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 베이비마리오 대 베이비루이지.png'],
+['마리오 카트™ – 요시바이크','닌텐도','LEGO','LEGOSM','2024.12.18','19900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 요시바이크.png'],
+['마리오 카트™ – 베이비피치와 그랑프리 세트','닌텐도','LEGO','LEGOSM','2024.12.18','114900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 베이비피치와 그랑프리 세트.png'],
+['마리오 카트™ – 키노피오의 차고','닌텐도','LEGO','LEGOSM','2024.12.18','52900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 키노피오의 차고.png'],
+['마리오 카트™ – 레고® 마리오와 스탠더드카트','닌텐도','LEGO','LEGOSM','2025.10.01','74900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 레고® 마리오와 스탠더드카트.png'],
+['마리오 카트™ - 와리오와 킹부끄','닌텐도','LEGO','LEGOSM','2025.10.01','74900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ - 와리오와 킹부끄.png'],
+['마리오 카트™ - 물어라 뻐끔플라워!','닌텐도','LEGO','LEGOSM','2025.10.01','74900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ - 물어라 뻐끔플라워!.png'],
+['마리오 카트™ - 헤이호와 Ｐ윙','닌텐도','LEGO','LEGOSM','2025.10.01','29900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ - 헤이호와 Ｐ윙.png'],
+['마리오 카트™ - 쿠파 성','닌텐도','LEGO','LEGOSM','2025.10.01','149900₩','KR','미보유','N','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ - 쿠파 성.png'],
   ['메이플스토리DS+닌텐도 DSi 스페셜 에디션','닌텐도','DS','DSHW','2010.04.15','237000₩','KR','미보유','N','DSi','/resource/image/nintendo/DS/KOR/Hardware/dsimaple.jpg'],
   ['닌텐도 DSi 레시라무･제크로무 에디션 <블랙>','닌텐도','DS','DSHW','2011.04.21','227000₩','KR','개봉','Y','DSi','/resource/image/nintendo/DS/KOR/Hardware/dsipokemonblack.jpg'],
   ['닌텐도 DSi 레시라무･제크로무 에디션 <화이트>','닌텐도','DS','DSHW','2011.04.21','227000₩','KR','개봉','Y','DSi','/resource/image/nintendo/DS/KOR/Hardware/dsipokemonwhite.jpg'],
@@ -191,5 +212,6 @@ var arr = [
   ['마리오&루이지 RPG 3 쿠파 몸속 대모험','닌텐도','DS','DSSW','2011.07.21','39000₩','KR','미개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/mario_luigi_rpg3.jpg'],
   ['모여라! 커비','닌텐도','DS','DSSW','2011.12.01','33000₩','KR','미개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/atsumete_kirby.jpg'],
   ['포켓몬스터 블랙 2','닌텐도','DS','DSSW','2011.11.08','39000₩','KR','미개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/pokemon_black2.jpg'],
-  ['포켓몬스터 화이트 2','닌텐도','DS','DSSW','2011.11.08','39000₩','KR','개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/pokemon_white2.jpg']
+  ['포켓몬스터 화이트 2','닌텐도','DS','DSSW','2011.11.08','39000₩','KR','개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/pokemon_white2.jpg'],
+
   ]; 
