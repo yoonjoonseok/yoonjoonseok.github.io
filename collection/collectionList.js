@@ -87,10 +87,12 @@ var arr = [
 ['뻐끔플라워','닌텐도','LEGO','LEGOSM','2023.11.06','96900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/뻐끔플라워.webp'],
 ['슈퍼 마리오 월드™ : 마리오와 요시','닌텐도','LEGO','LEGOSM','2024.10.01','179900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/슈퍼 마리오 월드™  마리오와 요시.png'],
 ['마리오 카트™: 마리오 & 스탠더드카트','닌텐도','LEGO','LEGOSM','2025.05.15','239900₩','KR','개봉','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ 마리오 & 스탠더드카트.png'],
+['레고® 슈퍼 마리오™: 마리오 카트™: 가시돌이 등껍질','닌텐도','LEGO','LEGOSM','2025.05.15','0₩','KR','미보유','Y','리워드','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 슈퍼 마리오™ 마리오 카트™ 가시돌이 등껍질.webp']
 ['Game Boy™','닌텐도','LEGO','LEGOSM','2025.10.01','89900₩','KR','미보유','Y','UCS','/resource/image/nintendo/LEGO/슈퍼 마리오/Game Boy™.png'],
-['레고® 마리오™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 마리오™ 와 모험!.jpg'],
-['레고® 루이지™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 루이지™ 와 모험!.png'],
-['레고® 피치와™ 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 피치와™ 모험!.jpg'],
+['쿠파의 하이웨이 카 확장팩','닌텐도','LEGO','LEGOSM','2024.01.01','44990₩','KR','개봉','Y','슈퍼 마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/쿠파의 하이웨이 카 확장팩.webp']
+['레고® 마리오™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','슈퍼 마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 마리오™ 와 모험!.jpg'],
+['레고® 루이지™ 와 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','슈퍼 마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 루이지™ 와 모험!.png'],
+['레고® 피치와™ 모험!','닌텐도','LEGO','LEGOSM','2024.08.01','69900₩','KR','개봉','Y','슈퍼 마리오','/resource/image/nintendo/LEGO/슈퍼 마리오/레고® 피치와™ 모험!.jpg'],
 ['마리오 카트™ – 요시바이크','닌텐도','LEGO','LEGOSM','2024.12.18','19900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 요시바이크.png'],
 ['마리오 카트™ – 스탠더드카트','닌텐도','LEGO','LEGOSM','2024.12.18','29900₩','KR','개봉','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 스탠더드카트.png'],
 ['마리오 카트™ – 동키콩과 DK 점보','닌텐도','LEGO','LEGOSM','2024.12.18','49900₩','KR','미보유','Y','마리오 카트','/resource/image/nintendo/LEGO/슈퍼 마리오/마리오 카트™ – 동키콩과 DK 점보.png'],
