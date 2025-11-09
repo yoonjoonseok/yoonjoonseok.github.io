@@ -306,7 +306,7 @@ var arr = [
 
   ['마리오 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/마리오.webp'],
 ['피치공주 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/피치공주.webp'],
-['요시 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/요시.webp'],
+['요시 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미보유','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/요시.webp'],
 ['동키콩 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/동키콩.webp'],
 ['링크 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/링크.webp'],
 ['폭스 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/폭스.webp'],
@@ -356,7 +356,7 @@ var arr = [
 ['류 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2016.04.28','1980¥','JP','미보유','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/류.webp'],
 ['클라우드 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/클라우드.webp'],
 ['클라우드 [2P 파이터] (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/클라우드 [2P 파이터].webp'],
-['카무이  (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/카무이 .webp'],
+['카무이  (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/카무이.webp'],
 ['카무이 [2P 파이터] (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/카무이 [2P 파이터].webp'],
 ['베요네타 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/베요네타.webp'],
 ['베요네타 [2P 파이터] (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2017.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/베요네타 [2P 파이터].webp'],
