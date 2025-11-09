@@ -301,4 +301,11 @@ var arr = [
   ['포켓몬스터 블랙 2','닌텐도','DS','DSSW','2011.11.08','39000₩','KR','미개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/pokemon_black2.jpg'],
   ['포켓몬스터 화이트 2','닌텐도','DS','DSSW','2011.11.08','39000₩','KR','개봉','Y','실물','/resource/image/nintendo/DS/KOR/Software/pokemon_white2.jpg'],
 
+  ['Pokémon GO Plus +（포켓몬 고 플러스 플러스)','닌텐도','etc','etc','2023.07.14','64800₩','KR','미개봉','Y','포켓몬 고','/resource/image/nintendo/etc/포켓몬 고 플러스 플러스.jpg'],
+  ['닌텐도 사운드 클록 알라모','닌텐도','etc','etc','2025.03.10','129800₩','KR','미개봉','Y','알라모','/resource/image/nintendo/etc/닌텐도 사운드 클록 알라모.webp'],
+
+['커비 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/커비 (별의 커비 시리즈).webp'],
+['메타 나이트 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/메타 나이트 (별의 커비 시리즈).webp'],
+['디디디 대왕 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/디디디 대왕 (별의 커비 시리즈).webp'],
+['웨이들 디 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/웨이들 디 (별의 커비 시리즈).webp']
   ]; 
