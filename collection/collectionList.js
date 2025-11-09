@@ -303,7 +303,7 @@ var arr = [
 
   ['Pokémon GO Plus +（포켓몬 고 플러스 플러스)','닌텐도','etc','etc','2023.07.14','64800₩','KR','미개봉','Y','포켓몬 고','/resource/image/nintendo/etc/포켓몬 고 플러스 플러스.jpg'],
   ['닌텐도 사운드 클록 알라모','닌텐도','etc','etc','2025.03.10','129800₩','KR','미개봉','Y','알라모','/resource/image/nintendo/etc/닌텐도 사운드 클록 알라모.webp'],
-
+//Amiibo 슈퍼 스매스브라더스 시리즈
   ['마리오 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/마리오.webp'],
 ['피치공주 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/피치공주.webp'],
 ['요시 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2014.12.06','1980¥','JP','미보유','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/요시.webp'],
@@ -392,8 +392,94 @@ var arr = [
 ['호무라 / 히카리 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2023.07.21','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/호무라 히카리.webp'],
 ['kazuya (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2023.01.13','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/kazuya.webp'],
 ['소라 (슈퍼 스매시브라더스 시리즈)','닌텐도','Amiibo','SMB','2024.02.16','1980¥','JP','미개봉','Y','슈퍼 스매시브라더스 시리즈','/resource/image/nintendo/Amiibo/box/SSB/소라.webp'],
+//Amiibo 슈퍼 마리오 시리즈
+['마리오','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/마리오.webp'],
+['루이지','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/루이지.webp'],
+['피치공주','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/피치공주.webp'],
+['쿠파','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/쿠파.webp'],
+['요시','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/요시.webp'],
+['키노피오','닌텐도','Amiibo','SM','2015.03.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/키노피오.webp'],
+['마리오 - 골드 에디션','닌텐도','Amiibo','SM','2015.12.17','1980¥','JP','미보유','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/마리오 - 골드 에디션.webp'],
+['데이지','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/데이지.webp'],
+['와리오','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/와리오.webp'],
+['와루이지','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/와루이지.webp'],
+['로젤리나','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/로젤리나.webp'],
+['동키콩','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/동키콩.webp'],
+['디디콩','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/디디콩.webp'],
+['부끄부끄','닌텐도','Amiibo','SM','2016.10.20','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/부끄부끄.webp'],
+['굼바','닌텐도','Amiibo','SM','2017.10.05','1980¥','JP','','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/굼바.webp'],
+['엉금엉금','닌텐도','Amiibo','SM','2017.10.05','1980¥','JP','','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/엉금엉금.webp'],
+['마리오 [웨딩 스타일]','닌텐도','Amiibo','SM','2017.10.27','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/마리오 [웨딩 스타일].webp'],
+['피치공주 [웨딩 스타일]','닌텐도','Amiibo','SM','2017.10.27','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/피치공주 [웨딩 스타일].webp'],
+['쿠파 [웨딩 스타일]','닌텐도','Amiibo','SM','2017.10.27','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/쿠파 [웨딩 스타일].webp'],
+['고양이마리오','닌텐도','Amiibo','SM','2021.02.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/고양이마리오.webp'],
+['고양이피치','닌텐도','Amiibo','SM','2021.02.12','1980¥','JP','미개봉','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/고양이피치.webp'],
+['마리오 & 치코','닌텐도','Amiibo','SM','2026.04.02','4000¥','JP','미보유','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/마리오 & 치코.webp'],
+['로젤리나 & 치코','닌텐도','Amiibo','SM','2026.04.02','4000¥','JP','미보유','Y','슈퍼 마리오 시리즈','/resource/image/nintendo/Amiibo/box/SM/로젤리나 & 치코.webp'],
+//Amiibo 젤다의 전설 시리즈
+['울프 링크','닌텐도','Amiibo','ZD','2016.03.10','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/울프 링크.webp'],
+['링크 [젤다의 전설]','닌텐도','Amiibo','ZD','2016.12.01','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [젤다의 전설].webp'],
+['링크 [시간의 오카리나]','닌텐도','Amiibo','ZD','2016.12.01','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [시간의 오카리나].webp'],
+['툰링크 [바람의 지휘봉]','닌텐도','Amiibo','ZD','2016.12.01','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/툰링크 [바람의 지휘봉].webp'],
+['젤다 [바람의 지휘봉]','닌텐도','Amiibo','ZD','2016.12.01','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/젤다 [바람의 지휘봉].webp'],
+['링크(기마)','닌텐도','Amiibo','ZD','2017.03.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크(기마).webp'],
+['링크(활)','닌텐도','Amiibo','ZD','2017.03.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크(활).webp'],
+['젤다','닌텐도','Amiibo','ZD','2017.03.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/젤다.webp'],
+['보코블린','닌텐도','Amiibo','ZD','2017.03.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/보코블린.webp'],
+['가디언','닌텐도','Amiibo','ZD','2017.03.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/가디언.webp'],
+['우르보사','닌텐도','Amiibo','ZD','2017.11.10','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/우르보사.webp'],
+['리발','닌텐도','Amiibo','ZD','2017.11.10','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/리발.webp'],
+['다르케르','닌텐도','Amiibo','ZD','2017.11.10','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/다르케르.webp'],
+['미파','닌텐도','Amiibo','ZD','2017.11.10','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/미파.webp'],
+['링크 [무쥬라의 가면]','닌텐도','Amiibo','ZD','2017.06.22','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [무쥬라의 가면].webp'],
+['링크 [황혼의 공주]','닌텐도','Amiibo','ZD','2017.06.22','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [황혼의 공주].webp'],
+['링크 [스카이워드 소드]','닌텐도','Amiibo','ZD','2017.06.22','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [스카이워드 소드].webp'],
+['링크 [꿈꾸는 섬]','닌텐도','Amiibo','ZD','2019.09.20','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [꿈꾸는 섬].webp'],
+['젤다&로프트버드','닌텐도','Amiibo','ZD','2021.07.16','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/젤다&로프트버드.webp'],
+['링크 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2023.05.12','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/링크 [티어스 오브 더 킹덤].webp'],
+['젤다 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2023.11.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/젤다 [티어스 오브 더 킹덤].webp'],
+['가논돌프 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2023.11.03','1980¥','JP','미개봉','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/가논돌프 [티어스 오브 더 킹덤].webp'],
+['루쥬 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/루쥬 [티어스 오브 더 킹덤].webp'],
+['윤돌 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/윤돌 [티어스 오브 더 킹덤].webp'],
+['튤리 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/튤리 [티어스 오브 더 킹덤].webp'],
+['시드 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/시드 [티어스 오브 더 킹덤].webp'],
+//Amiibo 동키콩 시리즈
+//Amiibo 동물의 숲 시리즈
+//Amiibo 스플래툰 시리즈
+['걸','닌텐도','Amiibo','SP','2015.05.28','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/걸.webp'],
+['보이','닌텐도','Amiibo','SP','2015.05.28','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/보이.webp'],
+['오징어','닌텐도','Amiibo','SP','2015.05.28','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/오징어.webp'],
+['Callie','닌텐도','Amiibo','SP','2016.07.07','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Callie.webp'],
+['Marie','닌텐도','Amiibo','SP','2016.07.07','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Marie.webp'],
+['걸 [네온 핑크]','닌텐도','Amiibo','SP','2017.07.21','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/걸 [네온 핑크].webp'],
+['보이 [네온 그린]','닌텐도','Amiibo','SP','2017.07.21','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/보이 [네온 그린].webp'],
+['오징어 [네온 퍼플]','닌텐도','Amiibo','SP','2017.07.21','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/오징어 [네온 퍼플].webp'],
+['Pearl','닌텐도','Amiibo','SP','2018.07.13','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Pearl.webp'],
+['Marina','닌텐도','Amiibo','SP','2018.07.13','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Marina.webp'],
+['Octoling Girl','닌텐도','Amiibo','SP','2018.11.09','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Octoling Girl.webp'],
+['Octoling Boy','닌텐도','Amiibo','SP','2018.11.09','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Octoling Boy.webp'],
+['Octoling Octopus','닌텐도','Amiibo','SP','2018.11.09','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/Octoling Octopus.webp'],
+['잉클링[옐로]','닌텐도','Amiibo','SP','2022.11.11','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/잉클링[옐로].webp'],
+['옥토링[블루]','닌텐도','Amiibo','SP','2022.11.11','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/옥토링[블루].webp'],
+['꼬마연어','닌텐도','Amiibo','SP','2022.11.11','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/꼬마연어.webp'],
+['후우카','닌텐도','Amiibo','SP','2023.11.17','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/후우카.webp'],
+['우츠호','닌텐도','Amiibo','SP','2023.11.17','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/우츠호.webp'],
+['만타로','닌텐도','Amiibo','SP','2023.11.17','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/만타로.webp'],
+['아오리[얼터너] / 호타루[얼터너]','닌텐도','Amiibo','SP','2025.09.06','1980¥','JP','미보유','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/아오리[얼터너] 호타루[얼터너].webp'],
+['이이다[사이드 오더] / 히메[사이드 오더]','닌텐도','Amiibo','SP','2025.09.06','1980¥','JP','미보유','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/이이다[사이드 오더] 히메[사이드 오더].webp'],
+//Amiibo 제노블레이드 시리즈
+//Amiibo 파이어 엠블렘 시리즈
+//Amiibo 피크민 시리즈
+//Amiibo 메트로이드 시리즈
+//Amiibo 별의 커비 시리즈
 ['커비 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/커비.webp'],
 ['메타 나이트 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/메타 나이트.webp'],
 ['디디디 대왕 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/디디디 대왕.webp'],
-['웨이들 디 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/웨이들 디.webp']
+['웨이들 디 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/웨이들 디.webp'],
+//Amiibo 커비의 에어라이더 시리즈
+//Amiibo 포켓몬 시리즈
+//Amiibo 슈퍼 마리오 30주년 시리즈
+//Amiibo 마리오 스포츠 슈퍼 스타즈 시리즈
+//Amiibo 요시 시리즈
+//Amiibo 그외 시리즈
   ]; 
