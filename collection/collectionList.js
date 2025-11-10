@@ -167,10 +167,27 @@ var arr = [
 ['Nintendo Switch(OLED 모델) 마리오 카트 8 디럭스 세트','닌텐도','SWITCH','SWITCHHW','2023.11.10','415000₩','KR','미보유','N','Switch (OLED 모델)','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch(OLED 모델) 마리오 카트 8 디럭스 세트.jpg'],
 ['Nintendo Switch Lite  하이랄 에디션','닌텐도','SWITCH','SWITCHHW','2024.09.26','259800₩','KR','미보유','Y','Switch Lite','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch Lite  하이랄 에디션.jpg'],
 ['Nintendo Switch(OLED 모델) 모여봐요 동물의 숲 세트','닌텐도','SWITCH','SWITCHHW','2024.10.24','415000₩','KR','미보유','N','Switch (OLED 모델)','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch(OLED 모델) 모여봐요 동물의 숲 세트.jpg'],
+['Nintendo Switch 2 마리오 카트 월드 세트','닌텐도','SWITCH2','SWITCH2HW','2025.06.05','688000₩','KR','미보유','N','Switch 2','/resource/image/nintendo/SWITCH2/KOR/Hardware/Nintendo Switch 2 마리오 카트 월드 세트.png'],
+['Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트','닌텐도','SWITCH2','SWITCH2HW','2025.10.16','688000₩','KR','개봉','N','Switch 2','/resource/image/nintendo/SWITCH2/KOR/Hardware/Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트.png'],
+
 ['Nintendo Entertainment System™ 컨트롤러','닌텐도','SWITCH','SWITCHHW','2019.12.11','64800₩','KR','미개봉','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Entertainment System™ 컨트롤러.jpg'],
 ['Super Nintendo Entertainment System™ 컨트롤러','닌텐도','SWITCH','SWITCHHW','2019.12.18','34800₩','KR','미개봉','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/Super Nintendo Entertainment System™ 컨트롤러.jpg'],
 ['Nintendo 64 컨트롤러','닌텐도','SWITCH','SWITCHHW','2021.10.26','54800₩','KR','미보유','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo 64 컨트롤러.jpg'],
 ['SEGA Mega Drive Fighting Pad 6B','닌텐도','SWITCH','SWITCHHW','2021.10.26','54800₩','KR','미보유','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/SEGA Mega Drive Fighting Pad 6B.jpg'],
+
+['마리오 카트 월드','닌텐도','SWITCH2','SWITCH2SW','2025.06.05','89800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/마리오 카트 월드.png'],
+['마리오 카트 월드','닌텐도','SWITCH2','SWITCH2DL','2025.06.05','89800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/마리오 카트 월드.png'],
+['젤다의 전설 브레스 오브 더 와일드 Nintendo Switch 2 Edition','닌텐도','SWITCH2','SWITCH2SW','2025.06.05','84800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/젤다의 전설 브레스 오브 더 와일드 Nintendo Switch 2 Edition.png'],
+['젤다의 전설 티어스 오브 더 킹덤 Nintendo Switch 2 Edition','닌텐도','SWITCH2','SWITCH2SW','2025.06.05','84800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/젤다의 전설 티어스 오브 더 킹덤 Nintendo Switch 2 Edition.png'],
+['Nintendo Switch 2 웰컴 투어','닌텐도','SWITCH2','SWITCH2DL','2025.06.05','9800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/Nintendo Switch 2 웰컴 투어.png'],
+['동키콩 바난자','닌텐도','SWITCH2','SWITCH2SW','2025.07.17','79800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/동키콩 바난자.png'],
+['동키콩 바난자','닌텐도','SWITCH2','SWITCH2DL','2025.07.17','79800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/동키콩 바난자.png'],
+['슈퍼 마리오 파티 잼버리 Nintendo Switch 2 Edition + 잼버리 TV','닌텐도','SWITCH2','SWITCH2SW','2025.07.24','84800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/슈퍼 마리오 파티 잼버리 Nintendo Switch 2 Edition + 잼버리 TV.png'],
+['Drag X Drive','닌텐도','SWITCH2','SWITCH2DL','2025.08.14','19800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/Drag X Drive.png'],
+['별의 커비 디스커버리 Nintendo Switch 2 Edition + 스타리 월드','닌텐도','SWITCH2','SWITCH2SW','2025.08.28','84800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/별의 커비 디스커버리 Nintendo Switch 2 Edition + 스타리 월드.png'],
+['포켓몬 레전즈 Z-A Nintendo Switch 2 Edition','닌텐도','SWITCH2','SWITCH2SW','2025.10.16','79800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/포켓몬 레전즈 Z-A Nintendo Switch 2 Edition.jpg'],
+['젤다무쌍 봉인 전기','닌텐도','SWITCH2','SWITCH2SW','2025.11.06','79800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/젤다무쌍 봉인 전기.jpg'],
+//['젤다무쌍 봉인 전기','닌텐도','SWITCH2','SWITCH2DL','2025.11.06','79800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/젤다무쌍 봉인 전기.jpg'],
 
 ['슈퍼 마리오 3D 랜드','닌텐도','3DS','3DSSW','2012.04.28','42000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/슈퍼 마리오 3D 랜드.jpg'],
 ['마리오 카트 7','닌텐도','3DS','3DSSW','2012.05.31','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/마리오 카트 7.jpg'],
@@ -209,6 +226,7 @@ var arr = [
 ['파이어 엠블렘 if','닌텐도','3DS','3DSSW','2016.09.08','69000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/파이어 엠블렘 if.jpg'],
 ['포켓몬스터 썬','닌텐도','3DS','3DSSW','2016.11.18','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 썬.jpg'],
 ['포켓몬스터 문','닌텐도','3DS','3DSSW','2016.11.18','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 문.jpg'],
+['포켓몬스터 썬 문 더블팩','닌텐도','3DS','3DSSW','2016.11.18','98000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 썬 문 더블팩.jpg'],
 ['튀어나와요 동물의 숲 amiibo+','닌텐도','3DS','3DSSW','2016.12.01','44000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/튀어나와요 동물의 숲 amiibo+.jpg'],
 ['리듬 세상 더 베스트 플러스','닌텐도','3DS','3DSSW','2016.12.01','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/리듬 세상 더 베스트 플러스.jpg'],
 ['포치와! 요시 울리 월드','닌텐도','3DS','3DSSW','2017.03.04','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포치와! 요시 울리 월드.jpg'],
@@ -220,6 +238,7 @@ var arr = [
 ['슈퍼 마리오 메이커 for Nintendo 3DS','닌텐도','3DS','3DSSW','2017.08.03','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/슈퍼 마리오 메이커 for Nintendo 3DS.jpg'],
 ['포켓몬스터 울트라썬','닌텐도','3DS','3DSSW','2017.11.17','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 울트라썬.jpg'],
 ['포켓몬스터 울트라문','닌텐도','3DS','3DSSW','2017.11.17','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 울트라문.jpg'],
+['포켓몬스터 울트라썬 울트라문 더블팩','닌텐도','3DS','3DSSW','2017.11.17','98000₩','KR','개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/포켓몬스터 울트라썬 울트라문 더블팩.jpg'],
 ['동키콩 리턴즈 3D Nintendo Selects','닌텐도','3DS','3DSSW','2017.12.07','29000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/동키콩 리턴즈 3D Nintendo Selects.jpg'],
 ['요시 뉴 아일랜드 Nintendo Selects','닌텐도','3DS','3DSSW','2017.12.07','29000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/요시 뉴 아일랜드 Nintendo Selects.jpg'],
 ['커비 배틀 디럭스!','닌텐도','3DS','3DSSW','2018.02.01','49000₩','KR','미개봉','Y','실물','/resource/image/nintendo/3DS/KOR/Software/커비 배틀 디럭스!.jpg'],
@@ -444,7 +463,24 @@ var arr = [
 ['튤리 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/튤리 [티어스 오브 더 킹덤].webp'],
 ['시드 [티어스 오브 더 킹덤]','닌텐도','Amiibo','ZD','2025.06.05','1980¥','JP','미보유','Y','젤다의 전설 시리즈','/resource/image/nintendo/Amiibo/box/ZD/시드 [티어스 오브 더 킹덤].webp'],
 //Amiibo 동키콩 시리즈
+['동키콩 & 폴린','닌텐도','Amiibo','DK','2025.07.17','1980¥','JP','미보유','Y','동키콩 시리즈','/resource/image/nintendo/Amiibo/box/DK/동키콩 & 폴린.webp'],
 //Amiibo 동물의 숲 시리즈
+['여울(동복)','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/여울(동복).webp'],
+['너굴','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/너굴.webp'],
+['고순이','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/고순이.webp'],
+['T.K.','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/T.K..webp'],
+['켄트','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/켄트.webp'],
+['리포','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/리포.webp'],
+['리사','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/리사.webp'],
+['솜이','닌텐도','Amiibo','AC','2015.11.21','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/솜이.webp'],
+['부엉','닌텐도','Amiibo','AC','2015.12.17','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/부엉.webp'],
+['부옥','닌텐도','Amiibo','AC','2015.12.17','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/부옥.webp'],
+['패트릭','닌텐도','Amiibo','AC','2015.12.17','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/패트릭.webp'],
+['도루묵씨','닌텐도','Amiibo','AC','2015.12.17','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/도루묵씨.webp'],
+['콩돌이&밤돌이','닌텐도','Amiibo','AC','2016.03.24','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/콩돌이&밤돌이.webp'],
+['낯선고양이','닌텐도','Amiibo','AC','2016.03.24','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/낯선고양이.webp'],
+['갑돌','닌텐도','Amiibo','AC','2016.03.24','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/갑돌.webp'],
+['여울(하복)','닌텐도','Amiibo','AC','2016.03.24','1980¥','JP','미보유','Y','동물의 숲 시리즈','/resource/image/nintendo/Amiibo/box/AC/여울(하복).webp'],
 //Amiibo 스플래툰 시리즈
 ['걸','닌텐도','Amiibo','SP','2015.05.28','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/걸.webp'],
 ['보이','닌텐도','Amiibo','SP','2015.05.28','1980¥','JP','미개봉','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/보이.webp'],
@@ -468,9 +504,19 @@ var arr = [
 ['아오리[얼터너] / 호타루[얼터너]','닌텐도','Amiibo','SP','2025.09.06','1980¥','JP','미보유','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/아오리[얼터너] 호타루[얼터너].webp'],
 ['이이다[사이드 오더] / 히메[사이드 오더]','닌텐도','Amiibo','SP','2025.09.06','1980¥','JP','미보유','Y','스플래툰 시리즈','/resource/image/nintendo/Amiibo/box/SP/이이다[사이드 오더] 히메[사이드 오더].webp'],
 //Amiibo 제노블레이드 시리즈
+['노아 & 미오','닌텐도','Amiibo','XB','2024.01.19','1980¥','JP','미개봉','Y','제노블레이드 시리즈','/resource/image/nintendo/Amiibo/box/XB/노아 & 미오.webp'],
 //Amiibo 파이어 엠블렘 시리즈
+['아름','닌텐도','Amiibo','FE','2017.07.13','1980¥','JP','미개봉','Y','파이어 엠블렘 시리즈','/resource/image/nintendo/Amiibo/box/FE/아름.webp'],
+['세리카','닌텐도','Amiibo','FE','2017.07.13','1980¥','JP','미개봉','Y','파이어 엠블렘 시리즈','/resource/image/nintendo/Amiibo/box/FE/세리카.webp'],
+['치키','닌텐도','Amiibo','FE','2017.10.26','1980¥','JP','미개봉','Y','파이어 엠블렘 시리즈','/resource/image/nintendo/Amiibo/box/FE/치키.webp'],
+['크롬','닌텐도','Amiibo','FE','2017.10.26','1980¥','JP','미개봉','Y','파이어 엠블렘 시리즈','/resource/image/nintendo/Amiibo/box/FE/크롬.webp'],
 //Amiibo 피크민 시리즈
+['피크민','닌텐도','Amiibo','PK','2017.07.13','1980¥','JP','미보유','Y','피크민 시리즈','/resource/image/nintendo/Amiibo/box/PK/피크민.webp'],
 //Amiibo 메트로이드 시리즈
+['사무스 아란','닌텐도','Amiibo','MD','2017.09.28','1980¥','JP','미개봉','Y','메트로이드 시리즈','/resource/image/nintendo/Amiibo/box/MD/사무스 아란.webp'],
+['메트로이드','닌텐도','Amiibo','MD','2017.09.28','1980¥','JP','미개봉','Y','메트로이드 시리즈','/resource/image/nintendo/Amiibo/box/MD/메트로이드.webp'],
+['사무스 [메트로이드 드레드]','닌텐도','Amiibo','MD','2017.09.28','1980¥','JP','미개봉','Y','메트로이드 시리즈','/resource/image/nintendo/Amiibo/box/MD/사무스 [메트로이드 드레드].webp'],
+['E.M.M.I. [메트로이드 드레드]','닌텐도','Amiibo','MD','2017.09.28','1980¥','JP','미개봉','Y','메트로이드 시리즈','/resource/image/nintendo/Amiibo/box/MD/E.M.M.I. [메트로이드 드레드].webp'],
 //Amiibo 별의 커비 시리즈
 ['커비 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/커비.webp'],
 ['메타 나이트 (별의 커비 시리즈)','닌텐도','Amiibo','KS','2016.04.28','1980¥','JP','미개봉','Y','별의 커비 시리즈','/resource/image/nintendo/Amiibo/box/KS/메타 나이트.webp'],
@@ -480,6 +526,6 @@ var arr = [
 //Amiibo 포켓몬 시리즈
 //Amiibo 슈퍼 마리오 30주년 시리즈
 //Amiibo 마리오 스포츠 슈퍼 스타즈 시리즈
-//Amiibo 요시 시리즈
+//Amiibo 요시 울리 월드 시리즈
 //Amiibo 그외 시리즈
   ]; 
