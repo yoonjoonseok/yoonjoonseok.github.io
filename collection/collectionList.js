@@ -168,7 +168,7 @@ var arr = [
 ['Nintendo Switch Lite  하이랄 에디션','닌텐도','SWITCH','SWITCHHW','2024.09.26','259800₩','KR','미보유','Y','Switch Lite','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch Lite  하이랄 에디션.jpg'],
 ['Nintendo Switch(OLED 모델) 모여봐요 동물의 숲 세트','닌텐도','SWITCH','SWITCHHW','2024.10.24','415000₩','KR','미보유','N','Switch (OLED 모델)','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Switch(OLED 모델) 모여봐요 동물의 숲 세트.jpg'],
 ['Nintendo Switch 2 마리오 카트 월드 세트','닌텐도','SWITCH2','SWITCH2HW','2025.06.05','688000₩','KR','미보유','N','Switch 2','/resource/image/nintendo/SWITCH2/KOR/Hardware/Nintendo Switch 2 마리오 카트 월드 세트.png'],
-['Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트','닌텐도','SWITCH2','SWITCH2HW','2025.10.16','688000₩','KR','개봉','N','Switch 2','/resource/image/nintendo/SWITCH2/KOR/Hardware/Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트.png'],
+['Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트','닌텐도','SWITCH2','SWITCH2HW','2025.10.16','688000₩','KR','개봉','Y','Switch 2','/resource/image/nintendo/SWITCH2/KOR/Hardware/Nintendo Switch 2 Pokémon Legends Z-A Nintendo Switch 2 Edition 세트.png'],
 
 ['Nintendo Entertainment System™ 컨트롤러','닌텐도','SWITCH','SWITCHHW','2019.12.11','64800₩','KR','미개봉','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/Nintendo Entertainment System™ 컨트롤러.jpg'],
 ['Super Nintendo Entertainment System™ 컨트롤러','닌텐도','SWITCH','SWITCHHW','2019.12.18','34800₩','KR','미개봉','Y','Nintendo Switch Online 전용 컨트롤러','/resource/image/nintendo/SWITCH/KOR/Hardware/Super Nintendo Entertainment System™ 컨트롤러.jpg'],
