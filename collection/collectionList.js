@@ -361,7 +361,7 @@ var arr = [
 ['커비의 드림 뷔페','닌텐도','SWITCH','SWITCHDL','2022.09.15','15000₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/커비의 드림 뷔페.jpg'],
 ['베요네타','닌텐도','SWITCH','SWITCHDL','2022.09.30','25000₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/베요네타.jpg'],
 ['베요네타 2','닌텐도','SWITCH','SWITCHDL','2022.09.30','54800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/베요네타 2.jpg'],
-['마리오 + 래비드 반짝이는 희망','닌텐도','SWITCH','SWITCHDL','2022.10.20','64800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/마리오 + 래비드 반짝이는 희망(MARIO + RABBIDS SPARKS OF HOPE).jpg.jpg'],
+['마리오 + 래비드 반짝이는 희망','닌텐도','SWITCH','SWITCHDL','2022.10.20','64800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/마리오 + 래비드 반짝이는 희망(MARIO + RABBIDS SPARKS OF HOPE).jpg'],
 ['베요네타 3','닌텐도','SWITCH','SWITCHDL','2022.10.28','94800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/베요네타 3.jpg'],
 ['포켓몬스터스칼렛','닌텐도','SWITCH','SWITCHDL','2022.11.18','64800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/포켓몬스터스칼렛.jpg'],
 ['포켓몬스터바이올렛','닌텐도','SWITCH','SWITCHDL','2022.11.18','64800₩','KR','미개봉','Y','DL','/resource/image/nintendo/SWITCH/KOR/DL/포켓몬스터바이올렛.jpg'],
