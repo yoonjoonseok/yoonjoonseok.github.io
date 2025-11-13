@@ -199,7 +199,7 @@ function displayResults(data) {
       container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
     })
   });
-  //resizeName();
+  resizeName();
 }
 
 function resizeName() {
@@ -229,7 +229,7 @@ function renderingSum(filteredData) {
 function resizeCards() {
   const value = sizeRange.value;
   document.documentElement.style.setProperty('--card-size', 100 / (value*2)+ '%');
-  //resizeName();
+  resizeName();
 }
 
 selectElement.addEventListener('change', filterAndDisplay);
