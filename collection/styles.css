@@ -38,13 +38,14 @@ display: flex;
 }
 
 .category {
+    width: 10%;
 align-items: center;
 padding: 30px;
 }
 
 .card-container {
 display: flex;
-width: 100%;
+width: 90%;
 flex-wrap: wrap;
 text-align: center;
 gap: 20px;
