@@ -12,7 +12,10 @@ function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, p
   this.imageUrl = imageUrl;
 };
 
-var itemList = arr.map(item => new Item(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]));
+var itemList = arr.map(item => new Item(
+  item[0], item[1], item[2], item[3], item[4], item[5],
+  item[6], item[7], item[8], item[9], item[10]
+));
 
 const selectElement = document.getElementById('for');
 const selectSortElement = document.getElementById('selectSort');
@@ -26,89 +29,48 @@ const resultsContainer = document.getElementById('results');
 const count = document.getElementById('count');
 const sizeRange = document.getElementById('sizeRange');
 
-var selectedOptions;
-var majorCategory;
-var middleCategory;
-var minorCategory;
 var filteredData;
-var keyword;
-var selectedRemark;
 
 function filterAndDisplay() {
-  filteredData = itemList;
-  filteredData = filteringKeyword(filteredData, keyword);
-  filteredData = filteringCategory(filteredData);
-  filteredData = filteringCheckbox(filteredData);
-  filteredData = filteringNation(filteredData);
-  filteredData = filteringRemarks(filteredData);
+  const keyword = searchBox.value.trim();
+  const selectedOptions = Array.from(selectElement.options).filter(o => o.selected);
+  const majorCategory = selectedOptions.filter(o => o.dataset.name === 'majorCategory').map(o => o.value);
+  const middleCategory = selectedOptions.filter(o => o.dataset.name === 'middleCategory').map(o => o.value);
+  const minorCategory = selectedOptions.filter(o => o.dataset.name === 'minorCategory').map(o => o.value);
+  const selectedNation = nationSelectElement.value;
+  const selectedRemark = remarkSelectElement.value;
+
+  filteredData = itemList.filter(item => {
+    if (keyword && !item.name.includes(keyword)) return false;
+    const hasCategoryFilter = majorCategory.length || middleCategory.length || minorCategory.length;
+    if (hasCategoryFilter && !(
+      majorCategory.includes(item.majorCategory) ||
+      middleCategory.includes(item.middleCategory) ||
+      minorCategory.includes(item.minorCategory)
+    )) return false;
+    if (isCollectedCheckbox.checked && item.isCollected !== 'Y') return false;
+    if (isHadCheckbox.checked && item.status === '미보유') return false;
+    if (statusCheckbox.checked && item.status !== '미개봉') return false;
+    if (selectedNation !== 'All' && item.nation !== selectedNation) return false;
+    if (selectedRemark !== 'All' && item.remarks !== selectedRemark) return false;
+    return true;
+  });
+
+  changeRemarkOptions(selectedRemark);
   filteredData = filteredDataSort(filteredData);
   displayResults(filteredData);
 }
 
-function filteringKeyword(filteredData, keyword) {
-  keyword = searchBox.value.trim();
-  if (keyword.length > 0) {
-    return filteredData.filter(item => item.name.includes(keyword));
-  }
-  return filteredData;
-}
-
-function filteringCategory(filteredData) {
-  selectedOptions = Array.from(selectElement.options).filter(option => option.selected);
-  majorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'majorCategory').map(item => item.value);
-  middleCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'middleCategory').map(item => item.value);
-  minorCategory = selectedOptions.filter(option => option.getAttribute('data-name') === 'minorCategory').map(item => item.value);
-  return filteredData.filter(item => majorCategory.includes(item.majorCategory) || middleCategory.includes(item.middleCategory) || minorCategory.includes(item.minorCategory));
-}
-
-function filteringCheckbox(filteredData) {
-  if (isCollectedCheckbox.checked) {
-    filteredData = filteredData.filter(item => item.isCollected === 'Y');
-  }
-
-  if (isHadCheckbox.checked) {
-    filteredData = filteredData.filter(item => item.status !== '미보유');
-  }
-
-  if (statusCheckbox.checked) {
-    filteredData = filteredData.filter(item => item.status === '미개봉');
-  }
-  return filteredData;
-}
-
-function filteringNation(filteredData) {
-  const selectedNation = nationSelectElement.value;
-  if (selectedNation != 'All') {
-    return filteredData.filter(item => item.nation === selectedNation);
-  } return filteredData;
-}
-
-function filteringRemarks(filteredData) {
-  const selectedRemark = remarkSelectElement.value;
-  changeRemarkOptions(selectedRemark);
-  if (selectedRemark != 'All') {
-    return filteredData.filter(item => item.remarks === selectedRemark);
-  }
-  return filteredData;
-}
-
 function changeRemarkOptions(selectedRemark) {
   const uniqueRemarks = [...new Set(filteredData.map(item => item.remarks))];
-
   remarkSelectElement.options.length = 1;
 
-  /*var option = document.createElement('option');
-  option.innerText = 'All';
-  option.value = 'All';
-  remarkSelectElement.append(option);*/
-
-  for (var i = 0; i < uniqueRemarks.length; i++) {
-    var option = document.createElement('option');
-    option.innerText = uniqueRemarks[i];
-    option.value = uniqueRemarks[i];
+  for (const remark of uniqueRemarks) {
+    const option = document.createElement('option');
+    option.innerText = remark;
+    option.value = remark;
     remarkSelectElement.append(option);
   }
-
   remarkSelectElement.value = selectedRemark;
 }
 
@@ -122,169 +84,143 @@ function filteredDataSort(filteredData) {
       return filteredData.toSorted((a, b) => a.name.localeCompare(b.name));
     case 'nameDesc':
       return filteredData.toSorted((a, b) => b.name.localeCompare(a.name));
+    default:
+      return filteredData;
   }
 }
 
 function displayResults(data) {
   resultsContainer.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+
   data.forEach(item => {
-    const div = document.createElement('div');
-    div.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card');
 
-    var overlay = document.createElement('div');
+    const overlay = document.createElement('div');
     overlay.classList.add('overlay');
-    div.appendChild(overlay);
+    card.appendChild(overlay);
 
-    var imgContainer = document.createElement('div');
+    const imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
-    var img = document.createElement('img');
+
+    const img = document.createElement('img');
     img.src = item.imageUrl;
-    let realImg = new Image();
-    realImg.src = item.imageUrl;
     img.style.visibility = 'hidden';
     img.style.opacity = '0';
     img.style.transition = 'opacity 0.2s ease';
+
     img.onload = function () {
-      let width = img.width;
-      let height = img.height;
-      if (width > height) {
-        img.classList.add('tail-img');
-      } else {
-        img.classList.add('long-img');
-      }
-      if (item.status === '미보유') {
-        img.classList.add('monochrome');
-      }
+      const isWide = img.naturalWidth > img.naturalHeight;
+      img.classList.add(isWide ? 'tail-img' : 'long-img');
+      if (item.status === '미보유') img.classList.add('monochrome');
       img.style.visibility = 'visible';
       img.style.opacity = '1';
     };
+
     imgContainer.appendChild(img);
-    div.appendChild(imgContainer);
+    card.appendChild(imgContainer);
 
-    const textContainer = document.createElement('div');
-    const textDiv = document.createElement('div');
-    textContainer.classList.add('name-container');
-    textDiv.classList.add('name');
-    textDiv.innerHTML = item.name;
-    if (item.status === '미개봉') {
-      textDiv.classList.add('unopened');
-    }
-    textContainer.appendChild(textDiv);
-    div.appendChild(textContainer);
+    const nameContainer = document.createElement('div');
+    nameContainer.classList.add('name-container');
+    const nameDiv = document.createElement('div');
+    nameDiv.classList.add('name');
+    if (item.status === '미개봉') nameDiv.classList.add('unopened');
+    nameDiv.innerHTML = item.name;
+    nameContainer.appendChild(nameDiv);
+    card.appendChild(nameContainer);
 
-    resultsContainer.appendChild(div);
+    fragment.appendChild(card);
   });
 
+  resultsContainer.appendChild(fragment);
   renderingSum(filteredData);
 
-  var cards = document.querySelectorAll('.card')
+  setupCardEffects();
 
-  cards.forEach(container => {
-    var overlay = container.querySelector('.overlay')
-    container.addEventListener('mousemove', function (e) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      var rotateY = -2 / 9 * x + 20
-      var rotateX = 1 / 5 * y - 20
-
-      overlay.style = `background-position : ${x / 5 + y / 5}%; filter : opacity(${x / 200}) brightness(1.2)`
-
-      container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
-
-    })
-
-    container.addEventListener('mouseout', function () {
-      overlay.style = 'filter : opacity(0)'
-      container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
-    })
-  });
-  resizeName();
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(resizeName);
+  } else {
+    requestAnimationFrame(resizeName);
+  }
 }
 
-/*function resizeName() {
-  var cards = document.querySelectorAll('.card')
-  cards.forEach(container => {
-    const nameContainer = container.querySelector('.name-container');
-    const name = nameContainer.querySelector('.name');
-    name.removeAttribute('style');
+function setupCardEffects() {
+  resultsContainer.removeEventListener('mousemove', onMouseMove);
+  resultsContainer.removeEventListener('mouseout', onMouseOut);
+  resultsContainer.addEventListener('mousemove', onMouseMove);
+  resultsContainer.addEventListener('mouseout', onMouseOut);
+}
 
-    var i = Math.floor(200/sizeRange.value);
+function onMouseMove(e) {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const overlay = card.querySelector('.overlay');
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const rotateY = -2 / 9 * x + 20;
+  const rotateX = 1 / 5 * y - 20;
 
-    while (nameContainer.scrollWidth > nameContainer.clientWidth || nameContainer.scrollHeight > nameContainer.clientHeight) {
-      name.style.cssText = 'font-size:' + i-- + 'cqw';
-      if (i == 1)
-        break;
-    }
-  });
-}*/
+  overlay.style.backgroundPosition = `${x / 5 + y / 5}%`;
+  overlay.style.filter = `opacity(${x / 200}) brightness(1.2)`;
+  card.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+function onMouseOut(e) {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const overlay = card.querySelector('.overlay');
+  overlay.style.filter = 'opacity(0)';
+  card.style.transform = 'perspective(350px) rotateY(0deg) rotateX(0deg)';
+}
 
 function resizeName() {
   const cards = Array.from(document.querySelectorAll('.card'));
   const baseSize = Math.floor(200 / sizeRange.value);
-  
   let index = 0;
 
   function processNextBatch() {
     const start = performance.now();
-    
-    // 한 프레임(약 16ms) 안에 처리 가능한 만큼만 수행
     while (index < cards.length && performance.now() - start < 16) {
       const container = cards[index++];
       const nameContainer = container.querySelector('.name-container');
       if (!nameContainer) continue;
-
       const name = nameContainer.querySelector('.name');
       if (!name) continue;
+      name.style.fontSize = '';
 
-      name.style.fontSize = ''; // 초기화
-      
-      let min = 1;
-      let max = baseSize;
-      let bestFit = min;
-
-      // --- 이진 탐색으로 최적 폰트 크기 찾기 ---
+      let min = 1, max = baseSize, bestFit = min;
       while (min <= max) {
         const mid = Math.floor((min + max) / 2);
         name.style.fontSize = mid + 'cqw';
-
         const fits =
           nameContainer.scrollWidth <= nameContainer.clientWidth &&
           nameContainer.scrollHeight <= nameContainer.clientHeight;
-
-        if (fits) {
-          bestFit = mid;
-          min = mid + 1;
-        } else {
-          max = mid - 1;
-        }
+        if (fits) { bestFit = mid; min = mid + 1; }
+        else { max = mid - 1; }
       }
-
       name.style.fontSize = bestFit + 'cqw';
     }
-
-    // 아직 처리할 카드가 남았으면 다음 프레임에 이어서 실행
-    if (index < cards.length) {
-      requestAnimationFrame(processNextBatch);
-    }
+    if (index < cards.length) requestAnimationFrame(processNextBatch);
   }
-
   requestAnimationFrame(processNextBatch);
 }
 
 function renderingSum(filteredData) {
   count.innerText = filteredData.length + '건';
-  amount.innerText = filteredData.reduce((accumulator, currentValue) => {
-    return accumulator + parseInt(currentValue.price.slice(0, -1));
+  amount.innerText = filteredData.reduce((acc, cur) => {
+    return acc + parseInt(cur.price.slice(0, -1));
   }, 0).toLocaleString() + '원';
 }
 
 function resizeCards() {
   const value = sizeRange.value;
-  document.documentElement.style.setProperty('--card-size', 100 / (value*2)+ '%');
+  document.documentElement.style.setProperty('--card-size', 100 / (value * 2) + '%');
   resizeName();
 }
 
+// Event binding
 selectElement.addEventListener('change', filterAndDisplay);
 selectSortElement.addEventListener('change', filterAndDisplay);
 isCollectedCheckbox.addEventListener('change', filterAndDisplay);
@@ -294,5 +230,6 @@ searchBox.addEventListener('input', filterAndDisplay);
 nationSelectElement.addEventListener('change', filterAndDisplay);
 remarkSelectElement.addEventListener('change', filterAndDisplay);
 sizeRange.addEventListener('change', resizeCards);
+
 filterAndDisplay();
 resizeCards();
