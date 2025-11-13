@@ -199,10 +199,10 @@ function displayResults(data) {
       container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
     })
   });
-  //resizeName();
+  resizeName();
 }
 
-function resizeName() {
+/*function resizeName() {
   var cards = document.querySelectorAll('.card')
   cards.forEach(container => {
     const nameContainer = container.querySelector('.name-container');
@@ -217,6 +217,59 @@ function resizeName() {
         break;
     }
   });
+}*/
+
+function resizeName() {
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const baseSize = Math.floor(200 / sizeRange.value);
+  
+  let index = 0;
+
+  function processNextBatch() {
+    const start = performance.now();
+    
+    // 한 프레임(약 16ms) 안에 처리 가능한 만큼만 수행
+    while (index < cards.length && performance.now() - start < 16) {
+      const container = cards[index++];
+      const nameContainer = container.querySelector('.name-container');
+      if (!nameContainer) continue;
+
+      const name = nameContainer.querySelector('.name');
+      if (!name) continue;
+
+      name.style.fontSize = ''; // 초기화
+      
+      let min = 1;
+      let max = baseSize;
+      let bestFit = min;
+
+      // --- 이진 탐색으로 최적 폰트 크기 찾기 ---
+      while (min <= max) {
+        const mid = Math.floor((min + max) / 2);
+        name.style.fontSize = mid + 'cqw';
+
+        const fits =
+          nameContainer.scrollWidth <= nameContainer.clientWidth &&
+          nameContainer.scrollHeight <= nameContainer.clientHeight;
+
+        if (fits) {
+          bestFit = mid;
+          min = mid + 1;
+        } else {
+          max = mid - 1;
+        }
+      }
+
+      name.style.fontSize = bestFit + 'cqw';
+    }
+
+    // 아직 처리할 카드가 남았으면 다음 프레임에 이어서 실행
+    if (index < cards.length) {
+      requestAnimationFrame(processNextBatch);
+    }
+  }
+
+  requestAnimationFrame(processNextBatch);
 }
 
 function renderingSum(filteredData) {
@@ -229,7 +282,7 @@ function renderingSum(filteredData) {
 function resizeCards() {
   const value = sizeRange.value;
   document.documentElement.style.setProperty('--card-size', 100 / (value*2)+ '%');
-  //resizeName();
+  resizeName();
 }
 
 selectElement.addEventListener('change', filterAndDisplay);
