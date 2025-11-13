@@ -55,9 +55,9 @@ padding: 20px;
 background-color: white;
 border-radius: 10px;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-/padding: 10px;/
+/*padding: 10px;*/
 width: var(--card-size);
-/height: 180px;/
+/*height: 180px;*/
 aspect-ratio: 1 / 1;
 transform: perspective(350px) rotateY(0deg) rotateX(0deg);
 justify-content: center;
@@ -103,16 +103,16 @@ filter: grayscale(100%);
 .name-container {
 width: 100%;
 height: 25%;
-/display: inline-block;/
+/*display: inline-block;*/
 align-items: center;
 justify-content: center;
 word-break: keep-all;
 container-type: size;
-/overflow: hidden;/
+/*overflow: hidden;*/
 }
 
 .name {
-/display: inline-block;/
+/*display: inline-block;*/
 font-size: 10cqw;
 }
 
