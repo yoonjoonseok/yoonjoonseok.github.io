@@ -24,6 +24,7 @@ const nationSelectElement = document.getElementById('nation');
 const remarkSelectElement = document.getElementById('remarks');
 const resultsContainer = document.getElementById('results');
 const count = document.getElementById('count');
+const sizeRange = document.getElementById('sizeRange');
 
 var selectedOptions;
 var majorCategory;
@@ -129,6 +130,11 @@ function displayResults(data) {
   data.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('card');
+
+    var overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    div.appendChild(overlay);
+
     var imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
     var img = document.createElement('img');
@@ -155,38 +161,61 @@ function displayResults(data) {
     imgContainer.appendChild(img);
     div.appendChild(imgContainer);
 
+    const textContainer = document.createElement('div');
     const textDiv = document.createElement('div');
-    textDiv.classList.add('name-container');
+    textContainer.classList.add('name-container');
+    textDiv.classList.add('name');
     textDiv.innerHTML = item.name;
     if (item.status === '미개봉') {
       textDiv.classList.add('unopened');
     }
-    div.appendChild(textDiv);
+    textContainer.appendChild(textDiv);
+    div.appendChild(textContainer);
+
     resultsContainer.appendChild(div);
   });
+
   renderingSum(filteredData);
 
-  
   var cards = document.querySelectorAll('.card')
 
   cards.forEach(container => {
-  //var overlay = document.querySelector('.overlay')
-  container.addEventListener('mousemove', function(e){
-    var x = e.offsetX
-    var y = e.offsetY
-    var rotateY = -1/5 * x + 20
-    var rotateX = 4/30 * y - 20
+    var overlay = container.querySelector('.overlay')
+    container.addEventListener('mousemove', function (e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var rotateY = -2 / 9 * x + 20
+      var rotateX = 1 / 5 * y - 20
 
-    //overlay.style = `background-position : ${x/5 + y/5}%; filter : opacity(${x/200}) brightness(1.2)`
+      overlay.style = `background-position : ${x / 5 + y / 5}%; filter : opacity(${x / 200}) brightness(1.2)`
 
-    container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
-  })
+      container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
 
-  container.addEventListener('mouseout', function(){
-    //overlay.style = 'filter : opacity(0)'
-    container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
-  })
+    })
 
+    container.addEventListener('mouseout', function () {
+      overlay.style = 'filter : opacity(0)'
+      container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
+    })
+  });
+  resizeName();
+}
+
+function resizeName() {
+  var cards = document.querySelectorAll('.card')
+  cards.forEach(container => {
+    const nameContainer = container.querySelector('.name-container');
+    const name = nameContainer.querySelector('.name');
+    name.removeAttribute('style');
+
+    var i = Math.floor(200/sizeRange.value);
+
+    while (nameContainer.scrollWidth > nameContainer.clientWidth || nameContainer.scrollHeight > nameContainer.clientHeight) {
+      name.style.cssText = 'font-size:' + i-- + 'cqw';
+      if (i == 1)
+        break;
+    }
   });
 }
 
@@ -197,6 +226,12 @@ function renderingSum(filteredData) {
   }, 0).toLocaleString() + '원';
 }
 
+function resizeCards() {
+  const value = sizeRange.value;
+  document.documentElement.style.setProperty('--card-size', 100 / (value*2)+ '%');
+  resizeName();
+}
+
 selectElement.addEventListener('change', filterAndDisplay);
 selectSortElement.addEventListener('change', filterAndDisplay);
 isCollectedCheckbox.addEventListener('change', filterAndDisplay);
@@ -205,4 +240,6 @@ statusCheckbox.addEventListener('change', filterAndDisplay);
 searchBox.addEventListener('input', filterAndDisplay);
 nationSelectElement.addEventListener('change', filterAndDisplay);
 remarkSelectElement.addEventListener('change', filterAndDisplay);
+sizeRange.addEventListener('change', resizeCards);
 filterAndDisplay();
+resizeCards();

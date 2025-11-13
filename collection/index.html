@@ -16,6 +16,9 @@
     <div class="header-right">
       <label id="amount"></label>
       <div>
+        <input id="sizeRange" type="range" min="1" max="10" value="5">
+      </div>
+      <div>
         <input type="checkbox" id="isCollectedCheckbox" name="isCollectedCheckbox" checked />
         <label for="isCollectedCheckbox">수집 여부</label>
       </div>
@@ -49,7 +52,7 @@
   </div>
   <div class="main-container">
     <div class="category">
-      <select id="for" multiple name="items" size="35">
+      <select id="for" multiple name="items" size="33">
         <option selected value="닌텐도" data-name="majorCategory"
           style="font-weight: 900;color:white;background-color: rgb(203, 0, 18);">Nintendo</option>
         <option value="pokemon" data-name="middleCategory"
@@ -65,13 +68,12 @@
         </option>
         <option value="SWITCH2HW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
         <option value="SWITCH2SW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="SWITCH2DL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
         <!--<option value="SWITCH2주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
         <option value="SWITCH" data-name="middleCategory" style="font-weight: bold;color:white;background-color: rgb(203, 0, 18);">
           &nbsp;&nbsp;&nbsp;SWITCH</option>
         <option value="SWITCHHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
         <option value="SWITCHSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="SWITCHDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
+        <!--<option value="SWITCHDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>-->
         <!--<option value="SWITCH주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
         <option value="WiiU" data-name="middleCategory"
           style="font-weight: bold; color:white;background: rgb(0, 154, 199)">&nbsp;&nbsp;&nbsp;Wii U</option>
@@ -80,7 +82,7 @@
           &nbsp;&nbsp;&nbsp;3DS</option>
         <option value="3DSHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
         <option value="3DSSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="3DSDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
+        <!--<option value="3DSDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>-->
         <!--<option value="3DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
         <option value="DSiWare" data-name="middleCategory"
           style="font-weight: bold;color:black;background-color: rgb(237, 73, 154);">&nbsp;&nbsp;&nbsp;DSiWare</option>
