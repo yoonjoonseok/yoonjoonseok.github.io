@@ -59,6 +59,7 @@ function filterAndDisplay() {
   changeRemarkOptions(selectedRemark);
   filteredData = filteredDataSort(filteredData);
   displayResults(filteredData);
+  autoResizeCards();
 }
 
 function changeRemarkOptions(selectedRemark) {
@@ -97,9 +98,11 @@ function displayResults(data) {
     const card = document.createElement('div');
     card.classList.add('card');
 
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    card.appendChild(overlay);
+    //if (item.status === '미개봉') {
+      const overlay = document.createElement('div');
+      overlay.classList.add('overlay');
+      card.appendChild(overlay);
+    //}
 
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
@@ -155,12 +158,12 @@ function setupCardEffects() {
 function onMouseMove(e) {
   const card = e.target.closest('.card');
   if (!card) return;
-  const overlay = card.querySelector('.overlay');
   const rect = card.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const rotateY = -2 / 9 * x + 20;
   const rotateX = 1 / 5 * y - 20;
+  const overlay = card.querySelector('.overlay');
 
   overlay.style.backgroundPosition = `${x / 5 + y / 5}%`;
   overlay.style.filter = `opacity(${x / 200}) brightness(1.2)`;
@@ -177,7 +180,7 @@ function onMouseOut(e) {
 
 function resizeName() {
   const cards = Array.from(document.querySelectorAll('.card'));
-  const baseSize = Math.floor(200 / sizeRange.value);
+  const baseSize = 15;   //Math.floor(200 / sizeRange.value);
   let index = 0;
 
   function processNextBatch() {
@@ -210,14 +213,22 @@ function resizeName() {
 function renderingSum(filteredData) {
   count.innerText = filteredData.length + '건';
   amount.innerText = filteredData.reduce((acc, cur) => {
-    return acc + parseInt(cur.price.slice(0, -1));
+    return acc + (cur.price.slice(-1) === '￥' ? 10 : 1) * (parseInt(cur.price.slice(0, -1)));
   }, 0).toLocaleString() + '원';
 }
 
 function resizeCards() {
   const value = sizeRange.value;
-  document.documentElement.style.setProperty('--card-size', 100 / (value * 2) + '%');
+  document.documentElement.style.setProperty('--card-size', value);
   resizeName();
+}
+
+function autoResizeCards() {
+  sizeRange.value = Math.floor(filteredData.length ** 0.5) + 1;
+  if (sizeRange.value > 10)
+    sizeRange.value = 10;
+  if (sizeRange.value < 10)
+    sizeRange.value = 10;
 }
 
 // Event binding
