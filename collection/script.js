@@ -59,7 +59,7 @@ function filterAndDisplay() {
   changeRemarkOptions(selectedRemark);
   filteredData = filteredDataSort(filteredData);
   displayResults(filteredData);
-  autoResizeCards();
+  //autoResizeCards();
 }
 
 function changeRemarkOptions(selectedRemark) {
@@ -180,7 +180,7 @@ function onMouseOut(e) {
 
 function resizeName() {
   const cards = Array.from(document.querySelectorAll('.card'));
-  const baseSize = 15;   //Math.floor(200 / sizeRange.value);
+  const baseSize = 10;   //Math.floor(200 / sizeRange.value);
   let index = 0;
 
   function processNextBatch() {
@@ -204,6 +204,8 @@ function resizeName() {
         else { max = mid - 1; }
       }
       name.style.fontSize = bestFit + 'cqw';
+      name.style.opacity = 1;
+      name.style.visibility = 'visible';
     }
     if (index < cards.length) requestAnimationFrame(processNextBatch);
   }
