@@ -62,7 +62,7 @@ var arr = [
 ['포켓몬 스케일 월드 팔데아 지방 코라이돈','닌텐도','pokemon','scaleworld','2024.05','7920¥','JP','개봉','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 코라이돈.jpg'],
 ['포켓몬 스케일 월드 팔데아 지방 미라이돈','닌텐도','pokemon','scaleworld','2024.05','7920¥','JP','개봉','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 미라이돈.jpg'],
 ['포켓몬 스케일 월드 팔데아 지방 칠리&토오','닌텐도','pokemon','scaleworld','2024.07','5500¥','JP','미보유','N','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 칠리&토오.jpg'],
-['포켓몬 스케일 월드 팔데아 지방 세트 2','닌텐도','pokemon','scaleworld','2024.09','3630¥','JP','미보유','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 세트 2.jpg'],
+['포켓몬 스케일 월드 팔데아 지방 세트 2','닌텐도','pokemon','scaleworld','2024.09','3630¥','JP','개봉','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 세트 2.jpg'],
 ['포켓몬 스케일 월드 팔데아 지방 모란&님피아','닌텐도','pokemon','scaleworld','2024.10','5280¥','JP','개봉','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 모란&님피아.jpg'],
 ['포켓몬 스케일 월드 팔데아 지방 이브이 진화 세트','닌텐도','pokemon','scaleworld','2024.10','5500¥','JP','개봉','Y','팔데아','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 팔데아 지방 이브이 진화 세트.jpg'],
 ['포켓몬 스케일 월드 성도 지방 호일&핫삼','닌텐도','pokemon','scaleworld','2025.01','5500¥','JP','미보유','N','성도','/resource/image/nintendo/pokemon/scaleworld/포켓몬 스케일 월드 성도 지방 호일&핫삼.jpg'],
