@@ -3,8 +3,8 @@
 }
 
 body {
-    width: 100%;
     background-color: #f0f0f0;
+    overflow-x: hidden;
 }
 
 .header {
@@ -39,13 +39,19 @@ body {
 }
 
 .category {
+    min-width:200px;
     align-items: center;
-    padding: 30px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#for{
+    width: 150px;
 }
 
 .card-container {
     display: flex;
-    width: 100%;
+    width: calc(100% - 200px);
     flex-wrap: wrap;
     text-align: center;
     gap: 20px;
@@ -57,7 +63,7 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: calc(100% / var(--card-size) - 40px);
+    width: calc(100% / var(--card-size) - 20px);
     aspect-ratio: 1 / 1;
     transform: perspective(350px) rotateY(0deg) rotateX(0deg);
     justify-content: center;
@@ -67,6 +73,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     background: linear-gradient(105deg,
             transparent 40%,
             rgba(255, 219, 112, 0.8) 45%,

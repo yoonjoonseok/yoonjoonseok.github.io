@@ -220,6 +220,7 @@ function renderingSum(filteredData) {
 function resizeCards() {
   const value = sizeRange.value;
   document.documentElement.style.setProperty('--card-size', value);
+  console.log(value);
   resizeName();
 }
 
