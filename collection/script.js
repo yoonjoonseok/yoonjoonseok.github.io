@@ -161,8 +161,8 @@ function onMouseMove(e) {
   const rect = card.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
-  const rotateY = -2 / 9 * x + 20;
-  const rotateX = 1 / 5 * y - 20;
+  const rotateY = -40 / card.clientWidth * x + 20;
+  const rotateX = 40 / card.clientHeight * y - 20;
   const overlay = card.querySelector('.overlay');
 
   overlay.style.backgroundPosition = `${x / 5 + y / 5}%`;

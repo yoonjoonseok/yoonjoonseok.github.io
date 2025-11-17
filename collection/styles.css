@@ -52,6 +52,7 @@ body {
 .card-container {
     display: flex;
     width: calc(100% - 200px);
+    min-width: 0;
     flex-wrap: wrap;
     text-align: center;
     gap: 20px;
