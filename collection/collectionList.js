@@ -192,9 +192,9 @@ var arr = [
 ['별의 커비 디스커버리 Nintendo Switch 2 Edition + 스타리 월드 업그레이드 패스','닌텐도','SWITCH2','SWITCH2DL','2025.08.28','20000₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/별의 커비 디스커버리 Nintendo Switch 2 Edition + 스타리 월드 업그레이드 패스.png'],
 ['동키콩 바난자 DK 아일랜드&에메랄드 러시','닌텐도','SWITCH2','SWITCH2DL','2025.09.12','22000₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/동키콩 바난자 DK 아일랜드&에메랄드 러시.webp'],
 ['포켓몬 레전즈 Z-A Nintendo Switch 2 Edition','닌텐도','SWITCH2','SWITCH2SW','2025.10.16','79800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/포켓몬 레전즈 Z-A Nintendo Switch 2 Edition.jpg'],
-//['포켓몬 레전즈 Z-A Nintendo Switch 2 Edition 업그레이드 패스','닌텐도','SWITCH2','SWITCH2DL','2025.10.16','10000₩','KR','보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/포켓몬 레전즈 Z-A Nintendo Switch 2 Edition 업그레이드 패스.jpg'],
+['포켓몬 레전즈 Z-A Nintendo Switch 2 Edition 업그레이드 패스','닌텐도','SWITCH2','SWITCH2DL','2025.10.16','10000₩','KR','보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/Pokémon LEGENDS Z-A Nintendo Switch 2 Edition 업그레이드 패스.webp'],
 ['젤다무쌍 봉인 전기','닌텐도','SWITCH2','SWITCH2SW','2025.11.06','79800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH2/KOR/Software/젤다무쌍 봉인 전기.jpg'],
-//['젤다무쌍 봉인 전기','닌텐도','SWITCH2','SWITCH2DL','2025.11.06','79800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/젤다무쌍 봉인 전기.jpg'],
+['젤다무쌍 봉인 전기','닌텐도','SWITCH2','SWITCH2DL','2025.11.06','79800₩','KR','미보유','Y','DL','/resource/image/nintendo/SWITCH2/KOR/DL/젤다무쌍 봉인 전기.jpg'],
 
 ['슈퍼 마리오 오디세이','닌텐도','SWITCH','SWITCHSW','2017.12.01','64800₩','KR','미보유','Y','실물','/resource/image/nintendo/SWITCH/KOR/Software/슈퍼 마리오 오디세이.jpg'],
 ['슈퍼 마리오 오디세이 여행 가이드북 세트','닌텐도','SWITCH','SWITCHSW','2017.12.01','64800₩','KR','개봉','Y','실물','/resource/image/nintendo/SWITCH/KOR/Software/슈퍼 마리오 오디세이 여행 가이드북 세트.jpg'],
