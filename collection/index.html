@@ -39,6 +39,8 @@
       // 리다이렉트 로그인 결과 확인
       getRedirectResult(auth)
         .then(async (result) => {
+          console.log(auth);
+          console.log(result);
           if (result && result.user) {
             const user = result.user;
             await saveUserProfile(user);
