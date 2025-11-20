@@ -44,6 +44,7 @@
 
     // The signed-in user info.
     const user = result.user;
+    saveUserProfile(user);
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
