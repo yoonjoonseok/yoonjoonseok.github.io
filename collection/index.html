@@ -28,7 +28,7 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     const db = getDatabase(app);
-
+    
     // DOM 로드 후 버튼 이벤트 연결
     document.addEventListener("DOMContentLoaded", () => {
       const loginBtn = document.getElementById("loginBtn");
@@ -36,27 +36,27 @@
         signInWithRedirect(auth, provider);
       });
 
-      // 리다이렉트 로그인 결과 확인
-      getRedirectResult(auth)
-        .then(async (result) => {
-          console.log(auth);
-          console.log(result);
-          if (result && result.user) {
-            const user = result.user;
-            await saveUserProfile(user);
-          }
-        })
-        .catch((error) => {
-          console.error("리다이렉트 로그인 오류:", error);
-        });
-    });
+getRedirectResult(auth)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access Google APIs.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
 
-    // 로그인 상태 변경 감지 (페이지 로드 시 기존 로그인 확인용)
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        await saveUserProfile(user);
-      }
-    });
+    // The signed-in user info.
+    const user = result.user;
+    saveUserProfile(user);
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
 
     // 사용자 프로필 저장 함수
     async function saveUserProfile(user) {
