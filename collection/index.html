@@ -3,6 +3,14 @@
 
 <head>
   <title>소장품</title>
+    <script type="module">
+  // Firebase SDK import (v9)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult } 
+      from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } 
+      from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+  </script>
   <script src="/collection/collectionList.js"></script>
   <script src="/collection/script.js" defer></script>
   <link rel="stylesheet" href="/collection/styles.css" />
