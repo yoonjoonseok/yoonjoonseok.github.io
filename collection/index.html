@@ -36,7 +36,10 @@
 
   // 로그인 후 사용자 데이터 저장 (여기가 핵심!)
   onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
+    if (!user) {
+      console.log("null");
+      return;
+    }
 
     const userRef = ref(db, "users/" + user.uid + "/profile");
     const snapshot = await get(userRef);
