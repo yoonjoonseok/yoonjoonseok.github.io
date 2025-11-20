@@ -24,7 +24,10 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const db = getDatabase(app);
+      // 로그인 버튼 클릭 시
+  document.getElementById("loginBtn").addEventListener("click", () => {
     signInWithRedirect(auth, provider);
+  });
 
       // 리다이렉트 로그인 결과 처리
   getRedirectResult(auth)
@@ -43,7 +46,6 @@
     .catch(console.error);
   
   </script>
-  <script src="/collection/collectionList.js"></script>
   <script src="/collection/script.js" defer></script>
   <link rel="stylesheet" href="/collection/styles.css" />
   <script src="./collectionList.js"></script>
@@ -57,6 +59,7 @@
       <label>Collection</label>
     </div>
     <div class="header-right">
+      <button id="loginBtn">로그인</button>
       <label id="amount"></label>
       <div>
         <input id="sizeRange" type="range" min="1" max="10" value="10">
