@@ -5,7 +5,7 @@
   <title>소장품</title>
     <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithRedirect, onAuthStateChanged }
+  import { getAuth, GoogleAuthProvider, signInWithRedirect, onAuthStateChanged, setPersistence, browserLocalPersistence }
       from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
   import { getDatabase, ref, set, get }
       from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
@@ -24,6 +24,8 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const db = getDatabase(app);
+
+      setPersistence(auth, browserLocalPersistence);
 
   // DOM 로드 후 버튼 이벤트 연결
   document.addEventListener("DOMContentLoaded", () => {
