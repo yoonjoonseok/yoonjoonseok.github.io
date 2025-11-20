@@ -42,6 +42,16 @@
     const user = result.user;
     console.log(user);
     saveUserProfile(user);
+    const dataRef = ref(db, '/users/'+ auth.uid + '/itemList');
+get(dataRef).then((snapshot) => {
+  if (snapshot.exists()) {
+    arr = snapshot.val();
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
