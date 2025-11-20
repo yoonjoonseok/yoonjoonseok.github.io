@@ -42,7 +42,7 @@
     const user = result.user;
     console.log(user);
     saveUserProfile(user);
-    const dataRef = ref(db, '/users/'+ auth.uid + '/itemList');
+    const dataRef = ref(db, 'users/'+ user.uid + '/itemList');
 get(dataRef).then((snapshot) => {
   if (snapshot.exists()) {
     arr = snapshot.val();
