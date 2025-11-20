@@ -33,17 +33,11 @@
     document.addEventListener("DOMContentLoaded", () => {
       const loginBtn = document.getElementById("loginBtn");
       loginBtn.addEventListener("click", () => {
-        signInWithRedirect(auth, provider);
-      });});
-
-    getRedirectResult(auth)
+        signInWithPopup(auth, provider)
   .then((result) => {
-    // This gives you a Google Access Token. You can use it to access Google APIs.
+    // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
-    console.log(credential);
     const token = credential.accessToken;
-    console.log(token);
-
     // The signed-in user info.
     const user = result.user;
     console.log(user);
@@ -52,7 +46,6 @@
     // ...
   }).catch((error) => {
     // Handle Errors here.
-    console.log(error);
     const errorCode = error.code;
     const errorMessage = error.message;
     // The email of the user's account used.
@@ -61,7 +54,7 @@
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
-    
+      });});
 
     // 사용자 프로필 저장 함수
     async function saveUserProfile(user) {
