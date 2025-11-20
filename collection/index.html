@@ -4,13 +4,13 @@
 <head>
   <title>소장품</title>
     <script type="module">
-  // Firebase SDK import (v9)
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult } 
+  import { getAuth, GoogleAuthProvider, signInWithRedirect, onAuthStateChanged }
       from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-  import { getDatabase, ref, set, get, child } 
+  import { getDatabase, ref, set, get }
       from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
+  // Firebase 설정
   const firebaseConfig = {
     apiKey: "AIzaSyDG5dM9sdYj1Gzk9otxoBwlE2c2YZjcGkY",
     authDomain: "collection-6de28.firebaseapp.com",
@@ -18,37 +18,44 @@
     projectId: "collection-6de28",
     storageBucket: "collection-6de28.firebasestorage.app",
     messagingSenderId: "532985173114",
-    appId: "1:532985173114:web:9c97c5f7cb796ad62bd7c3"
+    appId: "1:532985173114:web:9c97f5f7cb796ad62bd7c3"
   };
-        const app = initializeApp(firebaseConfig);
+
+  const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const db = getDatabase(app);
-      // 로그인 버튼 클릭 시
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    signInWithRedirect(auth, provider);
+
+  // DOM 로드 후 버튼 이벤트 연결
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      signInWithRedirect(auth, provider);
+    });
   });
 
-      // 리다이렉트 로그인 결과 처리
-  getRedirectResult(auth)
-    .then((result) => {
-      if (!result) return;
+  // 로그인 후 사용자 데이터 저장 (여기가 핵심!)
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
 
-      const user = result.user;
-      console.log("로그인 성공:", user.uid);
+    const userRef = ref(db, "users/" + user.uid + "/profile");
+    const snapshot = await get(userRef);
 
-      // 초기 데이터 저장
-      set(ref(db, "users/" + user.uid + "/profile"), {
+    // 처음 로그인한 사용자만 저장
+    if (!snapshot.exists()) {
+      await set(userRef, {
         email: user.email,
-        name: user.displayName
+        name: user.displayName,
+        photo: user.photoURL,
+        createdAt: Date.now()
       });
-    })
-    .catch(console.error);
-  
-  </script>
+      console.log("프로필 저장 완료");
+    } else {
+      console.log("기존 프로필 존재");
+    }
+  });
+</script>
   <script src="/collection/script.js" defer></script>
   <link rel="stylesheet" href="/collection/styles.css" />
-  <script src="./collectionList.js"></script>
   <script src="./script.js" defer></script>
   <link rel="stylesheet" href="./styles.css" />
 </head>
