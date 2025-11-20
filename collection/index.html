@@ -45,7 +45,7 @@
     const dataRef = ref(db, 'users/'+ user.uid + '/itemList');
 get(dataRef).then((snapshot) => {
   if (snapshot.exists()) {
-    itemList = JSON.stringify(snapshot.val());
+    itemList = Object.values(snapshot.val());
     filterAndDisplay();
   } else {
     console.log("No data available");
