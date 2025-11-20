@@ -29,43 +29,66 @@
     const provider = new GoogleAuthProvider();
     const db = getDatabase(app);
     
-    // DOM 로드 후 버튼 이벤트 연결
-    document.addEventListener("DOMContentLoaded", () => {
-      const loginBtn = document.getElementById("loginBtn");
-      loginBtn.addEventListener("click", () => {
-        signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user);
-    saveUserProfile(user);
-    const dataRef = ref(db, 'users/'+ user.uid + '/itemList');
-get(dataRef).then((snapshot) => {
-  if (snapshot.exists()) {
-    itemList = Object.values(snapshot.val());
-    filterAndDisplay();
-  } else {
-    console.log("No data available");
-  }
-}).catch((error) => {
-  console.error(error);
-});
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+// DOM 로드 후 버튼 이벤트 연결
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("loginBtn");
+
+  // 로그인 상태 변화 감지
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // 로그인 상태이면 사용자 데이터 로드
+      console.log("자동 로그인:", user);
+      saveUserProfile(user);
+      loadUserItems(user);
+      loginBtn.textContent = "로그아웃";
+    } else {
+      // 로그아웃 상태
+      loginBtn.textContent = "로그인";
+    }
   });
-      });});
+
+  // 로그인 버튼 클릭 이벤트
+  loginBtn.addEventListener("click", () => {
+    const user = auth.currentUser;
+    if (user) {
+      // 이미 로그인 되어있으면 로그아웃
+      auth.signOut().then(() => {
+        console.log("로그아웃 완료");
+        loginBtn.textContent = "로그인";
+        document.getElementById("results").innerHTML = "";
+      });
+    } else {
+      // 로그인
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          saveUserProfile(user);
+          loadUserItems(user);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  });
+});
+
+// 사용자 아이템 로드 함수
+function loadUserItems(user) {
+  const dataRef = ref(db, "users/" + user.uid + "/itemList");
+  get(dataRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        itemList = Object.values(snapshot.val());
+        filterAndDisplay(); // 기존 필터 & 출력 함수
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
     // 사용자 프로필 저장 함수
     async function saveUserProfile(user) {
