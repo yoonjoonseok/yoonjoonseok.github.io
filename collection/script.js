@@ -10,8 +10,6 @@ const resultsContainer = document.getElementById('results');
 const count = document.getElementById('count');
 const sizeRange = document.getElementById('sizeRange');
 
-var itemList;
-var filteredDataByCategory;
 var filteredData;
 
 /*function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl){
