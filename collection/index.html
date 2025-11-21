@@ -1,151 +1,324 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>소장품</title>
+    <script type="module" src="/collection/script.js" defer></script>
+    <link rel="stylesheet" href="/collection/styles.css" />
+    <script type="module" src="./script.js" defer></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
-<head>
-  <title>소장품</title>
-  <script type="module" src="/collection/script.js" defer></script>
-  <link rel="stylesheet" href="/collection/styles.css" />
-  <script type="module" src="./script.js" defer></script>
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
-<body>
-  <div class="header">
-    <div class="header-left">
-      <label>Collection</label>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <label>Collection</label>
+      </div>
+      <div class="header-right">
+        <button id="loginBtn">로그인</button>
+        <label id="amount"></label>
+        <div>
+          <input id="sizeRange" type="range" min="1" max="10" value="10" />
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="isCollectedCheckbox"
+            name="isCollectedCheckbox"
+            checked
+          />
+          <label for="isCollectedCheckbox">수집 여부</label>
+        </div>
+        <div>
+          <input type="checkbox" id="isHadCheckbox" name="isHadCheckbox" />
+          <label for="isHadCheckbox">보유만</label>
+        </div>
+        <div>
+          <input type="checkbox" id="statusCheckbox" name="statusCheckbox" />
+          <label for="statusCheckbox">미개봉만</label>
+        </div>
+        <input id="searchBox" type="text" />
+        <label for="nation">국가</label>
+        <select class="nationSelect" id="nation" name="nation">
+          <option value="All" selected>All</option>
+          <option value="KR">KR</option>
+          <option value="JP">JP</option>
+        </select>
+        <label for="remarks">분류</label>
+        <select class="remarksSelect" id="remarks" name="remarks">
+          <option value="All">All</option>
+        </select>
+        <select id="selectSort" name="sort">
+          <option value="releaseDateAsc">발매일 ↑</option>
+          <option value="releaseDateDesc">발매일 ↓</option>
+          <option value="nameAsc">이름 ↑</option>
+          <option value="nameDesc">이름 ↓</option>
+        </select>
+        <label id="count" style="width: 80px"></label>
+      </div>
     </div>
-    <div class="header-right">
-      <button id="loginBtn">로그인</button>
-      <label id="amount"></label>
-      <div>
-        <input id="sizeRange" type="range" min="1" max="10" value="10">
-      </div>
-      <div>
-        <input type="checkbox" id="isCollectedCheckbox" name="isCollectedCheckbox" checked />
-        <label for="isCollectedCheckbox">수집 여부</label>
-      </div>
-      <div>
-        <input type="checkbox" id="isHadCheckbox" name="isHadCheckbox" />
-        <label for="isHadCheckbox">보유만</label>
-      </div>
-      <div>
-        <input type="checkbox" id="statusCheckbox" name="statusCheckbox" />
-        <label for="statusCheckbox">미개봉만</label>
-      </div>
-      <input id="searchBox" type="text">
-      <label for="nation">국가</label>
-      <select class="nationSelect" id="nation" name="nation">
-        <option value="All" selected>All</option>
-        <option value="KR">KR</option>
-        <option value="JP">JP</option>
-      </select>
-      <label for="remarks">분류</label>
-      <select class="remarksSelect" id="remarks" name="remarks">
-        <option value="All">All</option>
-      </select>
-      <select id="selectSort" name="sort">
-        <option value="releaseDateAsc">발매일 ↑</option>
-        <option value="releaseDateDesc">발매일 ↓</option>
-        <option value="nameAsc">이름 ↑</option>
-        <option value="nameDesc">이름 ↓</option>
-      </select>
-      <label id="count" style="width: 80px;"></label>
-    </div>
-  </div>
 
-  <div class="main-container">
-    <div class="category">
-      <select id="for" multiple name="items" size="35">
-        <option value="닌텐도" data-name="majorCategory"
-          style="font-weight: 900;color:white;background-color: rgb(203, 0, 18);">Nintendo</option>
-        <option value="pokemon" data-name="middleCategory"
-          style="font-weight: bold;color:rgb(255, 203, 5);background-color: rgb(53, 100, 174);">&nbsp;&nbsp;&nbsp;포켓몬
-        </option>
-        <option value="scaleworld" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스케일 월드</option>
-        <!-- <option value="moncolle" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;몬콜레</option>
+    <div class="main-container">
+      <div class="category">
+        <select id="for" multiple name="items" size="35">
+          <option
+            value="닌텐도"
+            data-name="majorCategory"
+            style="
+              font-weight: 900;
+              color: white;
+              background-color: rgb(203, 0, 18);
+            "
+          >
+            Nintendo
+          </option>
+          <option
+            value="pokemon"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: rgb(255, 203, 5);
+              background-color: rgb(53, 100, 174);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;포켓몬
+          </option>
+          <option value="scaleworld" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스케일 월드
+          </option>
+          <!-- <option value="moncolle" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;몬콜레</option>
         <option value="gotcha" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가챠</option>-->
-        <option selected value="LEGO" data-name="middleCategory"
-          style="font-weight: bold; color:rgb(255, 213, 2);background-color: rgb(227, 0, 11);">
-          &nbsp;&nbsp;&nbsp;LEGO</option>
-        <option value="LEGOSM" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오</option>
-        <option value="SWITCH2" data-name="middleCategory"
-          style="font-weight: bold; color:white;background-color: rgb(203, 0, 18);">&nbsp;&nbsp;&nbsp;SWITCH 2
-        </option>
-        <option value="SWITCH2HW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="SWITCH2SW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="SWITCH2DL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
-        <!--<option value="SWITCH2주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="SWITCH" data-name="middleCategory"
-          style="font-weight: bold;color:white;background-color: rgb(203, 0, 18);">
-          &nbsp;&nbsp;&nbsp;SWITCH</option>
-        <option value="SWITCHHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="SWITCHSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="SWITCHDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
-        <!--<option value="SWITCH주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="WiiU" data-name="middleCategory"
-          style="font-weight: bold; color:white;background: rgb(0, 154, 199)">&nbsp;&nbsp;&nbsp;Wii U</option>
-        <option value="WiiUSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="3DS" data-name="middleCategory"
-          style="font-weight: bold; color:black;background-color: rgb(206, 24, 30);">
-          &nbsp;&nbsp;&nbsp;3DS</option>
-        <option value="3DSHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="3DSSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="3DSDL" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL</option>
-        <!--<option value="3DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="DSiWare" data-name="middleCategory"
-          style="font-weight: bold;color:black;background-color: rgb(237, 73, 154);">&nbsp;&nbsp;&nbsp;DSiWare</option>
-        <option value="Wii" data-name="middleCategory"
-          style="font-weight: bold; color:rgb(0, 171, 236);background-color: rgb(140, 140, 140);">
-          &nbsp;&nbsp;&nbsp;Wii</option>
-        <option value="WiiHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="WiiSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <!--<option value="Wii주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="DS" data-name="middleCategory"
-          style="font-weight: bold; color:white;background-color: rgb(237, 73, 154);">
-          &nbsp;&nbsp;&nbsp;DS</option>
-        <option value="DSHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="DSSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <!--<option value="DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-        <option value="GC" data-name="middleCategory"
-          style="font-weight: bold; color:rgb(74, 86, 142);background-color: black;">
-          &nbsp;&nbsp;&nbsp;GameCube</option>
-        <option value="GCSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="GBA" data-name="middleCategory"
-          style="font-weight: bold; color:white;background-color: rgb(29, 32, 136);">
-          &nbsp;&nbsp;&nbsp;Game Boy Advance
-        </option>
-        <option value="GBAHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="GBASW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <!--<option value="GBC" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Game Boy Color
+          <option
+            selected
+            value="LEGO"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: rgb(255, 213, 2);
+              background-color: rgb(227, 0, 11);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;LEGO
+          </option>
+          <option value="LEGOSM" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오
+          </option>
+          <option
+            value="SWITCH2"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: white;
+              background-color: rgb(203, 0, 18);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;SWITCH 2
+          </option>
+          <option value="SWITCH2HW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="SWITCH2SW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option value="SWITCH2DL" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+          </option>
+          <!--<option value="SWITCH2주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
+          <option
+            value="SWITCH"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: white;
+              background-color: rgb(203, 0, 18);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;SWITCH
+          </option>
+          <option value="SWITCHHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="SWITCHSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option value="SWITCHDL" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+          </option>
+          <!--<option value="SWITCH주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
+          <option
+            value="WiiU"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: white;
+              background: rgb(0, 154, 199);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;Wii U
+          </option>
+          <option value="WiiUSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option
+            value="3DS"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: black;
+              background-color: rgb(206, 24, 30);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;3DS
+          </option>
+          <option value="3DSHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="3DSSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option value="3DSDL" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+          </option>
+          <!--<option value="3DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
+          <option
+            value="DSiWare"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: black;
+              background-color: rgb(237, 73, 154);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;DSiWare
+          </option>
+          <option
+            value="Wii"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: rgb(0, 171, 236);
+              background-color: rgb(140, 140, 140);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;Wii
+          </option>
+          <option value="WiiHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="WiiSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <!--<option value="Wii주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
+          <option
+            value="DS"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: white;
+              background-color: rgb(237, 73, 154);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;DS
+          </option>
+          <option value="DSHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="DSSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <!--<option value="DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
+          <option
+            value="GC"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: rgb(74, 86, 142);
+              background-color: black;
+            "
+          >
+            &nbsp;&nbsp;&nbsp;GameCube
+          </option>
+          <option value="GCSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option
+            value="GBA"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: white;
+              background-color: rgb(29, 32, 136);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;Game Boy Advance
+          </option>
+          <option value="GBAHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="GBASW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <!--<option value="GBC" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Game Boy Color
         </option>
         <option value="GBCHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
         <option value="GBCSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>-->
-        <option value="GB" data-name="middleCategory" style="font-weight: bold;color:rgb(29, 32, 136)">
-          &nbsp;&nbsp;&nbsp;Game Boy</option>
-        <option value="GBHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="GBSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>
-        <option value="G&W" data-name="middleCategory"
-          style="font-weight: bold;color:rgb(22,34,20);background-color: rgb(230, 202, 119)">
-          &nbsp;&nbsp;&nbsp;Game&Watch</option>
-        <option value="etc" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Etc.</option>
-        <option value="Amiibo" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Amiibo</option>
-        <!--<option value="AmiiboSMB" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 스매시브라더스</option>
-        <option value="AmiiboSM" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오</option>
-        <option value="AmiiboZD" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;젤다의 전설</option>
-        <option value="AmiiboDK" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;동키콩</option>
-        <option value="AmiiboAC" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;동물의 숲</option>
-        <option value="AmiiboSP" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스플래툰</option>
-        <option value="AmiiboZB" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제노블레이드</option>
-        <option value="AmiiboFE" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;파이어 엠블렘</option>
-        <option value="AmiiboPK" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;피크민</option>
-        <option value="AmiiboMD" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;메트로이드</option>
-        <option value="AmiiboKS" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별의 커비</option>
-        <option value="AmiiboMSS" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마리오 스포츠 슈퍼스타즈</option>-->
-      </select>
+          <option
+            value="GB"
+            data-name="middleCategory"
+            style="font-weight: bold; color: rgb(29, 32, 136)"
+          >
+            &nbsp;&nbsp;&nbsp;Game Boy
+          </option>
+          <option value="GBHW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+          </option>
+          <option value="GBSW" data-name="minorCategory">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+          </option>
+          <option
+            value="G&W"
+            data-name="middleCategory"
+            style="
+              font-weight: bold;
+              color: rgb(22, 34, 20);
+              background-color: rgb(230, 202, 119);
+            "
+          >
+            &nbsp;&nbsp;&nbsp;Game&Watch
+          </option>
+          <option
+            value="etc"
+            data-name="middleCategory"
+            style="font-weight: bold"
+          >
+            &nbsp;&nbsp;&nbsp;Etc.
+          </option>
+          <option
+            value="Amiibo"
+            data-name="middleCategory"
+            style="font-weight: bold"
+          >
+            &nbsp;&nbsp;&nbsp;Amiibo
+          </option>
+        </select>
+      </div>
+      <div id="results" class="card-container"></div>
     </div>
-    <div id="results" class="card-container"></div>
-  </div>
-</body>
-
+    <div id="modal" class="modal-container">
+      <div class="modal-content">
+        <input id="modalDBindex" type="text" class="modal-input"></input>
+        <input id="modalName" type="text" class="modal-input"></input>
+        <input id="modalMajorCategory" type="text" class="modal-input"></input>
+        <input id="modalMiddleCategory" type="text" class="modal-input"></input>
+        <input id="modalMinorCategory" type="text" class="modal-input"></input>
+        <input id="modalReleaseDate" type="text" class="modal-input"></input>
+        <input id="modalPrice" type="text" class="modal-input"></input>
+        <input id="modalNation" type="text" class="modal-input"></input>
+        <input id="modalStatus" type="text" class="modal-input"></input>
+        <input id="modalIsCollected" type="text" class="modal-input"></input>
+        <input id="modalRemarks" type="text" class="modal-input"></input>
+        <input id="modalImageUrl" type="text" class="modal-input"></input>
+        <button class="close-modal-button" onclick="closeModal()">닫기</button>
+      </div>
+    </div>
+  </body>
 </html>
-

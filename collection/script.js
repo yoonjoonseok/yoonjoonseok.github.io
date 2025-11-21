@@ -1,44 +1,51 @@
-const selectElement = document.getElementById('for');
-const selectSortElement = document.getElementById('selectSort');
-const isCollectedCheckbox = document.getElementById('isCollectedCheckbox');
-const isHadCheckbox = document.getElementById('isHadCheckbox');
-const statusCheckbox = document.getElementById('statusCheckbox');
-const searchBox = document.getElementById('searchBox');
-const nationSelectElement = document.getElementById('nation');
-const remarkSelectElement = document.getElementById('remarks');
-const resultsContainer = document.getElementById('results');
-const count = document.getElementById('count');
-const sizeRange = document.getElementById('sizeRange');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+  get,
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-var itemList;
-var filteredDataByCategory;
-var filteredData;
+const firebaseConfig = {
+  apiKey: "AIzaSyDG5dM9sdYj1Gzk9otxoBwlE2c2YZjcGkY",
+  authDomain: "collection-6de28.firebaseapp.com",
+  databaseURL: "https://collection-6de28-default-rtdb.firebaseio.com",
+  projectId: "collection-6de28",
+  storageBucket: "collection-6de28.firebasestorage.app",
+  messagingSenderId: "532985173114",
+  appId: "1:532985173114:web:9c97c5f7cb796ad62bd7c3",
+};
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import {
-      getAuth,
-      GoogleAuthProvider,
-      signInWithRedirect,
-      getRedirectResult,
-      onAuthStateChanged, signInWithPopup
-    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
+const db = getDatabase(app);
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDG5dM9sdYj1Gzk9otxoBwlE2c2YZjcGkY",
-      authDomain: "collection-6de28.firebaseapp.com",
-      databaseURL: "https://collection-6de28-default-rtdb.firebaseio.com",
-      projectId: "collection-6de28",
-      storageBucket: "collection-6de28.firebasestorage.app",
-      messagingSenderId: "532985173114",
-      appId: "1:532985173114:web:9c97c5f7cb796ad62bd7c3"
-    };
+const selectElement = document.getElementById("for");
+const selectSortElement = document.getElementById("selectSort");
+const isCollectedCheckbox = document.getElementById("isCollectedCheckbox");
+const isHadCheckbox = document.getElementById("isHadCheckbox");
+const statusCheckbox = document.getElementById("statusCheckbox");
+const searchBox = document.getElementById("searchBox");
+const nationSelectElement = document.getElementById("nation");
+const remarkSelectElement = document.getElementById("remarks");
+const resultsContainer = document.getElementById("results");
+const count = document.getElementById("count");
+const sizeRange = document.getElementById("sizeRange");
+const modal = document.getElementById("modal");
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    const db = getDatabase(app);
-    
+var itemList = [];
+var filteredDataByCategory = [];
+var filteredData = [];
+
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("loginBtn");
@@ -102,23 +109,23 @@ function loadUserItems(user) {
     });
 }
 
-    // 사용자 프로필 저장 함수
-    async function saveUserProfile(user) {
-      const userRef = ref(db, "users/" + user.uid + "/profile");
-      const snapshot = await get(userRef);
+// 사용자 프로필 저장 함수
+async function saveUserProfile(user) {
+  const userRef = ref(db, "users/" + user.uid + "/profile");
+  const snapshot = await get(userRef);
 
-      if (!snapshot.exists()) {
-        await set(userRef, {
-          email: user.email,
-          name: user.displayName,
-          photo: user.photoURL,
-          createdAt: Date.now()
-        });
-        console.log("프로필 저장 완료");
-      } else {
-        console.log("기존 프로필 존재");
-      }
-    }
+  if (!snapshot.exists()) {
+    await set(userRef, {
+      email: user.email,
+      name: user.displayName,
+      photo: user.photoURL,
+      createdAt: Date.now(),
+    });
+    console.log("프로필 저장 완료");
+  } else {
+    console.log("기존 프로필 존재");
+  }
+}
 
 /*function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl){
         this.name = name;
@@ -136,18 +143,31 @@ function loadUserItems(user) {
 
 itemList = arr.map(item => new Item(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7], item[8], item[9], item[10]));*/
 
-function categoryFilter(){
-  const selectedOptions = Array.from(selectElement.options).filter(o => o.selected);
-  const majorCategory = selectedOptions.filter(o => o.dataset.name === 'majorCategory').map(o => o.value);
-  const middleCategory = selectedOptions.filter(o => o.dataset.name === 'middleCategory').map(o => o.value);
-  const minorCategory = selectedOptions.filter(o => o.dataset.name === 'minorCategory').map(o => o.value);
-  const hasCategoryFilter = majorCategory.length || middleCategory.length || minorCategory.length;
-  filteredDataByCategory = itemList.filter(item => {
-    if (hasCategoryFilter && !(
-      majorCategory.includes(item.majorCategory) ||
-      middleCategory.includes(item.middleCategory) ||
-      minorCategory.includes(item.minorCategory)
-    )) return false;
+function categoryFilter() {
+  const selectedOptions = Array.from(selectElement.options).filter(
+    (o) => o.selected
+  );
+  const majorCategory = selectedOptions
+    .filter((o) => o.dataset.name === "majorCategory")
+    .map((o) => o.value);
+  const middleCategory = selectedOptions
+    .filter((o) => o.dataset.name === "middleCategory")
+    .map((o) => o.value);
+  const minorCategory = selectedOptions
+    .filter((o) => o.dataset.name === "minorCategory")
+    .map((o) => o.value);
+  const hasCategoryFilter =
+    majorCategory.length || middleCategory.length || minorCategory.length;
+  filteredDataByCategory = itemList.filter((item) => {
+    if (
+      hasCategoryFilter &&
+      !(
+        majorCategory.includes(item.majorCategory) ||
+        middleCategory.includes(item.middleCategory) ||
+        minorCategory.includes(item.minorCategory)
+      )
+    )
+      return false;
     return true;
   });
   changeRemarkOptions();
@@ -158,13 +178,15 @@ function filterAndDisplay() {
   const selectedNation = nationSelectElement.value;
   const selectedRemark = remarkSelectElement.value;
 
-  filteredData = filteredDataByCategory.filter(item => {
+  filteredData = filteredDataByCategory.filter((item) => {
     if (keyword && !item.name.includes(keyword)) return false;
-    if (isCollectedCheckbox.checked && item.isCollected !== 'Y') return false;
-    if (isHadCheckbox.checked && item.status === '미보유') return false;
-    if (statusCheckbox.checked && item.status !== '미개봉') return false;
-    if (selectedNation !== 'All' && item.nation !== selectedNation) return false;
-    if (selectedRemark !== 'All' && item.remarks !== selectedRemark) return false;
+    if (isCollectedCheckbox.checked && item.isCollected !== "Y") return false;
+    if (isHadCheckbox.checked && item.status === "미보유") return false;
+    if (statusCheckbox.checked && item.status !== "미개봉") return false;
+    if (selectedNation !== "All" && item.nation !== selectedNation)
+      return false;
+    if (selectedRemark !== "All" && item.remarks !== selectedRemark)
+      return false;
     return true;
   });
 
@@ -174,28 +196,34 @@ function filterAndDisplay() {
 }
 
 function changeRemarkOptions() {
-  const uniqueRemarks = [...new Set(filteredDataByCategory.map(item => item.remarks))];
+  const uniqueRemarks = [
+    ...new Set(filteredDataByCategory.map((item) => item.remarks)),
+  ];
   remarkSelectElement.options.length = 1;
 
   for (const remark of uniqueRemarks) {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.innerText = remark;
     option.value = remark;
     remarkSelectElement.append(option);
   }
 
-  remarkSelectElement.value = 'All';
+  remarkSelectElement.value = "All";
 }
 
 function filteredDataSort(filteredData) {
   switch (selectSortElement.value) {
-    case 'releaseDateAsc':
-      return filteredData.toSorted((a, b) => a.releaseDate.localeCompare(b.releaseDate));
-    case 'releaseDateDesc':
-      return filteredData.toSorted((a, b) => b.releaseDate.localeCompare(a.releaseDate));
-    case 'nameAsc':
+    case "releaseDateAsc":
+      return filteredData.toSorted((a, b) =>
+        a.releaseDate.localeCompare(b.releaseDate)
+      );
+    case "releaseDateDesc":
+      return filteredData.toSorted((a, b) =>
+        b.releaseDate.localeCompare(a.releaseDate)
+      );
+    case "nameAsc":
       return filteredData.toSorted((a, b) => a.name.localeCompare(b.name));
-    case 'nameDesc':
+    case "nameDesc":
       return filteredData.toSorted((a, b) => b.name.localeCompare(a.name));
     default:
       return filteredData;
@@ -203,44 +231,44 @@ function filteredDataSort(filteredData) {
 }
 
 function displayResults(data) {
-  resultsContainer.innerHTML = '';
+  resultsContainer.innerHTML = "";
   const fragment = document.createDocumentFragment();
 
-  data.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('card');
+  data.forEach((item) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
 
     //if (item.status === '미개봉') {
-      const overlay = document.createElement('div');
-      overlay.classList.add('overlay');
-      card.appendChild(overlay);
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    card.appendChild(overlay);
     //}
 
-    const imgContainer = document.createElement('div');
-    imgContainer.classList.add('img-container');
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
 
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = item.imageUrl;
-    img.style.visibility = 'hidden';
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.2s ease';
+    img.style.visibility = "hidden";
+    img.style.opacity = "0";
+    img.style.transition = "opacity 0.2s ease";
 
     img.onload = function () {
       const isWide = img.naturalWidth > img.naturalHeight;
-      img.classList.add(isWide ? 'tail-img' : 'long-img');
-      if (item.status === '미보유') img.classList.add('monochrome');
-      img.style.visibility = 'visible';
-      img.style.opacity = '1';
+      img.classList.add(isWide ? "tail-img" : "long-img");
+      if (item.status === "미보유") img.classList.add("monochrome");
+      img.style.visibility = "visible";
+      img.style.opacity = "1";
     };
 
     imgContainer.appendChild(img);
     card.appendChild(imgContainer);
 
-    const nameContainer = document.createElement('div');
-    nameContainer.classList.add('name-container');
-    const nameDiv = document.createElement('div');
-    nameDiv.classList.add('name');
-    if (item.status === '미개봉') nameDiv.classList.add('unopened');
+    const nameContainer = document.createElement("div");
+    nameContainer.classList.add("name-container");
+    const nameDiv = document.createElement("div");
+    nameDiv.classList.add("name");
+    if (item.status === "미개봉") nameDiv.classList.add("unopened");
     nameDiv.innerHTML = item.name;
     nameContainer.appendChild(nameDiv);
     card.appendChild(nameContainer);
@@ -253,7 +281,7 @@ function displayResults(data) {
 
   setupCardEffects();
 
-  if ('requestIdleCallback' in window) {
+  if ("requestIdleCallback" in window) {
     requestIdleCallback(resizeName);
   } else {
     requestAnimationFrame(resizeName);
@@ -261,28 +289,29 @@ function displayResults(data) {
 }
 
 function setupCardEffects() {
-  resultsContainer.removeEventListener('click', cardDetail);
-  resultsContainer.addEventListener('click', cardDetail);
-  resultsContainer.removeEventListener('mousemove', onMouseMove);
-  resultsContainer.removeEventListener('mouseout', onMouseOut);
-  resultsContainer.addEventListener('mousemove', onMouseMove);
-  resultsContainer.addEventListener('mouseout', onMouseOut);
+  resultsContainer.removeEventListener("click", cardDetail);
+  resultsContainer.addEventListener("click", cardDetail);
+  resultsContainer.removeEventListener("mousemove", onMouseMove);
+  resultsContainer.removeEventListener("mouseout", onMouseOut);
+  resultsContainer.addEventListener("mousemove", onMouseMove);
+  resultsContainer.addEventListener("mouseout", onMouseOut);
 }
 
-function cardDetail(e){
-  const card = e.target.closest('.card');
-  console.log(card);
+function cardDetail(e) {
+  const card = e.target.closest(".card");
+  if (!card) return;
+  openModal(card);
 }
 
 function onMouseMove(e) {
-  const card = e.target.closest('.card');
+  const card = e.target.closest(".card");
   if (!card) return;
   const rect = card.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
-  const rotateY = -40 / card.clientWidth * x + 20;
-  const rotateX = 40 / card.clientHeight * y - 20;
-  const overlay = card.querySelector('.overlay');
+  const rotateY = (-40 / card.clientWidth) * x + 20;
+  const rotateX = (40 / card.clientHeight) * y - 20;
+  const overlay = card.querySelector(".overlay");
 
   overlay.style.backgroundPosition = `${x / 5 + y / 5}%`;
   overlay.style.filter = `opacity(${x / 200}) brightness(1.2)`;
@@ -290,41 +319,47 @@ function onMouseMove(e) {
 }
 
 function onMouseOut(e) {
-  const card = e.target.closest('.card');
+  const card = e.target.closest(".card");
   if (!card) return;
-  const overlay = card.querySelector('.overlay');
-  overlay.style.filter = 'opacity(0)';
-  card.style.transform = 'perspective(350px) rotateY(0deg) rotateX(0deg)';
+  const overlay = card.querySelector(".overlay");
+  overlay.style.filter = "opacity(0)";
+  card.style.transform = "perspective(350px) rotateY(0deg) rotateX(0deg)";
 }
 
 function resizeName() {
-  const cards = Array.from(document.querySelectorAll('.card'));
-  const baseSize = 10;   //Math.floor(200 / sizeRange.value);
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const baseSize = 10; //Math.floor(200 / sizeRange.value);
   let index = 0;
 
   function processNextBatch() {
     const start = performance.now();
     while (index < cards.length && performance.now() - start < 16) {
       const container = cards[index++];
-      const nameContainer = container.querySelector('.name-container');
+      const nameContainer = container.querySelector(".name-container");
       if (!nameContainer) continue;
-      const name = nameContainer.querySelector('.name');
+      const name = nameContainer.querySelector(".name");
       if (!name) continue;
-      name.style.fontSize = '';
+      name.style.fontSize = "";
 
-      let min = 1, max = baseSize, bestFit = min;
+      let min = 1,
+        max = baseSize,
+        bestFit = min;
       while (min <= max) {
         const mid = Math.floor((min + max) / 2);
-        name.style.fontSize = mid + 'cqw';
+        name.style.fontSize = mid + "cqw";
         const fits =
           nameContainer.scrollWidth <= nameContainer.clientWidth &&
           nameContainer.scrollHeight <= nameContainer.clientHeight;
-        if (fits) { bestFit = mid; min = mid + 1; }
-        else { max = mid - 1; }
+        if (fits) {
+          bestFit = mid;
+          min = mid + 1;
+        } else {
+          max = mid - 1;
+        }
       }
-      name.style.fontSize = bestFit + 'cqw';
+      name.style.fontSize = bestFit + "cqw";
       name.style.opacity = 1;
-      name.style.visibility = 'visible';
+      name.style.visibility = "visible";
     }
     if (index < cards.length) requestAnimationFrame(processNextBatch);
   }
@@ -332,36 +367,51 @@ function resizeName() {
 }
 
 function renderingSum(filteredData) {
-  count.innerText = filteredData.length + '건';
-  amount.innerText = filteredData.reduce((acc, cur) => {
-    return acc + (cur.price.slice(-1) === '￥' ? 10 : 1) * (parseInt(cur.price.slice(0, -1)));
-  }, 0).toLocaleString() + '원';
+  count.innerText = filteredData.length + "건";
+  amount.innerText =
+    filteredData
+      .reduce((acc, cur) => {
+        return (
+          acc +
+          (cur.price.slice(-1) === "￥" ? 10 : 1) *
+            parseInt(cur.price.slice(0, -1))
+        );
+      }, 0)
+      .toLocaleString() + "원";
 }
 
 function resizeCards() {
   const value = sizeRange.value;
-  document.documentElement.style.setProperty('--card-size', value);
+  document.documentElement.style.setProperty("--card-size", value);
   resizeName();
 }
 
 function autoResizeCards() {
   sizeRange.value = Math.floor(filteredData.length ** 0.5) + 1;
-  if (sizeRange.value > 10)
-    sizeRange.value = 10;
-  if (sizeRange.value < 10)
-    sizeRange.value = 10;
+  if (sizeRange.value > 10) sizeRange.value = 10;
+  if (sizeRange.value < 10) sizeRange.value = 10;
+}
+
+function openModal(card) {
+  //const textList = card.querySelectorAll(".modal-input");
+  //modal.getElementById("results").value = text[0];
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
 }
 
 // Event binding
-selectElement.addEventListener('change', function(){
+selectElement.addEventListener("change", function () {
   categoryFilter();
   filterAndDisplay();
 });
-selectSortElement.addEventListener('change', filterAndDisplay);
-isCollectedCheckbox.addEventListener('change', filterAndDisplay);
-isHadCheckbox.addEventListener('change', filterAndDisplay);
-statusCheckbox.addEventListener('change', filterAndDisplay);
-searchBox.addEventListener('input', filterAndDisplay);
-nationSelectElement.addEventListener('change', filterAndDisplay);
-remarkSelectElement.addEventListener('change', filterAndDisplay);
-sizeRange.addEventListener('change', resizeCards);
+selectSortElement.addEventListener("change", filterAndDisplay);
+isCollectedCheckbox.addEventListener("change", filterAndDisplay);
+isHadCheckbox.addEventListener("change", filterAndDisplay);
+statusCheckbox.addEventListener("change", filterAndDisplay);
+searchBox.addEventListener("input", filterAndDisplay);
+nationSelectElement.addEventListener("change", filterAndDisplay);
+remarkSelectElement.addEventListener("change", filterAndDisplay);
+sizeRange.addEventListener("change", resizeCards);
