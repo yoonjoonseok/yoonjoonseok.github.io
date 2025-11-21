@@ -1,3 +1,5 @@
+import { itemList, filteredDataByCategory} from './firebase.js';
+
 const selectElement = document.getElementById('for');
 const selectSortElement = document.getElementById('selectSort');
 const isCollectedCheckbox = document.getElementById('isCollectedCheckbox');
