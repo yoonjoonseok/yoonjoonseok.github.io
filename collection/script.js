@@ -1,24 +1,3 @@
-function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl) {
-  this.name = name;
-  this.majorCategory = majorCategory;
-  this.middleCategory = middleCategory;
-  this.minorCategory = minorCategory;
-  this.releaseDate = releaseDate;
-  this.price = price;
-  this.nation = nation;
-  this.status = status;
-  this.isCollected = isCollected;
-  this.remarks = remarks;
-  this.imageUrl = imageUrl;
-};
-
-var arr=[];
-
-var itemList = arr.map(item => new Item(
-  item[0], item[1], item[2], item[3], item[4], item[5],
-  item[6], item[7], item[8], item[9], item[10]
-));
-
 const selectElement = document.getElementById('for');
 const selectSortElement = document.getElementById('selectSort');
 const isCollectedCheckbox = document.getElementById('isCollectedCheckbox');
@@ -31,25 +10,50 @@ const resultsContainer = document.getElementById('results');
 const count = document.getElementById('count');
 const sizeRange = document.getElementById('sizeRange');
 
+var itemList;
+var filteredDataByCategory;
 var filteredData;
 
-function filterAndDisplay() {
-  const keyword = searchBox.value.trim();
+/*function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl){
+        this.name = name;
+        this.majorCategory = majorCategory;
+        this.middleCategory = middleCategory;
+        this.minorCategory = minorCategory;
+        this.releaseDate = releaseDate;
+        this.price = price;
+        this.nation = nation;
+        this.status = status;
+        this.isCollected = isCollected;
+        this.remarks = remarks;
+        this.imageUrl = imageUrl;
+    };
+
+itemList = arr.map(item => new Item(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7], item[8], item[9], item[10]));*/
+
+function categoryFilter(){
   const selectedOptions = Array.from(selectElement.options).filter(o => o.selected);
   const majorCategory = selectedOptions.filter(o => o.dataset.name === 'majorCategory').map(o => o.value);
   const middleCategory = selectedOptions.filter(o => o.dataset.name === 'middleCategory').map(o => o.value);
   const minorCategory = selectedOptions.filter(o => o.dataset.name === 'minorCategory').map(o => o.value);
-  const selectedNation = nationSelectElement.value;
-  const selectedRemark = remarkSelectElement.value;
-
-  filteredData = itemList.filter(item => {
-    if (keyword && !item.name.includes(keyword)) return false;
-    const hasCategoryFilter = majorCategory.length || middleCategory.length || minorCategory.length;
+  const hasCategoryFilter = majorCategory.length || middleCategory.length || minorCategory.length;
+  filteredDataByCategory = itemList.filter(item => {
     if (hasCategoryFilter && !(
       majorCategory.includes(item.majorCategory) ||
       middleCategory.includes(item.middleCategory) ||
       minorCategory.includes(item.minorCategory)
     )) return false;
+    return true;
+  });
+  changeRemarkOptions();
+}
+
+function filterAndDisplay() {
+  const keyword = searchBox.value.trim();
+  const selectedNation = nationSelectElement.value;
+  const selectedRemark = remarkSelectElement.value;
+
+  filteredData = filteredDataByCategory.filter(item => {
+    if (keyword && !item.name.includes(keyword)) return false;
     if (isCollectedCheckbox.checked && item.isCollected !== 'Y') return false;
     if (isHadCheckbox.checked && item.status === '미보유') return false;
     if (statusCheckbox.checked && item.status !== '미개봉') return false;
@@ -58,14 +62,13 @@ function filterAndDisplay() {
     return true;
   });
 
-  changeRemarkOptions(selectedRemark);
   filteredData = filteredDataSort(filteredData);
   displayResults(filteredData);
   //autoResizeCards();
 }
 
-function changeRemarkOptions(selectedRemark) {
-  const uniqueRemarks = [...new Set(filteredData.map(item => item.remarks))];
+function changeRemarkOptions() {
+  const uniqueRemarks = [...new Set(filteredDataByCategory.map(item => item.remarks))];
   remarkSelectElement.options.length = 1;
 
   for (const remark of uniqueRemarks) {
@@ -74,7 +77,8 @@ function changeRemarkOptions(selectedRemark) {
     option.value = remark;
     remarkSelectElement.append(option);
   }
-  remarkSelectElement.value = selectedRemark;
+
+  remarkSelectElement.value = 'All';
 }
 
 function filteredDataSort(filteredData) {
@@ -151,10 +155,17 @@ function displayResults(data) {
 }
 
 function setupCardEffects() {
+  resultsContainer.removeEventListener('click', cardDetail);
+  resultsContainer.addEventListener('click', cardDetail);
   resultsContainer.removeEventListener('mousemove', onMouseMove);
   resultsContainer.removeEventListener('mouseout', onMouseOut);
   resultsContainer.addEventListener('mousemove', onMouseMove);
   resultsContainer.addEventListener('mouseout', onMouseOut);
+}
+
+function cardDetail(e){
+  const card = e.target.closest('.card');
+  console.log(card);
 }
 
 function onMouseMove(e) {
@@ -224,7 +235,6 @@ function renderingSum(filteredData) {
 function resizeCards() {
   const value = sizeRange.value;
   document.documentElement.style.setProperty('--card-size', value);
-  console.log(value);
   resizeName();
 }
 
@@ -237,7 +247,10 @@ function autoResizeCards() {
 }
 
 // Event binding
-selectElement.addEventListener('change', filterAndDisplay);
+selectElement.addEventListener('change', function(){
+  categoryFilter();
+  filterAndDisplay();
+});
 selectSortElement.addEventListener('change', filterAndDisplay);
 isCollectedCheckbox.addEventListener('change', filterAndDisplay);
 isHadCheckbox.addEventListener('change', filterAndDisplay);
@@ -247,5 +260,6 @@ nationSelectElement.addEventListener('change', filterAndDisplay);
 remarkSelectElement.addEventListener('change', filterAndDisplay);
 sizeRange.addEventListener('change', resizeCards);
 
+categoryFilter();
 filterAndDisplay();
 resizeCards();
