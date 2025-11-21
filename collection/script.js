@@ -41,6 +41,7 @@ const resultsContainer = document.getElementById("results");
 const count = document.getElementById("count");
 const sizeRange = document.getElementById("sizeRange");
 const modal = document.getElementById("modal");
+const closeModalBtn = document.getElementById("close-modal-button");
 
 var itemList = [];
 var filteredDataByCategory = [];
@@ -415,3 +416,4 @@ searchBox.addEventListener("input", filterAndDisplay);
 nationSelectElement.addEventListener("change", filterAndDisplay);
 remarkSelectElement.addEventListener("change", filterAndDisplay);
 sizeRange.addEventListener("change", resizeCards);
+closeModalBtn.addEventListener("click",closeModal);
