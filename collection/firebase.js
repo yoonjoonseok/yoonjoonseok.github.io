@@ -23,8 +23,8 @@
     const provider = new GoogleAuthProvider();
     const db = getDatabase(app);
 
-var itemList;
-var filteredDataByCategory;
+export var itemList;
+export var filteredDataByCategory;
     
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
