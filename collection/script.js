@@ -90,7 +90,9 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         itemList = Object.values(snapshot.val());
-        filterAndDisplay(); // 기존 필터 & 출력 함수
+        categoryFilter();
+        filterAndDisplay();
+        resizeCards();
       } else {
         console.log("No data available");
       }
@@ -363,7 +365,3 @@ searchBox.addEventListener('input', filterAndDisplay);
 nationSelectElement.addEventListener('change', filterAndDisplay);
 remarkSelectElement.addEventListener('change', filterAndDisplay);
 sizeRange.addEventListener('change', resizeCards);
-
-categoryFilter();
-filterAndDisplay();
-resizeCards();
