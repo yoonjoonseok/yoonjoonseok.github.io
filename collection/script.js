@@ -156,6 +156,7 @@ function createItem() {
       itemList.push(item);
       categoryFilter();
       filterAndDisplay();
+      closeModal();
     })
     .catch((error) => {
       console.error("데이터 추가 중 오류 발생: ", error);

@@ -308,28 +308,61 @@
       <div class="modal-content">
         <form id="modalForm">
           <fieldset id="formSet">
-          <label for="name">name</label>
-          <input name="name" type="text" class="modal-input"></input>
-          <label for="majorCategory">majorCategory</label>
-          <input name="majorCategory" type="text" class="modal-input"></input>
-          <label for="middleCategory">middleCategory</label>
-          <input name="middleCategory" type="text" class="modal-input"></input>
-          <label for="minorCategory">minorCategory</label>
-          <input name="minorCategory" type="text" class="modal-input"></input>
-          <label for="releaseDate">releaseDate</label>
-          <input name="releaseDate" type="text" class="modal-input"></input>
-          <label for="price">price</label>
-          <input name="price" type="text" class="modal-input"></input>
-          <label for="nation">nation</label>
-          <input name="nation" type="text" class="modal-input"></input>
-          <label for="status">status</label>
-          <input name="status" type="text" class="modal-input"></input>
-          <label for="isCollected">isCollected</label>
-          <input name="isCollected" type="text" class="modal-input"></input>
-          <label for="remarks">remarks</label>
-          <input name="remarks" type="text" class="modal-input"></input>
-          <label for="imageUrl">imageUrl</label>
-          <input name="imageUrl" type="text" class="modal-input"></input>
+            <div class="form-group">
+              <label for="name">name</label>
+              <input name="name" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="releaseDate">releaseDate</label>
+              <input name="releaseDate" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="price">price</label>
+              <input name="price" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="majorCategory">majorCategory</label>
+              <input name="majorCategory" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="middleCategory">middleCategory</label>
+              <input name="middleCategory" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="minorCategory">minorCategory</label>
+              <input name="minorCategory" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="remarks">remarks</label>
+              <input name="remarks" type="text" class="modal-input"></input>
+            </div>
+            <div class="form-group">
+              <label for="nation">nation</label>
+              <select name="nation">
+                <option value="KR" selected>KR</option>
+                <option value="JP">JP</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="isCollected">isCollected</label>
+              <select name="isCollected">
+                <option value="Y" selected>Y</option>
+                <option value="N">N</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="status">status</label>
+              <select name="status">
+                <option value="미보유" selected>미보유</option>
+                <option value="미개봉">미개봉</option>
+                <option value="미개봉">개봉</option>
+                <option value="미개봉">단품</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="imageUrl">imageUrl</label>
+              <input name="imageUrl" type="text" class="modal-input"></input>
+            </div>
           </fieldset>
         </form>
         <button id = "create-modal-button" class="create-modal-button">추가</button>

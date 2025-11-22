@@ -153,3 +153,7 @@ body {
     max-width: 500px;
     position: relative;
 }
+
+.form-group{
+    display: flex;
+}
