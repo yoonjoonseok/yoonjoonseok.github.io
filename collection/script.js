@@ -407,17 +407,17 @@ function autoResizeCards() {
 function openModal(card) {
   const index = card.querySelector('#cardIndex').value;
   const item = itemList[index];
-  modal.querySelector('modalName').value = item.name;
-  modal.querySelector('modalMajorCategory').value = item.majorCategory;
-  modal.querySelector('modalMiddleCategory').value = item.middleCategory;
-  modal.querySelector('modalMinorCategory').value = item.minorCategory;
-  modal.querySelector('modalReleaseDate').value = item.releaseDate;
-  modal.querySelector('modalPrice').value = item.price;
-  modal.querySelector('modalNation').value = item.nation;
-  modal.querySelector('modalStatus').value = item.status;
-  modal.querySelector('modalIsCollected').value = item.isCollected;
-  modal.querySelector('modalRemarks').value = item.remarks;
-  modal.querySelector('modalImageUrl').value = item.imageUrl;
+  modal.querySelector('#modalName').value = item.name;
+  modal.querySelector('#modalMajorCategory').value = item.majorCategory;
+  modal.querySelector('#modalMiddleCategory').value = item.middleCategory;
+  modal.querySelector('#modalMinorCategory').value = item.minorCategory;
+  modal.querySelector('#modalReleaseDate').value = item.releaseDate;
+  modal.querySelector('#modalPrice').value = item.price;
+  modal.querySelector('#modalNation').value = item.nation;
+  modal.querySelector('#modalStatus').value = item.status;
+  modal.querySelector('#modalIsCollected').value = item.isCollected;
+  modal.querySelector('#modalRemarks').value = item.remarks;
+  modal.querySelector('#modalImageUrl').value = item.imageUrl;
 
   modal.style.display = "block";
 }
