@@ -141,18 +141,19 @@ async function saveUserProfile(user) {
 
 function createItem() {
   var formData = new FormData(modalForm);
+  var item = Object.fromEntries(formData);
   const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList"); 
   const newPostRef = push(postListRef);
   const newPostKey = newPostRef.key;
   console.log(newPostKey);
 
-  set(newPostRef, formData)
+  set(newPostRef, item)
     .then(() => {
       console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
-      formData.id= newPostKey;
-      formData.index = formData.length;
-      itemList.push(formData);
+      item.id= newPostKey;
+      item.index = itemList.length;
+      itemList.push(item);
       categoryFilter();
       filterAndDisplay();
     })
