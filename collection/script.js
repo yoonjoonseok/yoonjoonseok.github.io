@@ -143,11 +143,8 @@ function createItem() {
   // 'posts'라는 경로의 참조를 가져옵니다.
   const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
 
-  // postListRef 하위에 고유 키를 가진 새로운 참조를 생성합니다.
-  const newPostRef = push(postListRef);
-
   // 생성된 새로운 참조에 객체 데이터를 저장합니다.
-  set(newPostRef, formData)
+  push(postListRef, formData)
     .then(() => {
       console.log("데이터가 성공적으로 추가되었습니다.");
       item.index = itemList.length;
