@@ -163,9 +163,19 @@ function createItem() {
     });
 }
 
-function updateItem(item, index) {}
+function updateItem(item, index) {
+  closeModal();
+}
 
-function deleteItem(item, index) {}
+function deleteItem(e) {
+  if(confirm("정말 삭제하겠습니까?")){
+    const card = e.target.closest(".card");
+    const cardIndex = e.target.closest("#cardIndex");
+    console.log(e.target.closest("#cardIndex"));
+    console.log(card.querySelector("#cardIndex"));
+	}
+  closeModal();
+}
 
 /*function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl){
         this.name = name;
@@ -483,4 +493,5 @@ remarkSelectElement.addEventListener("change", filterAndDisplay);
 sizeRange.addEventListener("change", resizeCards);
 popCreateModalBtn.addEventListener("click", openCreateModal);
 createModalBtn.addEventListener("click", createItem);
+deleteModalBtn.addEventListener("click",deleteItem);
 closeModalBtn.addEventListener("click", closeModal);
