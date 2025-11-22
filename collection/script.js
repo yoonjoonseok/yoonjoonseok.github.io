@@ -12,6 +12,7 @@ import {
   ref,
   set,
   get,
+  push
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -141,11 +142,12 @@ async function saveUserProfile(user) {
 function createItem() {
   var formData = new FormData(modalForm);
   // 'posts'라는 경로의 참조를 가져옵니다.
-  const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
-
+  const postsRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
+  const newPostRef = postsRef.push();
   // 생성된 새로운 참조에 객체 데이터를 저장합니다.
-  push(postListRef, formData)
+  newPostRef.set(formData)
     .then(() => {
+      console.log(newPostRef.key);
       console.log("데이터가 성공적으로 추가되었습니다.");
       item.index = itemList.length;
       itemList.push(item);
