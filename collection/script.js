@@ -46,7 +46,7 @@ const createModalBtn = document.getElementById("create-modal-button");
 const updateModalBtn = document.getElementById("update-modal-button");
 const deleteModalBtn = document.getElementById("delete-modal-button");
 const closeModalBtn = document.getElementById("close-modal-button");
-const myForm = document.getElementById("myForm");
+const modalForm = document.getElementById("modalForm");
 
 var itemList = [];
 var filteredDataByCategory = [];
@@ -139,7 +139,7 @@ async function saveUserProfile(user) {
 }
 
 function createItem(item) {
-  var formData = new FormData(myForm);
+  var formData = new FormData(modalForm);
   // 'posts'라는 경로의 참조를 가져옵니다.
   const postListRef = ref(db, "users/" + user.uid + "/itemList");
 
@@ -439,17 +439,17 @@ function openModal(card) {
   document.getElementById("formSet").disabled = true;
   const index = card.querySelector("#cardIndex").value;
   const item = itemList[index];
-  modal.querySelector("#modalName").value = item.name;
-  modal.querySelector("#modalMajorCategory").value = item.majorCategory;
-  modal.querySelector("#modalMiddleCategory").value = item.middleCategory;
-  modal.querySelector("#modalMinorCategory").value = item.minorCategory;
-  modal.querySelector("#modalReleaseDate").value = item.releaseDate;
-  modal.querySelector("#modalPrice").value = item.price;
-  modal.querySelector("#modalNation").value = item.nation;
-  modal.querySelector("#modalStatus").value = item.status;
-  modal.querySelector("#modalIsCollected").value = item.isCollected;
-  modal.querySelector("#modalRemarks").value = item.remarks;
-  modal.querySelector("#modalImageUrl").value = item.imageUrl;
+  modal.querySelector('input[name="name"]').value = item.name;
+  modal.querySelector('input[name="majorCategory"]').value = item.majorCategory;
+  modal.querySelector('input[name="middleCategory"]').value = item.middleCategory;
+  modal.querySelector('input[name="minorCategory"]').value = item.minorCategory;
+  modal.querySelector('input[name="releaseDate"]').value = item.releaseDate;
+  modal.querySelector('input[name="price"]').value = item.price;
+  modal.querySelector('input[name="nation"]').value = item.nation;
+  modal.querySelector('input[name="status"]').value = item.status;
+  modal.querySelector('input[name="isCollected"]').value = item.isCollected;
+  modal.querySelector('input[name="remarks"]').value = item.remarks;
+  modal.querySelector('input[name="imageUrl"]').value = item.imageUrl;
 
   modal.style.display = "block";
 }
