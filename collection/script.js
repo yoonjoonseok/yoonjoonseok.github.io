@@ -13,7 +13,6 @@ import {
   set,
   get,
   push,
-  child,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -142,12 +141,12 @@ async function saveUserProfile(user) {
 
 function createItem() {
   var formData = new FormData(modalForm);
-  const newPostKey = push(
-    child(ref(db), "users/" + auth.currentUser.uid + "/itemList")
-  ).key;
+  const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList"); 
+  const newPostRef = push(postListRef);
+  const newPostKey = newPostRef.key;
   console.log(newPostKey);
 
-  set(ref(db, "users/" + auth.currentUser.uid + "/" + newPostKey), formData)
+  set(newPostRef, formData)
     .then(() => {
       console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
