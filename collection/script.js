@@ -138,10 +138,10 @@ async function saveUserProfile(user) {
   }
 }
 
-function createItem(item) {
+function createItem() {
   var formData = new FormData(modalForm);
   // 'posts'라는 경로의 참조를 가져옵니다.
-  const postListRef = ref(db, "users/" + user.uid + "/itemList");
+  const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
 
   // postListRef 하위에 고유 키를 가진 새로운 참조를 생성합니다.
   const newPostRef = push(postListRef);
