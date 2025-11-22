@@ -248,6 +248,7 @@ function displayResults(data) {
     hiddenInput.setAttribute('id', 'cardIndex');
     hiddenInput.setAttribute('type', 'hidden');
     hiddenInput.setAttribute('value', item.index);
+    card.append(hiddenInput);
 
     //if (item.status === '미개봉') {
     const overlay = document.createElement("div");
