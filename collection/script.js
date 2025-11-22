@@ -97,7 +97,12 @@ function loadUserItems(user) {
   get(dataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        itemList = Object.values(snapshot.val());
+        itemList = Object.values(snapshot.val()).map((item, index) => {
+          return {
+            ...item,
+            index: index,
+          };
+        });
         categoryFilter();
         filterAndDisplay();
         resizeCards();
@@ -238,6 +243,11 @@ function displayResults(data) {
   data.forEach((item) => {
     const card = document.createElement("div");
     card.classList.add("card");
+
+    const hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('id', 'cardIndex');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('value', item.index);
 
     //if (item.status === '미개봉') {
     const overlay = document.createElement("div");
@@ -394,8 +404,20 @@ function autoResizeCards() {
 }
 
 function openModal(card) {
-  //const textList = card.querySelectorAll(".modal-input");
-  //modal.getElementById("results").value = text[0];
+  const index = card.querySelector('#cardIndex').value;
+  const item = itemList[index];
+  modal.querySelector('modalName') = item.name;
+  modal.querySelector('modalMajorCategory') = item.majorCategory;
+  modal.querySelector('modalMiddleCategory') = item.middleCategory;
+  modal.querySelector('modalMinorCategory') = item.minorCategory;
+  modal.querySelector('modalReleaseDate') = item.releaseDate;
+  modal.querySelector('modalPrice') = item.price;
+  modal.querySelector('modalNation') = item.nation;
+  modal.querySelector('modalStatus') = item.status;
+  modal.querySelector('modalIsCollected') = item.isCollected;
+  modal.querySelector('modalRemarks') = item.remarks;
+  modal.querySelector('modalImageUrl') = item.imageUrl;
+
   modal.style.display = "block";
 }
 
@@ -416,4 +438,4 @@ searchBox.addEventListener("input", filterAndDisplay);
 nationSelectElement.addEventListener("change", filterAndDisplay);
 remarkSelectElement.addEventListener("change", filterAndDisplay);
 sizeRange.addEventListener("change", resizeCards);
-closeModalBtn.addEventListener("click",closeModal);
+closeModalBtn.addEventListener("click", closeModal);
