@@ -151,9 +151,9 @@ function createItem() {
     .then(() => {
       console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
-      item.id= newPostKey;
-      item.index = itemList.length;
-      itemList.push(item);
+      formData.id= newPostKey;
+      formData.index = formData.length;
+      formData.push(item);
       categoryFilter();
       filterAndDisplay();
     })
