@@ -449,9 +449,9 @@ function openModal(card) {
   modal.querySelector('input[name="minorCategory"]').value = item.minorCategory;
   modal.querySelector('input[name="releaseDate"]').value = item.releaseDate;
   modal.querySelector('input[name="price"]').value = item.price;
-  modal.querySelector('input[name="nation"]').value = item.nation;
-  modal.querySelector('input[name="status"]').value = item.status;
-  modal.querySelector('input[name="isCollected"]').value = item.isCollected;
+  modal.querySelector('select[name="nation"]').value = item.nation;
+  modal.querySelector('select[name="status"]').value = item.status;
+  modal.querySelector('select[name="isCollected"]').value = item.isCollected;
   modal.querySelector('input[name="remarks"]').value = item.remarks;
   modal.querySelector('input[name="imageUrl"]').value = item.imageUrl;
 
