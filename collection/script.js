@@ -41,7 +41,12 @@ const resultsContainer = document.getElementById("results");
 const count = document.getElementById("count");
 const sizeRange = document.getElementById("sizeRange");
 const modal = document.getElementById("modal");
+const popCreateModalBtn = document.getElementById("pop-create-modal-button");
+const createModalBtn = document.getElementById("create-modal-button");
+const updateModalBtn = document.getElementById("update-modal-button");
+const deleteModalBtn = document.getElementById("delete-modal-button");
 const closeModalBtn = document.getElementById("close-modal-button");
+const myForm = document.getElementById("myForm");
 
 var itemList = [];
 var filteredDataByCategory = [];
@@ -132,6 +137,32 @@ async function saveUserProfile(user) {
     console.log("기존 프로필 존재");
   }
 }
+
+function createItem(item) {
+  var formData = new FormData(myForm);
+  // 'posts'라는 경로의 참조를 가져옵니다.
+  const postListRef = ref(db, "users/" + user.uid + "/itemList");
+
+  // postListRef 하위에 고유 키를 가진 새로운 참조를 생성합니다.
+  const newPostRef = push(postListRef);
+
+  // 생성된 새로운 참조에 객체 데이터를 저장합니다.
+  set(newPostRef, formData)
+    .then(() => {
+      console.log("데이터가 성공적으로 추가되었습니다.");
+      item.index = itemList.length;
+      itemList.push(item);
+      categoryFilter();
+      filterAndDisplay();
+    })
+    .catch((error) => {
+      console.error("데이터 추가 중 오류 발생: ", error);
+    });
+}
+
+function updateItem(item, index) {}
+
+function deleteItem(item, index) {}
 
 /*function Item(name, majorCategory, middleCategory, minorCategory, releaseDate, price, nation, status, isCollected, remarks, imageUrl){
         this.name = name;
@@ -244,10 +275,10 @@ function displayResults(data) {
     const card = document.createElement("div");
     card.classList.add("card");
 
-    const hiddenInput = document.createElement('input');
-    hiddenInput.setAttribute('id', 'cardIndex');
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('value', item.index);
+    const hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("id", "cardIndex");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("value", item.index);
     card.append(hiddenInput);
 
     //if (item.status === '미개봉') {
@@ -405,25 +436,32 @@ function autoResizeCards() {
 }
 
 function openModal(card) {
-  const index = card.querySelector('#cardIndex').value;
+  document.getElementById("formSet").disabled = true;
+  const index = card.querySelector("#cardIndex").value;
   const item = itemList[index];
-  modal.querySelector('#modalName').value = item.name;
-  modal.querySelector('#modalMajorCategory').value = item.majorCategory;
-  modal.querySelector('#modalMiddleCategory').value = item.middleCategory;
-  modal.querySelector('#modalMinorCategory').value = item.minorCategory;
-  modal.querySelector('#modalReleaseDate').value = item.releaseDate;
-  modal.querySelector('#modalPrice').value = item.price;
-  modal.querySelector('#modalNation').value = item.nation;
-  modal.querySelector('#modalStatus').value = item.status;
-  modal.querySelector('#modalIsCollected').value = item.isCollected;
-  modal.querySelector('#modalRemarks').value = item.remarks;
-  modal.querySelector('#modalImageUrl').value = item.imageUrl;
+  modal.querySelector("#modalName").value = item.name;
+  modal.querySelector("#modalMajorCategory").value = item.majorCategory;
+  modal.querySelector("#modalMiddleCategory").value = item.middleCategory;
+  modal.querySelector("#modalMinorCategory").value = item.minorCategory;
+  modal.querySelector("#modalReleaseDate").value = item.releaseDate;
+  modal.querySelector("#modalPrice").value = item.price;
+  modal.querySelector("#modalNation").value = item.nation;
+  modal.querySelector("#modalStatus").value = item.status;
+  modal.querySelector("#modalIsCollected").value = item.isCollected;
+  modal.querySelector("#modalRemarks").value = item.remarks;
+  modal.querySelector("#modalImageUrl").value = item.imageUrl;
 
   modal.style.display = "block";
 }
 
 function closeModal() {
   modal.style.display = "none";
+}
+
+function openCreateModal(){
+  document.getElementById("formSet").disabled = false;
+  document.getElementById("modalForm").reset();
+  modal.style.display = "block";
 }
 
 // Event binding
@@ -439,4 +477,6 @@ searchBox.addEventListener("input", filterAndDisplay);
 nationSelectElement.addEventListener("change", filterAndDisplay);
 remarkSelectElement.addEventListener("change", filterAndDisplay);
 sizeRange.addEventListener("change", resizeCards);
+popCreateModalBtn.addEventListener("click", openCreateModal);
+createModalBtn.addEventListener("click", createItem);
 closeModalBtn.addEventListener("click", closeModal);

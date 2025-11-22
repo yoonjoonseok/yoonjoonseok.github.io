@@ -54,6 +54,7 @@
           <option value="nameDesc">이름 ↓</option>
         </select>
         <label id="count" style="width: 80px"></label>
+        <button id="pop-create-modal-button" class="pop-create-modal-button">추가</button>
       </div>
     </div>
 
@@ -305,18 +306,22 @@
     </div>
     <div id="modal" class="modal-container">
       <div class="modal-content">
-        <input id="modalId" type="text" class="modal-input"></input>
-        <input id="modalName" type="text" class="modal-input"></input>
-        <input id="modalMajorCategory" type="text" class="modal-input"></input>
-        <input id="modalMiddleCategory" type="text" class="modal-input"></input>
-        <input id="modalMinorCategory" type="text" class="modal-input"></input>
-        <input id="modalReleaseDate" type="text" class="modal-input"></input>
-        <input id="modalPrice" type="text" class="modal-input"></input>
-        <input id="modalNation" type="text" class="modal-input"></input>
-        <input id="modalStatus" type="text" class="modal-input"></input>
-        <input id="modalIsCollected" type="text" class="modal-input"></input>
-        <input id="modalRemarks" type="text" class="modal-input"></input>
-        <input id="modalImageUrl" type="text" class="modal-input"></input>
+        <form id="modalForm">
+          <fieldset id="formSet">
+          <input id="name" type="text" class="modal-input"></input>
+          <input id="majorCategory" type="text" class="modal-input"></input>
+          <input id="middleCategory" type="text" class="modal-input"></input>
+          <input id="minorCategory" type="text" class="modal-input"></input>
+          <input id="releaseDate" type="text" class="modal-input"></input>
+          <input id="price" type="text" class="modal-input"></input>
+          <input id="nation" type="text" class="modal-input"></input>
+          <input id="status" type="text" class="modal-input"></input>
+          <input id="isCollected" type="text" class="modal-input"></input>
+          <input id="remarks" type="text" class="modal-input"></input>
+          <input id="imageUrl" type="text" class="modal-input"></input>
+          </fieldset>
+        </form>
+        <button id = "create-modal-button" class="create-modal-button">추가</button>
         <button id = "update-modal-button" class="update-modal-button">수정</button>
         <button id = "delete-modal-button" class="delete-modal-button">삭제</button>
         <button id = "close-modal-button" class="close-modal-button">닫기</button>
