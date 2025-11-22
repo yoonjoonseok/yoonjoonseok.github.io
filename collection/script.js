@@ -12,7 +12,7 @@ import {
   ref,
   set,
   get,
-  push
+  push,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -141,14 +141,16 @@ async function saveUserProfile(user) {
 
 function createItem() {
   var formData = new FormData(modalForm);
-  // 'posts'라는 경로의 참조를 가져옵니다.
-  const postsRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
-  const newPostRef = postsRef.push();
-  // 생성된 새로운 참조에 객체 데이터를 저장합니다.
-  newPostRef.set(formData)
+  const newPostKey = push(
+    child(ref(db), "users/" + auth.currentUser.uid + "/itemList")
+  ).key;
+  console.log(newPostKey);
+
+  set(ref(db, "users/" + userId + "/" + newPostKey), formData)
     .then(() => {
-      console.log(newPostRef.key);
+      console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
+      item.id= newPostKey;
       item.index = itemList.length;
       itemList.push(item);
       categoryFilter();
@@ -440,7 +442,8 @@ function openModal(card) {
   const item = itemList[index];
   modal.querySelector('input[name="name"]').value = item.name;
   modal.querySelector('input[name="majorCategory"]').value = item.majorCategory;
-  modal.querySelector('input[name="middleCategory"]').value = item.middleCategory;
+  modal.querySelector('input[name="middleCategory"]').value =
+    item.middleCategory;
   modal.querySelector('input[name="minorCategory"]').value = item.minorCategory;
   modal.querySelector('input[name="releaseDate"]').value = item.releaseDate;
   modal.querySelector('input[name="price"]').value = item.price;
@@ -457,7 +460,7 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-function openCreateModal(){
+function openCreateModal() {
   document.getElementById("formSet").disabled = false;
   document.getElementById("modalForm").reset();
   modal.style.display = "block";
