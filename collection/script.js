@@ -147,7 +147,7 @@ function createItem() {
   ).key;
   console.log(newPostKey);
 
-  set(ref(db, "users/" + userId + "/" + newPostKey), formData)
+  set(ref(db, "users/" + auth.currentUser.uid + "/" + newPostKey), formData)
     .then(() => {
       console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
