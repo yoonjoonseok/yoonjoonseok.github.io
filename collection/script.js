@@ -13,6 +13,7 @@ import {
   set,
   get,
   push,
+  remove,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -319,7 +320,7 @@ function displayResults(data) {
 
   data.forEach((item) => {
     if(item.id == null) return;
-    
+
     const card = document.createElement("div");
     card.classList.add("card");
 
