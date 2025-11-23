@@ -200,7 +200,9 @@ function deleteItem() {
     remove(ref(db, "users/" + auth.currentUser.uid + "/itemList/" + itemList[currentIndex].id))
       .then(() => {
         console.log("데이터 삭제 성공");
-        itemList[currentIndex].id = null;
+        const item = itemList[currentIndex];
+        item.id = null;
+        itemList[currentIndex] = item;
         categoryFilter();
         filterAndDisplay();
       })
