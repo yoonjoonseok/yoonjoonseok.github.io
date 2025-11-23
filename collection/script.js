@@ -177,9 +177,7 @@ function updateItem() {
       console.log("데이터가 성공적으로 수정되었습니다.");
       newItem.id = currentItem.id;
       newItem.index = currentIndex;
-      currentItem = newItem;
-      console.log(currentItem);
-      console.log(itemList);
+      itemList[currentIndex] = newItem;
       categoryFilter();
       filterAndDisplay();
     })
