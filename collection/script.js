@@ -109,7 +109,7 @@ function loadUserItems(user) {
           return {
             ...item,
             index: index,
-            id:key,
+            id: key,
           };
         });
         categoryFilter();
@@ -170,9 +170,11 @@ function updateItem() {
   var formData = new FormData(modalForm);
   var currentItem = itemList[currentIndex];
   var newItem = Object.fromEntries(formData);
-  const db = getDatabase();
+
   set(
-    ref(db, "users/" + auth.currentUser.uid + "/itemList/" + currentItem.id), newItem)
+    ref(db, "users/" + auth.currentUser.uid + "/itemList/" + currentItem.id),
+    newItem
+  )
     .then(() => {
       console.log("데이터가 성공적으로 수정되었습니다.");
       newItem.id = currentItem.id;
@@ -191,8 +193,19 @@ function updateItem() {
 
 function deleteItem() {
   if (confirm("정말 삭제하겠습니까?")) {
-    console.log(e.target.closest(itemList[currentIndex].id));
-    console.log(e.target.closest(itemList[currentIndex].name));
+    console.log(itemList[currentIndex].id);
+    console.log(itemList[currentIndex].name);
+
+    remove(ref(db, "users/" + auth.currentUser.uid + "/itemList/" + itemList[currentIndex].id))
+      .then(() => {
+        console.log("데이터 삭제 성공");
+        itemList[currentIndex].id = null;
+        categoryFilter();
+        filterAndDisplay();
+      })
+      .catch((error) => {
+        console.error("데이터 삭제 실패:", error);
+      });
   }
   closeModal();
 }
@@ -305,6 +318,8 @@ function displayResults(data) {
   const fragment = document.createDocumentFragment();
 
   data.forEach((item) => {
+    if(item.id == null) return;
+    
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -500,7 +515,7 @@ function openCreateModal() {
   modal.style.display = "block";
 }
 
-function openUpdateModal(){
+function openUpdateModal() {
   document.getElementById("formSet").disabled = false;
   console.log(itemList[currentIndex].id);
   console.log(itemList[currentIndex].index);
