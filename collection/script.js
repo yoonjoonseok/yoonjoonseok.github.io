@@ -179,6 +179,7 @@ function updateItem() {
       newItem.index = currentIndex;
       currentItem = newItem;
       console.log(currentItem);
+      console.log(itemList);
       categoryFilter();
       filterAndDisplay();
     })
