@@ -196,13 +196,13 @@ function deleteItem() {
   if (confirm("정말 삭제하겠습니까?")) {
     console.log(itemList[currentIndex].id);
     console.log(itemList[currentIndex].name);
+    const item = itemList[currentIndex];
 
-    remove(ref(db, "users/" + auth.currentUser.uid + "/itemList/" + itemList[currentIndex].id))
+    remove(ref(db, "users/" + auth.currentUser.uid + "/itemList/" + item.id))
       .then(() => {
         console.log("데이터 삭제 성공");
-        const item = itemList[currentIndex];
         item.id = null;
-        itemList[currentIndex] = item;
+        itemList[item.index] = item;
         categoryFilter();
         filterAndDisplay();
       })
