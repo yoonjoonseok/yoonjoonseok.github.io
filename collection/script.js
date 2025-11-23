@@ -105,7 +105,6 @@ function loadUserItems(user) {
   get(dataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot);
         itemList = Object.entries(snapshot.val()).map(([key, item], index) => {
           return {
             ...item,
@@ -113,7 +112,6 @@ function loadUserItems(user) {
             id:key,
           };
         });
-        console.log(itemList);
         categoryFilter();
         filterAndDisplay();
         resizeCards();
@@ -176,9 +174,11 @@ function updateItem() {
   set(
     ref(db, "users/" + auth.currentUser.uid + "/itemList/" + currentItem.id), newItem)
     .then(() => {
+      console.log("데이터가 성공적으로 수정되었습니다.");
       newItem.id = currentItem.id;
       newItem.index = currentIndex;
       currentItem = newItem;
+      console.log(currentItem);
       categoryFilter();
       filterAndDisplay();
     })
@@ -500,7 +500,7 @@ function openCreateModal() {
 }
 
 function openUpdateModal(){
-  document.getElementById("formSet").disabled = true;
+  document.getElementById("formSet").disabled = false;
   console.log(itemList[currentIndex].id);
   console.log(itemList[currentIndex].index);
   console.log(currentIndex);
