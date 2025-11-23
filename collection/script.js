@@ -178,6 +178,8 @@ function updateItem() {
       newItem.id = currentItem.id;
       newItem.index = currentIndex;
       itemList[currentIndex] = newItem;
+      console.log(newItem);
+      console.log(itemList);
       categoryFilter();
       filterAndDisplay();
     })
