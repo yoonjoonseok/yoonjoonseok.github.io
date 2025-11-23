@@ -105,6 +105,7 @@ function loadUserItems(user) {
   get(dataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
+        console.log(snapshot);
         itemList = Object.values(snapshot.val()).map((item, index) => {
           return {
             ...item,
