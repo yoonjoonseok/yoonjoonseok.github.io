@@ -106,11 +106,11 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot);
-        itemList = Object.values(snapshot.val()).map((item, index) => {
+        itemList = Object.entries(snapshot.val()).map(([key, item], index) => {
           return {
             ...item,
             index: index,
-            id:"",
+            id:key,
           };
         });
         console.log(itemList);
