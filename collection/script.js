@@ -110,8 +110,10 @@ function loadUserItems(user) {
           return {
             ...item,
             index: index,
+            id:"",
           };
         });
+        console.log(itemList);
         categoryFilter();
         filterAndDisplay();
         resizeCards();
