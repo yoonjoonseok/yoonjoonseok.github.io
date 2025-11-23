@@ -45,6 +45,7 @@ const modal = document.getElementById("modal");
 const popCreateModalBtn = document.getElementById("pop-create-modal-button");
 const createModalBtn = document.getElementById("create-modal-button");
 const updateModalBtn = document.getElementById("update-modal-button");
+const saveModalBtn = document.getElementById("save-modal-button");
 const deleteModalBtn = document.getElementById("delete-modal-button");
 const closeModalBtn = document.getElementById("close-modal-button");
 const modalForm = document.getElementById("modalForm");
@@ -52,6 +53,7 @@ const modalForm = document.getElementById("modalForm");
 var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
+var currentIndex;
 
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
@@ -142,7 +144,7 @@ async function saveUserProfile(user) {
 function createItem() {
   var formData = new FormData(modalForm);
   var item = Object.fromEntries(formData);
-  const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList"); 
+  const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
   const newPostRef = push(postListRef);
   const newPostKey = newPostRef.key;
   console.log(newPostKey);
@@ -151,29 +153,43 @@ function createItem() {
     .then(() => {
       console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
-      item.id= newPostKey;
+      item.id = newPostKey;
       item.index = itemList.length;
       itemList.push(item);
       categoryFilter();
       filterAndDisplay();
-      closeModal();
     })
     .catch((error) => {
       console.error("데이터 추가 중 오류 발생: ", error);
     });
-}
-
-function updateItem(item, index) {
   closeModal();
 }
 
-function deleteItem(e) {
-  if(confirm("정말 삭제하겠습니까?")){
-    const card = e.target.closest(".card");
-    const cardIndex = e.target.closest("#cardIndex");
-    console.log(e.target.closest("#cardIndex"));
-    console.log(card.querySelector("#cardIndex"));
-	}
+function updateItem() {
+  var formData = new FormData(modalForm);
+  var currentItem = itemList[currentIndex];
+  var newItem = Object.fromEntries(formData);
+  const db = getDatabase();
+  set(
+    ref(db, "users/" + auth.currentUser.uid + "/itemList/" + currentItem.id), newItem)
+    .then(() => {
+      newItem.id = currentItem.id;
+      newItem.index = currentIndex;
+      currentItem = newItem;
+      categoryFilter();
+      filterAndDisplay();
+    })
+    .catch((error) => {
+      console.error("데이터 수정 중 오류 발생: ", error);
+    });
+  closeModal();
+}
+
+function deleteItem() {
+  if (confirm("정말 삭제하겠습니까?")) {
+    console.log(e.target.closest(itemList[currentIndex].id));
+    console.log(e.target.closest(itemList[currentIndex].name));
+  }
   closeModal();
 }
 
@@ -449,9 +465,10 @@ function autoResizeCards() {
 }
 
 function openModal(card) {
+  currentIndex = card.querySelector("#cardIndex").value;
+  const item = itemList[currentIndex];
+
   document.getElementById("formSet").disabled = true;
-  const index = card.querySelector("#cardIndex").value;
-  const item = itemList[index];
   modal.querySelector('input[name="name"]').value = item.name;
   modal.querySelector('input[name="majorCategory"]').value = item.majorCategory;
   modal.querySelector('input[name="middleCategory"]').value =
@@ -470,12 +487,20 @@ function openModal(card) {
 
 function closeModal() {
   modal.style.display = "none";
+  currentIndex = null;
 }
 
 function openCreateModal() {
   document.getElementById("formSet").disabled = false;
   document.getElementById("modalForm").reset();
   modal.style.display = "block";
+}
+
+function openUpdateModal(){
+  document.getElementById("formSet").disabled = true;
+  console.log(itemList[currentIndex].id);
+  console.log(itemList[currentIndex].index);
+  console.log(currentIndex);
 }
 
 // Event binding
@@ -493,5 +518,7 @@ remarkSelectElement.addEventListener("change", filterAndDisplay);
 sizeRange.addEventListener("change", resizeCards);
 popCreateModalBtn.addEventListener("click", openCreateModal);
 createModalBtn.addEventListener("click", createItem);
-deleteModalBtn.addEventListener("click",deleteItem);
+updateModalBtn.addEventListener("click", openUpdateModal);
+saveModalBtn.addEventListener("click", updateItem);
+deleteModalBtn.addEventListener("click", deleteItem);
 closeModalBtn.addEventListener("click", closeModal);
