@@ -321,7 +321,7 @@ function displayResults(data) {
   const fragment = document.createDocumentFragment();
 
   data.forEach((item) => {
-    if(item.id == null) return;
+    if (item.id == null) return;
 
     const card = document.createElement("div");
     card.classList.add("card");
@@ -346,7 +346,10 @@ function displayResults(data) {
     img.style.visibility = "hidden";
     img.style.opacity = "0";
     img.style.transition = "opacity 0.2s ease";
-    img.onerror= "this.onerror=null; this.src='/resource/image/noImage.png';"
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = "/resource/image/noImage.png";
+    };
 
     img.onload = function () {
       const isWide = img.naturalWidth > img.naturalHeight;
@@ -510,7 +513,6 @@ function openModal(card) {
   saveModalBtn.style.display = "none";
   deleteModalBtn.style.display = "block";
 
-
   modal.style.display = "block";
 }
 
@@ -522,7 +524,7 @@ function closeModal() {
 function openCreateModal() {
   document.getElementById("formSet").disabled = false;
   document.getElementById("modalForm").reset();
-  
+
   createModalBtn.style.display = "block";
   updateModalBtn.style.display = "none";
   saveModalBtn.style.display = "none";
