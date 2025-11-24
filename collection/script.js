@@ -108,10 +108,10 @@ function loadUserItems(user) {
   get(categoryDataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        categoryList = snapshot.val();
+        //categoryList = snapshot.val();
         categoryList = Object.entries(snapshot.val());
         console.log(categoryList);
-        sortCategory(snapshot.val());
+        //sortCategory(snapshot.val());
         sortCategory(categoryList);
       }
     })
