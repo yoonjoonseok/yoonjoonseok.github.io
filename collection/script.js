@@ -197,19 +197,19 @@ function setCategory() {
     const option = document.createElement("option");
     option.value = item.value;
     option.dataset.name = item.level + "Category";
-    const style = item.fontColor
-      ? "color:" + item.fontColor + ";"
-      : "" + item.backGroundColor
-      ? "background-color:" + item.backGroundColor + ";"
-      : "" + (item.level == "minor")
-      ? ""
-      : "font-weight:" + (item.level == "major")
-      ? "900;"
-      : "" + (item.level == "middle")
-      ? "bold;"
-      : "" + ";";
+    const style =
+      (item.fontColor ? "color:" + item.fontColor + ";" : "") +
+      (item.backGroundColor
+        ? "background-color:" + item.backGroundColor + ";"
+        : "") +
+      (item.level == "minor" ? "" : "font-weight:") +
+      (item.level == "major" ? "900;" : "") +
+      (item.level == "middle" ? "bold;" : "");
     option.style = style;
-    option.innerHTML = item.label;
+    option.innerHTML =
+      (item.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
+      (item.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
+      item.label;
     selectElement.append(option);
   });
 }
