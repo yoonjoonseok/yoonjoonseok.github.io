@@ -51,6 +51,7 @@ const deleteModalBtn = document.getElementById("delete-modal-button");
 const closeModalBtn = document.getElementById("close-modal-button");
 const modalForm = document.getElementById("modalForm");
 
+var categoryList = [];
 var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
@@ -102,7 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 사용자 아이템 로드 함수
 function loadUserItems(user) {
+  const categoryDataRef = ref(db, "users/" + user.uid + "/itemCategory");
   const dataRef = ref(db, "users/" + user.uid + "/itemList");
+  get(categoryDataRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        categoryList = Object.entries(snapshot.val());
+        console.log(categoryList);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   get(dataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {

@@ -1,376 +1,304 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>소장품</title>
-    <script type="module" src="/collection/script.js" defer></script>
-    <link rel="stylesheet" href="/collection/styles.css" />
-    <script type="module" src="./script.js" defer></script>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
 
-  <body>
-    <div class="header">
-      <div class="header-left">
-        <label>Collection</label>
-      </div>
-      <div class="header-right">
-        <button id="loginBtn">로그인</button>
-        <label id="amount"></label>
-        <div>
-          <input id="sizeRange" type="range" min="1" max="10" value="10" />
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="isCollectedCheckbox"
-            name="isCollectedCheckbox"
-            checked
-          />
-          <label for="isCollectedCheckbox">수집 여부</label>
-        </div>
-        <div>
-          <input type="checkbox" id="isHadCheckbox" name="isHadCheckbox" />
-          <label for="isHadCheckbox">보유만</label>
-        </div>
-        <div>
-          <input type="checkbox" id="statusCheckbox" name="statusCheckbox" />
-          <label for="statusCheckbox">미개봉만</label>
-        </div>
-        <input id="searchBox" type="text" />
-        <label for="nation">국가</label>
-        <select class="nationSelect" id="nation" name="nation">
-          <option value="All" selected>All</option>
-          <option value="KR">KR</option>
-          <option value="JP">JP</option>
-        </select>
-        <label for="remarks">분류</label>
-        <select class="remarksSelect" id="remarks" name="remarks">
-          <option value="All">All</option>
-        </select>
-        <select id="selectSort" name="sort">
-          <option value="releaseDateAsc">발매일 ↑</option>
-          <option value="releaseDateDesc">발매일 ↓</option>
-          <option value="nameAsc">이름 ↑</option>
-          <option value="nameDesc">이름 ↓</option>
-        </select>
-        <label id="count" style="width: 80px"></label>
-        <button id="pop-create-modal-button" class="pop-create-modal-button">추가</button>
-      </div>
+<head>
+  <title>소장품</title>
+  <script type="module" src="/collection/script.js" defer></script>
+  <link rel="stylesheet" href="/collection/styles.css" />
+  <script type="module" src="./script.js" defer></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./collectionList.js" defer></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <label>Collection</label>
     </div>
+    <div class="header-right">
+      <button id="loginBtn">로그인</button>
+      <label id="amount"></label>
+      <div>
+        <input id="sizeRange" type="range" min="1" max="10" value="10" />
+      </div>
+      <div>
+        <input type="checkbox" id="isCollectedCheckbox" name="isCollectedCheckbox" checked />
+        <label for="isCollectedCheckbox">수집 여부</label>
+      </div>
+      <div>
+        <input type="checkbox" id="isHadCheckbox" name="isHadCheckbox" />
+        <label for="isHadCheckbox">보유만</label>
+      </div>
+      <div>
+        <input type="checkbox" id="statusCheckbox" name="statusCheckbox" />
+        <label for="statusCheckbox">미개봉만</label>
+      </div>
+      <input id="searchBox" type="text" />
+      <label for="nation">국가</label>
+      <select class="nationSelect" id="nation" name="nation">
+        <option value="All" selected>All</option>
+        <option value="KR">KR</option>
+        <option value="JP">JP</option>
+      </select>
+      <label for="remarks">분류</label>
+      <select class="remarksSelect" id="remarks" name="remarks">
+        <option value="All">All</option>
+      </select>
+      <select id="selectSort" name="sort">
+        <option value="releaseDateAsc">발매일 ↑</option>
+        <option value="releaseDateDesc">발매일 ↓</option>
+        <option value="nameAsc">이름 ↑</option>
+        <option value="nameDesc">이름 ↓</option>
+      </select>
+      <label id="count" style="width: 80px"></label>
+      <button id="pop-create-modal-button" class="pop-create-modal-button">추가</button>
+    </div>
+  </div>
 
-    <div class="main-container">
-      <div class="category">
-        <select id="for" multiple name="items" size="35">
-          <option
-            value="닌텐도"
-            data-name="majorCategory"
-            style="
+  <div class="main-container">
+    <div class="category">
+      <select id="for" multiple name="items" size="35">
+        <option value="닌텐도" data-name="majorCategory" style="
               font-weight: 900;
               color: white;
               background-color: rgb(203, 0, 18);
-            "
-          >
-            Nintendo
-          </option>
-          <option
-            value="pokemon"
-            data-name="middleCategory"
-            style="
+            ">
+          Nintendo
+        </option>
+        <option value="pokemon" data-name="middleCategory" style="
               font-weight: bold;
               color: rgb(255, 203, 5);
               background-color: rgb(53, 100, 174);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;포켓몬
-          </option>
-          <option value="scaleworld" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스케일 월드
-          </option>
-          <!-- <option value="moncolle" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;몬콜레</option>
-        <option value="gotcha" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가챠</option>-->
-          <option
-            selected
-            value="LEGO"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;포켓몬
+        </option>
+        <option value="scaleworld" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스케일 월드
+        </option>
+        <option selected value="LEGO" data-name="middleCategory" style="
               font-weight: bold;
               color: rgb(255, 213, 2);
               background-color: rgb(227, 0, 11);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;LEGO
-          </option>
-          <option value="LEGOSM" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오
-          </option>
-          <option
-            value="SWITCH2"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;LEGO
+        </option>
+        <option value="LEGOSM" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;슈퍼 마리오
+        </option>
+        <option value="SWITCH2" data-name="middleCategory" style="
               font-weight: bold;
               color: white;
               background-color: rgb(203, 0, 18);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;SWITCH 2
-          </option>
-          <option value="SWITCH2HW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="SWITCH2SW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option value="SWITCH2DL" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
-          </option>
-          <!--<option value="SWITCH2주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-          <option
-            value="SWITCH"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;SWITCH 2
+        </option>
+        <option value="SWITCH2HW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="SWITCH2SW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="SWITCH2DL" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+        </option>
+        <option value="SWITCH" data-name="middleCategory" style="
               font-weight: bold;
               color: white;
               background-color: rgb(203, 0, 18);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;SWITCH
-          </option>
-          <option value="SWITCHHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="SWITCHSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option value="SWITCHDL" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
-          </option>
-          <!--<option value="SWITCH주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-          <option
-            value="WiiU"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;SWITCH
+        </option>
+        <option value="SWITCHHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="SWITCHSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="SWITCHDL" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+        </option>
+        <option value="WiiU" data-name="middleCategory" style="
               font-weight: bold;
               color: white;
               background: rgb(0, 154, 199);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;Wii U
-          </option>
-          <option value="WiiUSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option
-            value="3DS"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;Wii U
+        </option>
+        <option value="WiiUSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="3DS" data-name="middleCategory" style="
               font-weight: bold;
               color: black;
               background-color: rgb(206, 24, 30);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;3DS
-          </option>
-          <option value="3DSHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="3DSSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option value="3DSDL" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
-          </option>
-          <!--<option value="3DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-          <option
-            value="DSiWare"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;3DS
+        </option>
+        <option value="3DSHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="3DSSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="3DSDL" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL
+        </option>
+        <option value="DSiWare" data-name="middleCategory" style="
               font-weight: bold;
               color: black;
               background-color: rgb(237, 73, 154);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;DSiWare
-          </option>
-          <option
-            value="Wii"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;DSiWare
+        </option>
+        <option value="Wii" data-name="middleCategory" style="
               font-weight: bold;
               color: rgb(0, 171, 236);
               background-color: rgb(140, 140, 140);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;Wii
-          </option>
-          <option value="WiiHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="WiiSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <!--<option value="Wii주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-          <option
-            value="DS"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;Wii
+        </option>
+        <option value="WiiHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="WiiSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="DS" data-name="middleCategory" style="
               font-weight: bold;
               color: white;
               background-color: rgb(237, 73, 154);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;DS
-          </option>
-          <option value="DSHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="DSSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <!--<option value="DS주변기기" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변기기</option>-->
-          <option
-            value="GC"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;DS
+        </option>
+        <option value="DSHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="DSSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="GC" data-name="middleCategory" style="
               font-weight: bold;
               color: rgb(74, 86, 142);
               background-color: black;
-            "
-          >
-            &nbsp;&nbsp;&nbsp;GameCube
-          </option>
-          <option value="GCSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option
-            value="GBA"
-            data-name="middleCategory"
-            style="
+            ">
+          &nbsp;&nbsp;&nbsp;GameCube
+        </option>
+        <option value="GCSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="GBA" data-name="middleCategory" style="
               font-weight: bold;
               color: white;
               background-color: rgb(29, 32, 136);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;Game Boy Advance
-          </option>
-          <option value="GBAHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="GBASW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <!--<option value="GBC" data-name="middleCategory" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;Game Boy Color
+            ">
+          &nbsp;&nbsp;&nbsp;Game Boy Advance
         </option>
-        <option value="GBCHW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어</option>
-        <option value="GBCSW" data-name="minorCategory">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어</option>-->
-          <option
-            value="GB"
-            data-name="middleCategory"
-            style="font-weight: bold; color: rgb(29, 32, 136)"
-          >
-            &nbsp;&nbsp;&nbsp;Game Boy
-          </option>
-          <option value="GBHW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
-          </option>
-          <option value="GBSW" data-name="minorCategory">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
-          </option>
-          <option
-            value="G&W"
-            data-name="middleCategory"
-            style="
+        <option value="GBAHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="GBASW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="GB" data-name="middleCategory" style="font-weight: bold; color: rgb(29, 32, 136)">
+          &nbsp;&nbsp;&nbsp;Game Boy
+        </option>
+        <option value="GBHW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;하드웨어
+        </option>
+        <option value="GBSW" data-name="minorCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소프트웨어
+        </option>
+        <option value="G&W" data-name="middleCategory" style="
               font-weight: bold;
               color: rgb(22, 34, 20);
               background-color: rgb(230, 202, 119);
-            "
-          >
-            &nbsp;&nbsp;&nbsp;Game&Watch
-          </option>
-          <option
-            value="etc"
-            data-name="middleCategory"
-            style="font-weight: bold"
-          >
-            &nbsp;&nbsp;&nbsp;Etc.
-          </option>
-          <option
-            value="Amiibo"
-            data-name="middleCategory"
-            style="font-weight: bold"
-          >
-            &nbsp;&nbsp;&nbsp;Amiibo
-          </option>
-        </select>
-      </div>
-      <div id="results" class="card-container"></div>
+            ">
+          &nbsp;&nbsp;&nbsp;Game&Watch
+        </option>
+        <option value="etc" data-name="middleCategory" style="font-weight: bold">
+          &nbsp;&nbsp;&nbsp;Etc.
+        </option>
+        <option value="Amiibo" data-name="middleCategory" style="font-weight: bold">
+          &nbsp;&nbsp;&nbsp;Amiibo
+        </option>
+      </select>
     </div>
-    <div id="modal" class="modal-container">
-      <div class="modal-content">
-        <form id="modalForm">
-          <fieldset id="formSet">
-            <div class="form-group">
-              <label for="name">name</label>
-              <input name="name" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="releaseDate">releaseDate</label>
-              <input name="releaseDate" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="price">price</label>
-              <input name="price" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="majorCategory">majorCategory</label>
-              <input name="majorCategory" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="middleCategory">middleCategory</label>
-              <input name="middleCategory" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="minorCategory">minorCategory</label>
-              <input name="minorCategory" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="remarks">remarks</label>
-              <input name="remarks" type="text" class="modal-input"></input>
-            </div>
-            <div class="form-group">
-              <label for="nation">nation</label>
-              <select name="nation">
-                <option value="KR" selected>KR</option>
-                <option value="JP">JP</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="isCollected">isCollected</label>
-              <select name="isCollected">
-                <option value="Y" selected>Y</option>
-                <option value="N">N</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="status">status</label>
-              <select name="status">
-                <option value="미개봉">미개봉</option>
-                <option value="개봉">개봉</option>
-                <option value="단품">단품</option>
-                <option value="미보유" selected>미보유</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="imageUrl">imageUrl</label>
-              <input name="imageUrl" type="text" class="modal-input"></input>
-            </div>
-          </fieldset>
-        </form>
-        <button id = "create-modal-button" class="create-modal-button">추가</button>
-        <button id = "update-modal-button" class="update-modal-button">수정</button>
-        <button id = "save-modal-button" class="save-modal-button">저장</button>
-        <button id = "delete-modal-button" class="delete-modal-button">삭제</button>
-        <button id = "close-modal-button" class="close-modal-button">닫기</button>
+    <div id="results" class="card-container"></div>
+  </div>
+  <div id="modal" class="modal-container">
+    <div class="modal-content">
+      <form id="modalForm">
+        <fieldset id="formSet">
+          <table style="width:100%">
+            <tbody>
+              <tr>
+                <td><label for="name">이름</label></td>
+                <td><input name="name" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="releaseDate">발매일</label></td>
+                <td><input name="releaseDate" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="price">소비자가격</label></td>
+                <td><input name="price" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="majorCategory">대분류</label></td>
+                <td><input name="majorCategory" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="middleCategory">중분류</label></td>
+                <td><input name="middleCategory" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="minorCategory">소분류</label></td>
+                <td><input name="minorCategory" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="remarks">비고</label></td>
+                <td><input name="remarks" type="text" class="modal-input"></td>
+              </tr>
+              <tr>
+                <td><label for="nation">국가</label></td>
+                <td><select name="nation">
+                    <option value="KR" selected="">KR</option>
+                    <option value="JP">JP</option>
+                  </select></td>
+              </tr>
+              <tr>
+                <td><label for="isCollected">수집 여부</label></td>
+                <td><select name="isCollected">
+                    <option value="Y" selected="">Y</option>
+                    <option value="N">N</option>
+                  </select></td>
+              </tr>
+              <tr>
+                <td><label for="status">상태</label></td>
+                <td><select name="status">
+                    <option value="미개봉">미개봉</option>
+                    <option value="개봉">개봉</option>
+                    <option value="단품">단품</option>
+                    <option value="미보유" selected="">미보유</option>
+                  </select></td>
+              </tr>
+              <tr>
+                <td><label for="imageUrl">이미지 Url</label></td>
+                <td><input name="imageUrl" type="text" class="modal-input"></td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </form>
+      <div class="button-container">
+        <button id="create-modal-button" class="create-modal-button">추가</button>
+        <button id="update-modal-button" class="update-modal-button">수정</button>
+        <button id="save-modal-button" class="save-modal-button">저장</button>
+        <button id="delete-modal-button" class="delete-modal-button">삭제</button>
+        <button id="close-modal-button" class="close-modal-button">닫기</button>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
