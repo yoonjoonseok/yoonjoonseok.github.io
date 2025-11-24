@@ -138,6 +138,54 @@ function loadUserItems(user) {
     });
 }
 
+function sortCategory(data) {
+  const levelRank = { major: 1, middle: 2, minor: 3 };
+
+  // ID 기준 객체 맵
+  const map = Object.fromEntries(
+    data.map(([id, item]) => [id, { id, ...item }])
+  );
+
+  // 부모 → 자식 목록 생성
+  const childrenMap = {};
+  for (const id in map) {
+    const parent = map[id].parent || null;
+    if (!childrenMap[parent]) childrenMap[parent] = [];
+    childrenMap[parent].push(map[id]);
+  }
+
+  // parent 그룹 내 order 순으로 정렬
+  for (const p in childrenMap) {
+    childrenMap[p].sort((a, b) => Number(a.order) - Number(b.order));
+  }
+
+  // DFS로 부모 이후에 자식 출력
+  const result = [];
+
+  function traverse(id) {
+    const item = map[id];
+    result.push(item);
+
+    const children = childrenMap[id];
+    if (children) {
+      for (const child of children) {
+        traverse(child.id);
+      }
+    }
+  }
+
+  // major 루트부터 시작
+  const roots = childrenMap[null].sort(
+    (a, b) => Number(a.order) - Number(b.order)
+  );
+
+  for (const root of roots) {
+    traverse(root.id);
+  }
+
+  console.log(result);
+}
+
 // 사용자 프로필 저장 함수
 async function saveUserProfile(user) {
   const userRef = ref(db, "users/" + user.uid + "/profile");
