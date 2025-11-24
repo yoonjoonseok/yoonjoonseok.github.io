@@ -113,6 +113,7 @@ function loadUserItems(user) {
         console.log(categoryList);
         //sortCategory(snapshot.val());
         sortCategory(categoryList);
+        setCategory();
       }
     })
     .catch((error) => {
@@ -186,7 +187,31 @@ function sortCategory(data) {
     traverse(root.id);
   }
 
-  console.log(result);
+  categoryList = result;
+}
+
+function setCategory() {
+  const selectElement = document.getElementById("for");
+
+  categoryList.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.value;
+    option.dataset.name = item.level + "Category";
+    const style = item.fontColor
+      ? "color:" + item.fontColor + ";"
+      : "" + item.backGroundColor
+      ? "background-color:" + item.backGroundColor + ";"
+      : "" + (item.level == "minor")
+      ? ""
+      : "font-weight:" + (item.level == "major")
+      ? "900;"
+      : "" + (item.level == "middle")
+      ? "bold;"
+      : "" + ";";
+    option.style = style;
+    option.innerHTML = item.label;
+    selectElement.append(option);
+  });
 }
 
 // 사용자 프로필 저장 함수
