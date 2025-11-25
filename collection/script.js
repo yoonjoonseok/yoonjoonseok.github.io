@@ -56,6 +56,8 @@ var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
 var currentIndex;
+var major_middle = new Map();
+var middle_minor = new Map();
 
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
@@ -164,6 +166,9 @@ function newSortCategory(data) {
           .sort((a, b) => a[1].order - b[1].order)
           .forEach(([midKey, middle]) => {
             newSetCategory(middle);
+            const midList = major_middle.get(majorKey) ?? [];
+            midList.push(midKey);
+            major_middle.set(majorKey, midList);
 
             // Minor
             if (middle.son) {
@@ -171,17 +176,22 @@ function newSortCategory(data) {
                 .sort((a, b) => a[1].order - b[1].order)
                 .forEach(([minKey, minor]) => {
                   newSetCategory(minor);
+                  const minList = middle_minor.get(midKey) ?? [];
+                  minList.push(minKey);
+                  middle_minor.set(majorKey, minList);
                 });
             }
           });
       }
     });
+    console.log(major_middle);
+    console.log(middle_minor);
 }
 
 function newSetCategory(data) {
   let option = new Option(
-    (data.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
-      (data.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
+    (data.level == "middle" ? "      " : "") +
+      (data.level == "minor" ? "            " : "") +
       data.label,
     data.label
   );
