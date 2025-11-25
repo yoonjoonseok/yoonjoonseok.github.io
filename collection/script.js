@@ -121,6 +121,7 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(Object.entries(snapshot.val()));
+        newSortCategory(Object.entries(snapshot.val()));
       }
     })
     .catch((error) => {
@@ -147,6 +148,39 @@ function loadUserItems(user) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+function newSortCategory(data) {
+  selectElement.innerHTML = "";
+  data
+    .sort((a, b) => a[1].order - b[1].order) // major 정렬
+    .forEach(([majorKey, major]) => {
+      // Major
+      newSetCategory(major);
+
+      // Middle
+      if (major.son) {
+        Object.entries(major.son)
+          .sort((a, b) => a[1].order - b[1].order)
+          .forEach(([midKey, middle]) => {
+            newSetCategory(middle);
+
+            // Minor
+            if (middle.son) {
+              Object.entries(middle.son)
+                .sort((a, b) => a[1].order - b[1].order)
+                .forEach(([minKey, minor]) => {
+                  newSetCategory(minor);
+                });
+            }
+          });
+      }
+    });
+}
+
+function newSetCategory(data) {
+  let option = new Option(data.label, data.label);
+  selectElement.add(option);
 }
 
 function sortCategory(data) {
