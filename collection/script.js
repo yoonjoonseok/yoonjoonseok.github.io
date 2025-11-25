@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       signInWithPopup(auth, provider)
         .then((result) => {
           const user = result.user;
-          console.log(user);
           saveUserProfile(user);
           loadUserItems(user);
         })
@@ -104,16 +103,24 @@ document.addEventListener("DOMContentLoaded", () => {
 // 사용자 아이템 로드 함수
 function loadUserItems(user) {
   const categoryDataRef = ref(db, "users/" + user.uid + "/itemCategory");
+  const newCategoryDataRef = ref(db, "users/" + user.uid + "/newItemCategory");
   const dataRef = ref(db, "users/" + user.uid + "/itemList");
   get(categoryDataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        //categoryList = snapshot.val();
         categoryList = Object.entries(snapshot.val());
-        console.log(categoryList);
-        //sortCategory(snapshot.val());
         sortCategory(categoryList);
         setCategory();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  get(newCategoryDataRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(Object.entries(snapshot.val()));
       }
     })
     .catch((error) => {
@@ -238,7 +245,6 @@ function createItem() {
   const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
   const newPostRef = push(postListRef);
   const newPostKey = newPostRef.key;
-  console.log(newPostKey);
 
   set(newPostRef, item)
     .then(() => {
@@ -270,8 +276,6 @@ function updateItem() {
       newItem.id = currentItem.id;
       newItem.index = currentItem.index;
       itemList[currentItem.index] = newItem;
-      console.log(newItem);
-      console.log(itemList);
       categoryFilter();
       filterAndDisplay();
     })
@@ -283,8 +287,6 @@ function updateItem() {
 
 function deleteItem() {
   if (confirm("정말 삭제하겠습니까?")) {
-    console.log(itemList[currentIndex].id);
-    console.log(itemList[currentIndex].name);
     const item = itemList[currentIndex];
 
     remove(ref(db, "users/" + auth.currentUser.uid + "/itemList/" + item.id))
