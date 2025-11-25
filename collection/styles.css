@@ -171,3 +171,11 @@ body {
     right:10px;
     cursor:pointer;
 }
+
+.majorCategory{
+    font-weight: 900;
+}
+
+.middleCategory{
+    font-weight: bold;
+}

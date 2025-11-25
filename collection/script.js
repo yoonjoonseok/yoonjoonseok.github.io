@@ -179,7 +179,17 @@ function newSortCategory(data) {
 }
 
 function newSetCategory(data) {
-  let option = new Option(data.label, data.label);
+  let option = new Option(
+    (item.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
+      (item.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
+      data.label,
+    data.label
+  );
+  option.dataset.name = data.level + "Category";
+  option.style.color = data.fontColor;
+  option.style.backgroundColor = data.backgroundColor;
+  option.classList.add(data.level + "Category");
+
   selectElement.add(option);
 }
 
