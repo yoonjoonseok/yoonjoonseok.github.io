@@ -180,8 +180,8 @@ function newSortCategory(data) {
 
 function newSetCategory(data) {
   let option = new Option(
-    (item.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
-      (item.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
+    (data.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
+      (data.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
       data.label,
     data.label
   );
