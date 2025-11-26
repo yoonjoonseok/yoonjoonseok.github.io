@@ -129,7 +129,7 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(Object.entries(snapshot.val()));
-        categoryMap = convertToHierarchicalMap(snapshot.val());
+        categoryMap = convertToHierarchicalMap(snapshot.val(), 1);
         console.log(categoryMap);
         renderCategory();
         console.log(categoryMap);
@@ -169,31 +169,50 @@ function renderCategory() {
   }
 }
 
-function renderMiddleCategory(){
+function renderCategory(key, value, depth) {
+  var level;
+  switch(depth){
+    case 1 : level = "major";
+      break;
+    case 2 : level = "middle";
+      break;
+    default : level = "minor";
+  }
+  var option = new Option(
+    (depth == 2 ? "      " : "") + (depth == 3 ? "            " : "") + key, key);
+  option.style.color = value.fontColor;
+  option.style.backgroundColor = value.backGroundColor;
+  option.dataset.name = level + "Category";
+  option.classList.add(level + "Category");
+  selectElement.add(option);
+}
+
+function renderMiddleCategory() {
   middleCategorySelect.options.length = 1;
   console.log(categoryMap);
-  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()){
+  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()) {
     var option = new Option(key, key);
-    middleCategorySelect.add(option);    
+    middleCategorySelect.add(option);
   }
 }
 
-function convertToHierarchicalMap(obj) {
+function convertToHierarchicalMap(obj, depth) {
   const sortedEntries = Object.entries(obj).sort((a, b) => {
-        const orderA = a[1].order ?? 0;
-        const orderB = b[1].order ?? 0;
-        return orderA - orderB;
+    const orderA = a[1].order ?? 0;
+    const orderB = b[1].order ?? 0;
+    return orderA - orderB;
   });
   const map = new Map();
 
   for (const [key, value] of sortedEntries) {
     // 값은 객체 그대로 유지해야 함 → 복사
     const newObj = { ...value };
+    renderEachCategory(key, value, depth);
 
     // son이 비어있지 않고 object이면 다시 Map 변환
     if (value.son && typeof value.son === "object") {
       // son은 객체들의 entry 배열이어야 Map으로 변환 가능
-      newObj.son = convertToHierarchicalMap(value.son);
+      newObj.son = convertToHierarchicalMap(value.son, depth + 1);
     }
 
     map.set(key, newObj);
