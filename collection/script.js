@@ -179,7 +179,7 @@ function renderCategory(key, value, depth) {
     default : level = "minor";
   }
   var option = new Option(
-    (depth == 2 ? "      " : "") + (depth == 3 ? "            " : "") + key, key);
+    (level == "middle" ? "      " : "") + (level == "minor" ? "            " : "") + key, key);
   option.style.color = value.fontColor;
   option.style.backgroundColor = value.backGroundColor;
   option.dataset.name = level + "Category";
