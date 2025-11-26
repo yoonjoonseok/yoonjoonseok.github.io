@@ -188,7 +188,7 @@ function convertToHierarchicalMap(obj) {
     // son이 비어있지 않고 object이면 다시 Map 변환
     if (value.son && typeof value.son === "object") {
       // son은 객체들의 entry 배열이어야 Map으로 변환 가능
-      newObj.son = convertToHierarchicalMap(Object.entries(value.son));
+      newObj.son = convertToHierarchicalMap(value.son);
     }
 
     map.set(key, newObj);
