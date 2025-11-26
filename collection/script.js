@@ -51,13 +51,19 @@ const deleteModalBtn = document.getElementById("delete-modal-button");
 const closeModalBtn = document.getElementById("close-modal-button");
 const modalForm = document.getElementById("modalForm");
 
+const majorCategorySelect = document.getElementById("majorCategorySelect");
+const middleCategorySelect = document.getElementById("middleCategorySelect");
+const categoryLabel = document.getElementById("categoryLabel");
+const fontColorSelect = document.getElementById("fontColorSelect");
+const backgroundColorSelect = document.getElementById("backgroundColorSelect");
+const categoryAddBtn = document.getElementById("categoryAddBtn");
+
 var categoryList = [];
 var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
 var currentIndex;
-var major_middle = new Map();
-var middle_minor = new Map();
+var categoryMap = new Map();
 
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
@@ -123,7 +129,7 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(Object.entries(snapshot.val()));
-        newSortCategory(Object.entries(snapshot.val()));
+        //newSortCategory(Object.entries(snapshot.val()));
       }
     })
     .catch((error) => {
@@ -166,9 +172,6 @@ function newSortCategory(data) {
           .sort((a, b) => a[1].order - b[1].order)
           .forEach(([midKey, middle]) => {
             newSetCategory(middle);
-            const midList = major_middle.get(majorKey) ?? [];
-            midList.push(midKey);
-            major_middle.set(majorKey, midList);
 
             // Minor
             if (middle.son) {
@@ -176,16 +179,13 @@ function newSortCategory(data) {
                 .sort((a, b) => a[1].order - b[1].order)
                 .forEach(([minKey, minor]) => {
                   newSetCategory(minor);
-                  const minList = middle_minor.get(midKey) ?? [];
-                  minList.push(minKey);
-                  middle_minor.set(majorKey, minList);
                 });
             }
           });
       }
     });
-    console.log(major_middle);
-    console.log(middle_minor);
+  console.log(major_middle);
+  console.log(middle_minor);
 }
 
 function newSetCategory(data) {
@@ -686,6 +686,55 @@ function openUpdateModal() {
   deleteModalBtn.style.display = "none";
 }
 
+function addCategory() {
+  const label = categoryLabel.value;
+  const category = new Category(
+    backgroundColorSelect.value,
+    fontColorSelect.value,
+    0,
+    ""
+  );
+  const url = "users/" + auth.currentUser.uid + "/newItemCategory";
+
+  const majcv = majorCategorySelect.value;
+  const midcv = middleCategorySelect.value;
+
+  if (majcv != "none") {
+    url += "/" + majcv + "/child";
+    const parent = categoryMap.get(majcv);
+    category.order = parent.size + 1;
+    parent.child = new Map(label, category);
+  } else {
+    category.order = categoryMap.size + 1;
+    categoryMap.set(label, category);
+  }
+  if (midcv != "none") {
+    url += "/" + midcv + "/child";
+    const parent = categoryMap.get(majcv).child.get(midcv);
+    category.order = parent.size + 1;
+    parent.child = new Map(label, category);
+  }
+
+  url += "/" + label;
+
+  const ref = ref(db, url);
+
+  set(ref, category)
+    .then(() => {
+      console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
+    })
+    .catch((error) => {
+      console.error("카테고리 데이터 추가 중 오류 발생: ", error);
+    });
+}
+
+function Category(backgroundColor, fontColor, order, son) {
+  this.backGroundColor = backgroundColor;
+  this.fontColor = fontColor;
+  this.order = order;
+  this.son = son;
+}
+
 // Event binding
 selectElement.addEventListener("change", function () {
   categoryFilter();
@@ -705,3 +754,4 @@ updateModalBtn.addEventListener("click", openUpdateModal);
 saveModalBtn.addEventListener("click", updateItem);
 deleteModalBtn.addEventListener("click", deleteItem);
 closeModalBtn.addEventListener("click", closeModal);
+categoryAddBtn.addEventListener("click", addCategory);
