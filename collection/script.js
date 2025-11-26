@@ -752,11 +752,11 @@ function addCategory() {
   if (majcv != "none") {
     url += "/" + majcv + "/son";
     const parent = categoryMap.get(majcv);
-    console.log(parent.size);
+    console.log(parent.son.size);
     if (parent.son == "") {
       parent.son = new Map();
     }
-    category.order = parent.size + 1;
+    category.order = parent.son.size + 1;
     parent.son.set(label, category);
   } else {
     category.order = categoryMap.size + 1;
@@ -764,11 +764,11 @@ function addCategory() {
   }
   if (midcv != "none") {
     url += "/" + midcv + "/son";
-    const parent = categoryMap.get(majcv).son.get(midcv).son;
+    const parent = categoryMap.get(majcv).son.get(midcv);
     if (parent.son == "") {
       parent.son = new Map();
     }
-    category.order = parent.size + 1;
+    category.order = parent.son.size + 1;
     parent.son.set(label, category);
   }
 
