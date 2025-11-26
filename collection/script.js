@@ -717,9 +717,9 @@ function addCategory() {
 
   url += "/" + label;
 
-  const ref = ref(db, url);
+  const categoryRef = ref(db, url);
 
-  set(ref, category)
+  set(categoryRef, category)
     .then(() => {
       console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
     })
