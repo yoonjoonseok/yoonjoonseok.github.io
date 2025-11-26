@@ -129,7 +129,8 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(Object.entries(snapshot.val()));
-        //newSortCategory(Object.entries(snapshot.val()));
+        categoryMap = objectToMap(snapshot.val());
+        console.log(categoryMap);
       }
     })
     .catch((error) => {
@@ -156,6 +157,18 @@ function loadUserItems(user) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+function objectToMap(obj) {
+    const map = new Map();
+    for (const [key, value] of Object.entries(obj)) {
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+            map.set(key, objectToMap(value));  // 객체면 재귀변환
+        } else {
+            map.set(key, value); // number/string 등 기본값
+        }
+    }
+    return map;
 }
 
 function newSortCategory(data) {
