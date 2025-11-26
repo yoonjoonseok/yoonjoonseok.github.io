@@ -163,42 +163,49 @@ function loadUserItems(user) {
 
 function renderCategory() {
   majorCategorySelect.options.length = 1;
-  for (const [key, value] of categoryMap) {
-    var option = new Option (key,key);
+  for (const key of myMap.keys()) {
+    var option = new Option(key, key);
     majorCategorySelect.add(option);
   }
 }
 
+function renderMiddleCategory(){
+  middleCategorySelect.options.length = 1;
+  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()){
+    var option = new Option(key, key);
+    middleCategorySelect.add(option);    
+  }
+}
+
 function convertToHierarchicalMap(obj) {
-    const map = new Map();
+  const map = new Map();
 
-    for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(obj)) {
+    // 값은 객체 그대로 유지해야 함 → 복사
+    const newObj = { ...value };
 
-        // 값은 객체 그대로 유지해야 함 → 복사
-        const newObj = { ...value };
-
-        // son이 비어있지 않고 object이면 다시 Map 변환
-        if (value.son && typeof value.son === "object") {
-            // son은 객체들의 entry 배열이어야 Map으로 변환 가능
-            newObj.son = convertToHierarchicalMap(Object.entries(value.son));
-        }
-
-        map.set(key, newObj);
+    // son이 비어있지 않고 object이면 다시 Map 변환
+    if (value.son && typeof value.son === "object") {
+      // son은 객체들의 entry 배열이어야 Map으로 변환 가능
+      newObj.son = convertToHierarchicalMap(Object.entries(value.son));
     }
 
-    return map;
+    map.set(key, newObj);
+  }
+
+  return map;
 }
 
 function objectToMap(obj) {
-    const map = new Map();
-    for (const [key, value] of Object.entries(obj)) {
-        if (value && typeof value === "object" && !Array.isArray(value)) {
-            map.set(key, objectToMap(value));  // 객체면 재귀변환
-        } else {
-            map.set(key, value); // number/string 등 기본값
-        }
+  const map = new Map();
+  for (const [key, value] of Object.entries(obj)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      map.set(key, objectToMap(value)); // 객체면 재귀변환
+    } else {
+      map.set(key, value); // number/string 등 기본값
     }
-    return map;
+  }
+  return map;
 }
 
 function newSortCategory(data) {
@@ -745,10 +752,11 @@ function addCategory() {
   if (majcv != "none") {
     url += "/" + majcv + "/son";
     const parent = categoryMap.get(majcv);
-    category.order = parent.size + 1;
-    if(parent.son == ""){
+    console.log(parent.size);
+    if (parent.son == "") {
       parent.son = new Map();
     }
+    category.order = parent.size + 1;
     parent.son.set(label, category);
   } else {
     category.order = categoryMap.size + 1;
@@ -756,11 +764,11 @@ function addCategory() {
   }
   if (midcv != "none") {
     url += "/" + midcv + "/son";
-    const parent = categoryMap.get(majcv).son.get(midcv);
-    category.order = parent.size + 1;
-    if(parent.son == ""){
+    const parent = categoryMap.get(majcv).son.get(midcv).son;
+    if (parent.son == "") {
       parent.son = new Map();
     }
+    category.order = parent.size + 1;
     parent.son.set(label, category);
   }
 
@@ -805,3 +813,4 @@ saveModalBtn.addEventListener("click", updateItem);
 deleteModalBtn.addEventListener("click", deleteItem);
 closeModalBtn.addEventListener("click", closeModal);
 categoryAddBtn.addEventListener("click", addCategory);
+majorCategorySelect.addEventListener("change", renderMiddleCategory);
