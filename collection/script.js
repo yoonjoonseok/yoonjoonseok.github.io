@@ -129,7 +129,9 @@ function loadUserItems(user) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(Object.entries(snapshot.val()));
-        categoryMap = objectToMap(snapshot.val());
+        categoryMap = convertToHierarchicalMap(snapshot.val());
+        console.log(categoryMap);
+        renderCategory();
         console.log(categoryMap);
       }
     })
@@ -157,6 +159,33 @@ function loadUserItems(user) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+function renderCategory() {
+  for (const [key, value] of categoryMap) {
+    var option = new Option (key,key);
+    majorCategorySelect.add(option);
+  }
+}
+
+function convertToHierarchicalMap(obj) {
+    const map = new Map();
+
+    for (const [key, value] of Object.entries(obj)) {
+
+        // 값은 객체 그대로 유지해야 함 → 복사
+        const newObj = { ...value };
+
+        // son이 비어있지 않고 object이면 다시 Map 변환
+        if (value.son && typeof value.son === "object") {
+            // son은 객체들의 entry 배열이어야 Map으로 변환 가능
+            newObj.son = convertToHierarchicalMap(Object.entries(value.son));
+        }
+
+        map.set(key, newObj);
+    }
+
+    return map;
 }
 
 function objectToMap(obj) {
@@ -735,6 +764,7 @@ function addCategory() {
   set(categoryRef, category)
     .then(() => {
       console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
+      renderCategory();
     })
     .catch((error) => {
       console.error("카테고리 데이터 추가 중 오류 발생: ", error);
