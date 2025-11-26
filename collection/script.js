@@ -162,6 +162,7 @@ function loadUserItems(user) {
 }
 
 function renderCategory() {
+  majorCategorySelect.options.length = 1;
   for (const [key, value] of categoryMap) {
     var option = new Option (key,key);
     majorCategorySelect.add(option);
@@ -745,7 +746,10 @@ function addCategory() {
     url += "/" + majcv + "/child";
     const parent = categoryMap.get(majcv);
     category.order = parent.size + 1;
-    parent.child = new Map(label, category);
+    if(parent.child == ""){
+      parent.child = new Map();
+    }
+    parent.child.set(label, category);
   } else {
     category.order = categoryMap.size + 1;
     categoryMap.set(label, category);
@@ -754,7 +758,10 @@ function addCategory() {
     url += "/" + midcv + "/child";
     const parent = categoryMap.get(majcv).child.get(midcv);
     category.order = parent.size + 1;
-    parent.child = new Map(label, category);
+    if(parent.child == ""){
+      parent.child = new Map();
+    }
+    parent.child.set(label, category);
   }
 
   url += "/" + label;
