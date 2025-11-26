@@ -131,7 +131,7 @@ function loadUserItems(user) {
         console.log(Object.entries(snapshot.val()));
         categoryMap = convertToHierarchicalMap(snapshot.val(), 1);
         console.log(categoryMap);
-        renderCategory();
+        renderMajorCategory();
         console.log(categoryMap);
       }
     })
@@ -161,7 +161,7 @@ function loadUserItems(user) {
     });
 }
 
-function renderCategory() {
+function renderMajorCategory() {
   majorCategorySelect.options.length = 1;
   for (const key of categoryMap.keys()) {
     var option = new Option(key, key);
