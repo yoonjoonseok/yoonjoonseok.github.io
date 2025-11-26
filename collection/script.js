@@ -743,25 +743,25 @@ function addCategory() {
   const midcv = middleCategorySelect.value;
 
   if (majcv != "none") {
-    url += "/" + majcv + "/child";
+    url += "/" + majcv + "/son";
     const parent = categoryMap.get(majcv);
     category.order = parent.size + 1;
-    if(parent.child == ""){
-      parent.child = new Map();
+    if(parent.son == ""){
+      parent.son = new Map();
     }
-    parent.child.set(label, category);
+    parent.son.set(label, category);
   } else {
     category.order = categoryMap.size + 1;
     categoryMap.set(label, category);
   }
   if (midcv != "none") {
-    url += "/" + midcv + "/child";
-    const parent = categoryMap.get(majcv).child.get(midcv);
+    url += "/" + midcv + "/son";
+    const parent = categoryMap.get(majcv).son.get(midcv);
     category.order = parent.size + 1;
-    if(parent.child == ""){
-      parent.child = new Map();
+    if(parent.son == ""){
+      parent.son = new Map();
     }
-    parent.child.set(label, category);
+    parent.son.set(label, category);
   }
 
   url += "/" + label;
