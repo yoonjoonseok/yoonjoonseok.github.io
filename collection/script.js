@@ -179,9 +179,14 @@ function renderMiddleCategory(){
 }
 
 function convertToHierarchicalMap(obj) {
+  const sortedEntries = Object.entries(obj).sort((a, b) => {
+        const orderA = a[1].order ?? 0;
+        const orderB = b[1].order ?? 0;
+        return orderA - orderB;
+  });
   const map = new Map();
 
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of sortedEntries) {
     // 값은 객체 그대로 유지해야 함 → 복사
     const newObj = { ...value };
 
