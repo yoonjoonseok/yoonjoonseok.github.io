@@ -694,7 +694,7 @@ function addCategory() {
     0,
     ""
   );
-  const url = "users/" + auth.currentUser.uid + "/newItemCategory";
+  var url = "users/" + auth.currentUser.uid + "/newItemCategory";
 
   const majcv = majorCategorySelect.value;
   const midcv = middleCategorySelect.value;
