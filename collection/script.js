@@ -771,6 +771,7 @@ function addCategory() {
     category.order = parent.son.size + 1;
     parent.son.set(label, category);
   }
+  console.log(categoryMap);
 
   url += "/" + label;
 
