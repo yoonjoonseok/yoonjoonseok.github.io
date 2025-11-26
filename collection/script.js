@@ -171,6 +171,7 @@ function renderCategory() {
 
 function renderMiddleCategory(){
   middleCategorySelect.options.length = 1;
+  console.log(categoryMap);
   for (const key of categoryMap.get(majorCategorySelect.value).son.keys()){
     var option = new Option(key, key);
     middleCategorySelect.add(option);    
