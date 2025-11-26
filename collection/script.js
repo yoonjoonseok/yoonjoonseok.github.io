@@ -163,7 +163,7 @@ function loadUserItems(user) {
 
 function renderCategory() {
   majorCategorySelect.options.length = 1;
-  for (const key of myMap.keys()) {
+  for (const key of categoryMap.keys()) {
     var option = new Option(key, key);
     majorCategorySelect.add(option);
   }
