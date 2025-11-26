@@ -207,7 +207,7 @@ function convertToHierarchicalMap(obj, depth) {
   for (const [key, value] of sortedEntries) {
     // 값은 객체 그대로 유지해야 함 → 복사
     const newObj = { ...value };
-    renderEachCategory(key, value, depth);
+    renderCategory(key, value, depth);
 
     // son이 비어있지 않고 object이면 다시 Map 변환
     if (value.son && typeof value.son === "object") {
