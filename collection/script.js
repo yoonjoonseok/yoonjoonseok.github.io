@@ -58,12 +58,11 @@ const fontColorSelect = document.getElementById("fontColorSelect");
 const backgroundColorSelect = document.getElementById("backgroundColorSelect");
 const categoryAddBtn = document.getElementById("categoryAddBtn");
 
-var categoryList = [];
+var categoryMap = new Map();
 var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
 var currentIndex;
-var categoryMap = new Map();
 
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
@@ -75,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 로그인 상태이면 사용자 데이터 로드
       console.log("자동 로그인:", user);
       saveUserProfile(user);
+      loadUserCategories(user);
       loadUserItems(user);
       loginBtn.textContent = "로그아웃";
     } else {
@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((result) => {
           const user = result.user;
           saveUserProfile(user);
+          loadUserCategories(user);
           loadUserItems(user);
         })
         .catch((error) => {
@@ -108,36 +109,180 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// 사용자 아이템 로드 함수
-function loadUserItems(user) {
-  const categoryDataRef = ref(db, "users/" + user.uid + "/itemCategory");
-  const newCategoryDataRef = ref(db, "users/" + user.uid + "/newItemCategory");
-  const dataRef = ref(db, "users/" + user.uid + "/itemList");
-  get(categoryDataRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        categoryList = Object.entries(snapshot.val());
-        sortCategory(categoryList);
-        setCategory();
-      }
-    })
-    .catch((error) => {
-      console.error(error);
+// 사용자 프로필 저장 함수
+async function saveUserProfile(user) {
+  const userRef = ref(db, "users/" + user.uid + "/profile");
+  const snapshot = await get(userRef);
+
+  if (!snapshot.exists()) {
+    await set(userRef, {
+      email: user.email,
+      name: user.displayName,
+      photo: user.photoURL,
+      createdAt: Date.now(),
     });
+    console.log("프로필 저장 완료");
+  } else {
+    console.log("기존 프로필 존재");
+  }
+}
+
+/*Category 관리 functions*/
+
+function loadUserCategories(user) {
+  const newCategoryDataRef = ref(db, "users/" + user.uid + "/newItemCategory");
 
   get(newCategoryDataRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(Object.entries(snapshot.val()));
-        categoryMap = convertToHierarchicalMap(snapshot.val(), 1);
-        console.log(categoryMap);
-        renderMajorCategory();
-        console.log(categoryMap);
+        categoryMap = convertToHierarchicalMap(snapshot.val());
+        renderAllCategory();
       }
     })
     .catch((error) => {
       console.error(error);
     });
+}
+
+function convertToHierarchicalMap(obj) {
+  const sortedEntries = Object.entries(obj).sort((a, b) => {
+    const orderA = a[1].order ?? 0;
+    const orderB = b[1].order ?? 0;
+    return orderA - orderB;
+  });
+  const map = new Map();
+
+  for (const [key, value] of sortedEntries) {
+    const newObj = { ...value };
+
+    if (value.son && typeof value.son === "object") {
+      newObj.son = convertToHierarchicalMap(value.son);
+    }
+
+    map.set(key, newObj);
+  }
+
+  return map;
+}
+
+function renderAllCategory() {
+  selectElement.options.length = 0;
+  categoryMap.forEach((majorKey, majorValue) => {
+    renderCategory(majorKey, majorValue, null, null);
+    if (majorValue.son instanceof Map) {
+      majorValue.son.forEach((middleKey, middleValue) => {
+        renderCategory(middleKey, middleValue, majorKey, null);
+        if (middleValue.son instanceof Map) {
+          middleValue.son.forEach((minorKey, minorValue) => {
+            renderCategory(minorKey, minorValue, majorKey, middleKey);
+          })
+        }
+      })
+    }
+  });
+
+  renderMajorCategory();
+  console.log(categoryMap);
+}
+
+function renderCategory(key, value, major, middle) {
+  var level = (middle) ? "minor" : ((major) ? "middle" : "major");
+  var gap = "";
+  var option = new Option();
+
+  option.value = key;
+  option.style.color = value.fontColor;
+  option.style.backgroundColor = value.backGroundColor;
+  option.classList.add(level + "Category");
+
+  if (major) {
+    option.dataset.major = major;
+    gap += "      ";
+  }
+  if (middle) {
+    option.dataset.middle = middle;
+    gap += "      ";
+  }
+
+  option.innerHTML = gap + key;
+  selectElement.add(option);
+}
+
+function renderMajorCategory() {
+  majorCategorySelect.options.length = 1;
+  for (const key of categoryMap.keys()) {
+    var option = new Option(key, key);
+    majorCategorySelect.add(option);
+  }
+}
+
+function renderMiddleCategory() {
+  middleCategorySelect.options.length = 1;
+  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()) {
+    var option = new Option(key, key);
+    middleCategorySelect.add(option);
+  }
+}
+
+function addCategory() {
+  const label = categoryLabel.value;
+  const category = new Category(
+    backgroundColorSelect.value,
+    fontColorSelect.value,
+    0,
+    ""
+  );
+  var url = "users/" + auth.currentUser.uid + "/newItemCategory";
+
+  const majcv = majorCategorySelect.value;
+  const midcv = middleCategorySelect.value;
+
+  if (majcv != "none") {
+    url += "/" + majcv + "/son";
+    const parent = categoryMap.get(majcv);
+    if (parent.son == "") {
+      parent.son = new Map();
+    }
+    category.order = parent.son.size + 1;
+    parent.son.set(label, category);
+  } else {
+    category.order = categoryMap.size + 1;
+    categoryMap.set(label, category);
+  }
+
+  if (midcv != "none") {
+    url += "/" + midcv + "/son";
+    const parent = categoryMap.get(majcv).son.get(midcv);
+    if (parent.son == "") {
+      parent.son = new Map();
+    }
+    category.order = parent.son.size + 1;
+    parent.son.set(label, category);
+  }
+
+  url += "/" + label;
+  const categoryRef = ref(db, url);
+
+  set(categoryRef, category)
+    .then(() => {
+      console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
+      renderMajorCategory();
+    })
+    .catch((error) => {
+      console.error("카테고리 데이터 추가 중 오류 발생: ", error);
+    });
+}
+
+function Category(backgroundColor, fontColor, order, son) {
+  this.backGroundColor = backgroundColor;
+  this.fontColor = fontColor;
+  this.order = order;
+  this.son = son;
+}
+
+// 사용자 아이템 로드 함수
+function loadUserItems(user) {
+  const dataRef = ref(db, "users/" + user.uid + "/itemList");
 
   get(dataRef)
     .then((snapshot) => {
@@ -161,212 +306,7 @@ function loadUserItems(user) {
     });
 }
 
-function renderMajorCategory() {
-  majorCategorySelect.options.length = 1;
-  for (const key of categoryMap.keys()) {
-    var option = new Option(key, key);
-    majorCategorySelect.add(option);
-  }
-}
-
-function renderCategory(key, value, depth) {
-  var level;
-  switch(depth){
-    case 1 : level = "major";
-      break;
-    case 2 : level = "middle";
-      break;
-    default : level = "minor";
-  }
-  var option = new Option(
-    (level == "middle" ? "      " : "") + (level == "minor" ? "            " : "") + key, key);
-  option.style.color = value.fontColor;
-  option.style.backgroundColor = value.backGroundColor;
-  option.dataset.name = level + "Category";
-  option.classList.add(level + "Category");
-  selectElement.add(option);
-}
-
-function renderMiddleCategory() {
-  middleCategorySelect.options.length = 1;
-  console.log(categoryMap);
-  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()) {
-    var option = new Option(key, key);
-    middleCategorySelect.add(option);
-  }
-}
-
-function convertToHierarchicalMap(obj, depth) {
-  const sortedEntries = Object.entries(obj).sort((a, b) => {
-    const orderA = a[1].order ?? 0;
-    const orderB = b[1].order ?? 0;
-    return orderA - orderB;
-  });
-  const map = new Map();
-
-  for (const [key, value] of sortedEntries) {
-    // 값은 객체 그대로 유지해야 함 → 복사
-    const newObj = { ...value };
-    renderCategory(key, value, depth);
-
-    // son이 비어있지 않고 object이면 다시 Map 변환
-    if (value.son && typeof value.son === "object") {
-      // son은 객체들의 entry 배열이어야 Map으로 변환 가능
-      newObj.son = convertToHierarchicalMap(value.son, depth + 1);
-    }
-
-    map.set(key, newObj);
-  }
-
-  return map;
-}
-
-function objectToMap(obj) {
-  const map = new Map();
-  for (const [key, value] of Object.entries(obj)) {
-    if (value && typeof value === "object" && !Array.isArray(value)) {
-      map.set(key, objectToMap(value)); // 객체면 재귀변환
-    } else {
-      map.set(key, value); // number/string 등 기본값
-    }
-  }
-  return map;
-}
-
-function newSortCategory(data) {
-  selectElement.innerHTML = "";
-  data
-    .sort((a, b) => a[1].order - b[1].order) // major 정렬
-    .forEach(([majorKey, major]) => {
-      // Major
-      newSetCategory(major);
-
-      // Middle
-      if (major.son) {
-        Object.entries(major.son)
-          .sort((a, b) => a[1].order - b[1].order)
-          .forEach(([midKey, middle]) => {
-            newSetCategory(middle);
-
-            // Minor
-            if (middle.son) {
-              Object.entries(middle.son)
-                .sort((a, b) => a[1].order - b[1].order)
-                .forEach(([minKey, minor]) => {
-                  newSetCategory(minor);
-                });
-            }
-          });
-      }
-    });
-  console.log(major_middle);
-  console.log(middle_minor);
-}
-
-function newSetCategory(data) {
-  let option = new Option(
-    (data.level == "middle" ? "      " : "") +
-      (data.level == "minor" ? "            " : "") +
-      data.label,
-    data.label
-  );
-  option.dataset.name = data.level + "Category";
-  option.style.color = data.fontColor;
-  option.style.backgroundColor = data.backgroundColor;
-  option.classList.add(data.level + "Category");
-
-  selectElement.add(option);
-}
-
-function sortCategory(data) {
-  const levelRank = { major: 1, middle: 2, minor: 3 };
-
-  // ID 기준 객체 맵
-  const map = Object.fromEntries(
-    data.map(([id, item]) => [id, { id, ...item }])
-  );
-
-  // 부모 → 자식 목록 생성
-  const childrenMap = {};
-  for (const id in map) {
-    const parent = map[id].parent || null;
-    if (!childrenMap[parent]) childrenMap[parent] = [];
-    childrenMap[parent].push(map[id]);
-  }
-
-  // parent 그룹 내 order 순으로 정렬
-  for (const p in childrenMap) {
-    childrenMap[p].sort((a, b) => Number(a.order) - Number(b.order));
-  }
-
-  // DFS로 부모 이후에 자식 출력
-  const result = [];
-
-  function traverse(id) {
-    const item = map[id];
-    result.push(item);
-
-    const children = childrenMap[id];
-    if (children) {
-      for (const child of children) {
-        traverse(child.id);
-      }
-    }
-  }
-
-  // major 루트부터 시작
-  const roots = childrenMap[null].sort(
-    (a, b) => Number(a.order) - Number(b.order)
-  );
-
-  for (const root of roots) {
-    traverse(root.id);
-  }
-
-  categoryList = result;
-}
-
-function setCategory() {
-  const selectElement = document.getElementById("for");
-
-  categoryList.forEach((item) => {
-    const option = document.createElement("option");
-    option.value = item.value;
-    option.dataset.name = item.level + "Category";
-    const style =
-      (item.fontColor ? "color:" + item.fontColor + ";" : "") +
-      (item.backGroundColor
-        ? "background-color:" + item.backGroundColor + ";"
-        : "") +
-      (item.level == "minor" ? "" : "font-weight:") +
-      (item.level == "major" ? "900;" : "") +
-      (item.level == "middle" ? "bold;" : "");
-    option.style = style;
-    option.innerHTML =
-      (item.level == "middle" ? "&nbsp;&nbsp;&nbsp;" : "") +
-      (item.level == "minor" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : "") +
-      item.label;
-    selectElement.append(option);
-  });
-}
-
-// 사용자 프로필 저장 함수
-async function saveUserProfile(user) {
-  const userRef = ref(db, "users/" + user.uid + "/profile");
-  const snapshot = await get(userRef);
-
-  if (!snapshot.exists()) {
-    await set(userRef, {
-      email: user.email,
-      name: user.displayName,
-      photo: user.photoURL,
-      createdAt: Date.now(),
-    });
-    console.log("프로필 저장 완료");
-  } else {
-    console.log("기존 프로필 존재");
-  }
-}
+/*item 관리 functions*/
 
 function createItem() {
   var formData = new FormData(modalForm);
@@ -377,7 +317,6 @@ function createItem() {
 
   set(newPostRef, item)
     .then(() => {
-      console.log(newPostKey);
       console.log("데이터가 성공적으로 추가되었습니다.");
       item.id = newPostKey;
       item.index = itemList.length;
@@ -450,31 +389,18 @@ function deleteItem() {
 itemList = arr.map(item => new Item(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7], item[8], item[9], item[10]));*/
 
 function categoryFilter() {
-  const selectedOptions = Array.from(selectElement.options).filter(
-    (o) => o.selected
-  );
-  const majorCategory = selectedOptions
-    .filter((o) => o.dataset.name === "majorCategory")
-    .map((o) => o.value);
-  const middleCategory = selectedOptions
-    .filter((o) => o.dataset.name === "middleCategory")
-    .map((o) => o.value);
-  const minorCategory = selectedOptions
-    .filter((o) => o.dataset.name === "minorCategory")
-    .map((o) => o.value);
-  const hasCategoryFilter =
-    majorCategory.length || middleCategory.length || minorCategory.length;
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  var level = (selectedOption.dataset.middle)?"minor":((selectedOption.dataset.major)?"middle":"major");
+
   filteredDataByCategory = itemList.filter((item) => {
-    if (
-      hasCategoryFilter &&
-      !(
-        majorCategory.includes(item.majorCategory) ||
-        middleCategory.includes(item.middleCategory) ||
-        minorCategory.includes(item.minorCategory)
-      )
-    )
-      return false;
-    return true;
+    if(level == "major"){
+      return item.majorCategory == selectedOption.value;
+    } else if(level == "middle"){
+      return item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.value;
+    } else {
+      item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.dataset.middle  && item.minorCategory == selectedOption.value;
+    }
+    return false;
   });
   changeRemarkOptions();
 }
@@ -692,7 +618,7 @@ function renderingSum(filteredData) {
         return (
           acc +
           (cur.price.slice(-1) === "￥" ? 10 : 1) *
-            parseInt(cur.price.slice(0, -1))
+          parseInt(cur.price.slice(0, -1))
         );
       }, 0)
       .toLocaleString() + "원";
@@ -759,64 +685,6 @@ function openUpdateModal() {
   updateModalBtn.style.display = "none";
   saveModalBtn.style.display = "block";
   deleteModalBtn.style.display = "none";
-}
-
-function addCategory() {
-  const label = categoryLabel.value;
-  const category = new Category(
-    backgroundColorSelect.value,
-    fontColorSelect.value,
-    0,
-    ""
-  );
-  var url = "users/" + auth.currentUser.uid + "/newItemCategory";
-
-  const majcv = majorCategorySelect.value;
-  const midcv = middleCategorySelect.value;
-
-  if (majcv != "none") {
-    url += "/" + majcv + "/son";
-    const parent = categoryMap.get(majcv);
-    console.log(parent.son.size);
-    if (parent.son == "") {
-      parent.son = new Map();
-    }
-    category.order = parent.son.size + 1;
-    parent.son.set(label, category);
-  } else {
-    category.order = categoryMap.size + 1;
-    categoryMap.set(label, category);
-  }
-  if (midcv != "none") {
-    url += "/" + midcv + "/son";
-    const parent = categoryMap.get(majcv).son.get(midcv);
-    if (parent.son == "") {
-      parent.son = new Map();
-    }
-    category.order = parent.son.size + 1;
-    parent.son.set(label, category);
-  }
-  console.log(categoryMap);
-
-  url += "/" + label;
-
-  const categoryRef = ref(db, url);
-
-  set(categoryRef, category)
-    .then(() => {
-      console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
-      renderCategory();
-    })
-    .catch((error) => {
-      console.error("카테고리 데이터 추가 중 오류 발생: ", error);
-    });
-}
-
-function Category(backgroundColor, fontColor, order, son) {
-  this.backGroundColor = backgroundColor;
-  this.fontColor = fontColor;
-  this.order = order;
-  this.son = son;
 }
 
 // Event binding
