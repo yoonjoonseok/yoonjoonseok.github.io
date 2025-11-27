@@ -246,19 +246,17 @@ function addCategory() {
     }
     category.order = parent.son.size + 1;
     parent.son.set(label, category);
-  } else {
-    category.order = categoryMap.size + 1;
-    categoryMap.set(label, category);
-  }
-
-  if (midcv != "") {
-    url += "/" + midcv + "/son";
+  } else if (midcv != "") {
+    url += "/" + majcv + "/" + midcv + "/son";
     const parent = categoryMap.get(majcv).son.get(midcv);
     if (parent.son == "") {
       parent.son = new Map();
     }
     category.order = parent.son.size + 1;
     parent.son.set(label, category);
+  } else {
+    category.order = categoryMap.size + 1;
+    categoryMap.set(label, category);
   }
 
   url += "/" + label;
