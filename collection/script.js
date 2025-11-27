@@ -168,15 +168,12 @@ function convertToHierarchicalMap(obj) {
 function renderAllCategory() {
   selectElement.options.length = 0;
   categoryMap.forEach((majorValue, majorKey) => {
-    console.log(majorKey + " " + majorValue);
     renderCategory(majorKey, majorValue, null, null);
     if (majorValue.son instanceof Map) {
       majorValue.son.forEach((middleValue, middleKey) => {
-        console.log(middleKey + " " + middleValue);
         renderCategory(middleKey, middleValue, majorKey, null);
         if (middleValue.son instanceof Map) {
           middleValue.son.forEach((minorValue, minorKey) => {
-            console.log(minorKey + " " + minorValue);
             renderCategory(minorKey, minorValue, majorKey, middleKey);
           })
         }

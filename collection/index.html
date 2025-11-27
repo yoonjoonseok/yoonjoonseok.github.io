@@ -59,15 +59,19 @@
     <div class="category">
       <select id="for" multiple name="items" size="35">
       </select>
+      <label>상위 대분류</label>
       <select id="majorCategorySelect">
         <option value="none">없음</option>
       </select>
+      <label>상위 중분류</label>
       <select id="middleCategorySelect">
         <option value="none">없음</option>
       </select>
       <input id="categoryLabel" type="text">
+      <label>배경 색</label>
+      <input id="backgroundColorSelect" type="color" value="#ffffff">
+      <label>글자 색</label>
       <input id="fontColorSelect" type="color">
-      <input id="backgroundColorSelect" type="color">
       <button id="categoryAddBtn">추가</button>
     </div>
     <div id="results" class="card-container"></div>
