@@ -668,10 +668,10 @@ function openModal(card) {
 
   document.getElementById("formSet").disabled = true;
   modal.querySelector('input[name="name"]').value = item.name;
-  modal.querySelector('input[name="majorCategory"]').value = item.majorCategory;
-  modal.querySelector('input[name="middleCategory"]').value =
+  modal.querySelector('select[name="majorCategory"]').value = item.majorCategory;
+  modal.querySelector('select[name="middleCategory"]').value =
     item.middleCategory;
-  modal.querySelector('input[name="minorCategory"]').value = item.minorCategory;
+  modal.querySelector('select[name="minorCategory"]').value = item.minorCategory;
   modal.querySelector('input[name="releaseDate"]').value = item.releaseDate;
   modal.querySelector('input[name="price"]').value = item.price;
   modal.querySelector('select[name="nation"]').value = item.nation;
