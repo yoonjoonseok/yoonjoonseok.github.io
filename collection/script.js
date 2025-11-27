@@ -201,11 +201,11 @@ function renderCategory(key, value, major, middle) {
 
   if (major) {
     option.dataset.major = major;
-    gap += "      ";
+    gap += "&nbsp;&nbsp;&nbsp;&nbsp;";
   }
   if (middle) {
     option.dataset.middle = middle;
-    gap += "      ";
+    gap += "&nbsp;&nbsp;&nbsp;&nbsp;";
   }
 
   option.innerHTML = gap + key;
@@ -402,9 +402,8 @@ function categoryFilter() {
     } else if(level == "middle"){
       return item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.value;
     } else {
-      item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.dataset.middle  && item.minorCategory == selectedOption.value;
+      return item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.dataset.middle  && item.minorCategory == selectedOption.value;
     }
-    return false;
   });
   changeRemarkOptions();
 }
