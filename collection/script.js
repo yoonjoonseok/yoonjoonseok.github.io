@@ -57,12 +57,26 @@ const categoryLabel = document.getElementById("categoryLabel");
 const fontColorSelect = document.getElementById("fontColorSelect");
 const backgroundColorSelect = document.getElementById("backgroundColorSelect");
 const categoryAddBtn = document.getElementById("categoryAddBtn");
+const modalMajorSelect = document.getElementById("modalMajorSelect");
+const modalMiddleSelect = document.getElementById("modalMiddleSelect");
+const modalMinorSelect = document.getElementById("modalMinorSelect");
 
 var categoryMap = new Map();
 var itemList = [];
 var filteredDataByCategory = [];
 var filteredData = [];
+var currentCategory = {
+  "major" : "",
+  "middle" : "",
+  "minor" : "",
+}
 var currentIndex;
+
+function CurrentCategory(major, middle, minor){
+  this.major = major;
+  this.middle = middle;
+  this.minor = minor;
+}
 
 // DOM 로드 후 버튼 이벤트 연결
 document.addEventListener("DOMContentLoaded", () => {
@@ -211,17 +225,27 @@ function renderCategory(key, value, major, middle) {
 
 function renderMajorCategory() {
   majorCategorySelect.options.length = 1;
+  modalMinorSelect.options.length = 1;
   for (const key of categoryMap.keys()) {
     var option = new Option(key, key);
     majorCategorySelect.add(option);
+    modalMinorSelect.add(option);
   }
 }
 
-function renderMiddleCategory() {
-  middleCategorySelect.options.length = 1;
-  for (const key of categoryMap.get(majorCategorySelect.value).son.keys()) {
+function renderMiddleCategory(select) {
+  select.options.length = 1;
+  for (const key of categoryMap.get(select.dataset.major).son.keys()) {
     var option = new Option(key, key);
-    middleCategorySelect.add(option);
+    select.add(option);
+  }
+}
+
+function renderMinorCategory(select) {
+  select.options.length = 1;
+  for (const key of categoryMap.get(select.dataset.major).son.get(select.value).son.keys()) {
+    var option = new Option(key, key);
+    select.add(option);
   }
 }
 
@@ -394,11 +418,14 @@ function categoryFilter() {
 
   filteredDataByCategory = itemList.filter((item) => {
     if(level == "major"){
-      return item.majorCategory == selectedOption.value;
+      currentCategory = new CurrentCategory(selectedOption.value, "", "");
+      return item.majorCategory == currentCategory.major;
     } else if(level == "middle"){
-      return item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.value;
+      currentCategory = new CurrentCategory(selectedOption.dataset.major, selectedOption.value, "");
+      return item.majorCategory == currentCategory.major && item.middleCategory == currentCategory.middle;
     } else {
-      return item.majorCategory == selectedOption.dataset.major && item.middleCategory == selectedOption.dataset.middle  && item.minorCategory == selectedOption.value;
+      currentCategory = new CurrentCategory(selectedOption.dataset.major, selectedOption.dataset.middle, selectedOption.value);
+      return item.majorCategory == currentCategory.major && item.middleCategory == currentCategory.middle  && item.minorCategory == currentCategory.minor;
     }
   });
   changeRemarkOptions();
@@ -658,7 +685,7 @@ function openModal(card) {
   saveModalBtn.style.display = "none";
   deleteModalBtn.style.display = "block";
 
-  modal.style.display = "block";
+  beforeRenderModal(item);
 }
 
 function closeModal() {
@@ -675,6 +702,14 @@ function openCreateModal() {
   saveModalBtn.style.display = "none";
   deleteModalBtn.style.display = "none";
 
+  beforeRenderModal();
+}
+
+function beforeRenderModal(item){
+
+  modalMajorSelect.value = currentCategory.major;
+  modalMiddleSelect.value = currentCategory.middle;
+  modalMinorSelect.value = currentCategory.minor;
   modal.style.display = "block";
 }
 
@@ -706,4 +741,6 @@ saveModalBtn.addEventListener("click", updateItem);
 deleteModalBtn.addEventListener("click", deleteItem);
 closeModalBtn.addEventListener("click", closeModal);
 categoryAddBtn.addEventListener("click", addCategory);
-majorCategorySelect.addEventListener("change", renderMiddleCategory);
+majorCategorySelect.addEventListener("change", renderMiddleCategory(middleCategorySelect));
+modalMajorSelect.addEventListener("change", renderMiddleCategory(modalMinorSelect));
+modalMiddleSelect.addEventListener("change", renderMinorCategory(modalMinorSelect));
