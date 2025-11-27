@@ -267,6 +267,7 @@ function addCategory() {
   set(categoryRef, category)
     .then(() => {
       console.log("카테고리 데이터가 성공적으로 추가되었습니다.");
+      renderAllCategory();
       renderMajorCategory();
     })
     .catch((error) => {
