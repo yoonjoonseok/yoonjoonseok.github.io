@@ -247,7 +247,7 @@ function addCategory() {
     category.order = parent.son.size + 1;
     parent.son.set(label, category);
   } else if (midcv != "") {
-    url += "/" + majcv + "/" + midcv + "/son";
+    url += "/" + majcv + "/son/" + midcv + "/son";
     const parent = categoryMap.get(majcv).son.get(midcv);
     if (parent.son == "") {
       parent.son = new Map();
