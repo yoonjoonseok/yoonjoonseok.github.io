@@ -238,7 +238,7 @@ function addCategory() {
   const majcv = majorCategorySelect.value;
   const midcv = middleCategorySelect.value;
 
-  if (majcv != "none" && midcv == "none") {
+  if (majcv != "" && midcv == "") {
     url += "/" + majcv + "/son";
     const parent = categoryMap.get(majcv);
     if (parent.son == "") {
@@ -251,7 +251,7 @@ function addCategory() {
     categoryMap.set(label, category);
   }
 
-  if (midcv != "none") {
+  if (midcv != "") {
     url += "/" + midcv + "/son";
     const parent = categoryMap.get(majcv).son.get(midcv);
     if (parent.son == "") {
