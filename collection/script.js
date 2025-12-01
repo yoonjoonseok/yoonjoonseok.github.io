@@ -225,11 +225,11 @@ function renderCategory(key, value, major, middle) {
 
 function renderMajorCategory() {
   majorCategorySelect.options.length = 1;
-  modalMinorSelect.options.length = 1;
+  modalMajorSelect.options.length = 1;
   for (const key of categoryMap.keys()) {
     var option = new Option(key, key);
     majorCategorySelect.add(option);
-    modalMinorSelect.add(option);
+    modalMajorSelect.add(option);
   }
 }
 
@@ -669,8 +669,10 @@ function openModal(card) {
   document.getElementById("formSet").disabled = true;
   modal.querySelector('input[name="name"]').value = item.name;
   modal.querySelector('select[name="majorCategory"]').value = item.majorCategory;
+  modal.querySelector('select[name="middleCategory"]').add(new Option(item.middleCategory, item.middleCategory));
   modal.querySelector('select[name="middleCategory"]').value =
     item.middleCategory;
+  modal.querySelector('select[name="minorCategory"]').add(new Option(item.minorCategory, item.minorCategory));
   modal.querySelector('select[name="minorCategory"]').value = item.minorCategory;
   modal.querySelector('input[name="releaseDate"]').value = item.releaseDate;
   modal.querySelector('input[name="price"]').value = item.price;
