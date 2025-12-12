@@ -344,6 +344,11 @@ function loadUserItems(user) {
 function createItem() {
     var formData = new FormData(modalForm);
     var item = Object.fromEntries(formData);
+
+    if(!item.imageUrl){
+      item.imageUrl = "/resource/image/"+item.majorCategory+"/"+item.middleCategory+"/"+item.minorCategory+"/"+item.name+".webp";
+    }
+
     const postListRef = ref(db, "users/" + auth.currentUser.uid + "/itemList");
     const newPostRef = push(postListRef);
     const newPostKey = newPostRef.key;
