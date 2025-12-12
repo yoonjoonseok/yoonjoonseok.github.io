@@ -59,20 +59,23 @@
     <div class="category">
       <select id="for" multiple name="items" size="35">
       </select>
-      <label>상위 대분류</label>
-      <select id="majorCategorySelect">
-        <option value="">없음</option>
-      </select>
-      <label>상위 중분류</label>
-      <select id="middleCategorySelect">
-        <option value="">없음</option>
-      </select>
-      <input id="categoryLabel" type="text">
-      <label>배경 색</label>
-      <input id="backgroundColorSelect" type="color" value="#ffffff">
-      <label>글자 색</label>
-      <input id="fontColorSelect" type="color">
-      <button id="categoryAddBtn">추가</button>
+      <div class="addCategory">
+        <label>상위 대분류</label>
+        <select id="majorCategorySelect">
+          <option value="">없음</option>
+        </select>
+        <label>상위 중분류</label>
+        <select id="middleCategorySelect">
+          <option value="">없음</option>
+        </select>
+        <label>분류 이름</label>
+        <input id="categoryLabel" type="text">
+        <label>배경 색</label>
+        <input id="backgroundColorSelect" type="color" value="#ffffff">
+        <label>글자 색</label>
+        <input id="fontColorSelect" type="color">
+        <button id="categoryAddBtn">추가</button>
+      </div>
     </div>
     <div id="results" class="card-container"></div>
   </div>
@@ -96,19 +99,21 @@
               </tr>
               <tr>
                 <td><label for="majorCategory">대분류</label></td>
-                <td><select id = "modalMajorSelect" name = "majorCategory"></select></td>
+                <td><select id="modalMajorSelect" name="majorCategory">
+                    <option value="">없음</option>
+                  </select></td>
               </tr>
               <tr>
                 <td><label for="middleCategory">중분류</label></td>
-                <td><select id = "modalMiddleSelect" name = "middleCategory">
-                  <option value="">없음</option>
-                </select></td>
+                <td><select id="modalMiddleSelect" name="middleCategory">
+                    <option value="">없음</option>
+                  </select></td>
               </tr>
               <tr>
                 <td><label for="minorCategory">소분류</label></td>
-                <td><select id = "modalMinorSelect" name = "minorCategory">
-                  <option value="">없음</option>
-                </select></td>
+                <td><select id="modalMinorSelect" name="minorCategory">
+                    <option value="">없음</option>
+                  </select></td>
               </tr>
               <tr>
                 <td><label for="remarks">비고</label></td>

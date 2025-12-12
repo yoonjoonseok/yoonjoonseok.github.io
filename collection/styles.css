@@ -45,6 +45,12 @@ body {
     padding-top: 20px;
 }
 
+.addCategory {
+    display: grid;
+    align-items: center; 
+    justify-content: center;
+}
+
 #for{
     width: 150px;
 }
