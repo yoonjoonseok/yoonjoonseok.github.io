@@ -657,8 +657,8 @@ function renderingSum(filteredData) {
             .reduce((acc, cur) => {
                 return (
                     acc +
-                    (cur.price.slice(-1) === "￥" ? 10 : 1) *
-                    parseInt(cur.price.slice(0, -1))
+                    (cur.nation === "JP" ? 10 : 1) *
+                    parseInt(cur.price)
                 );
             }, 0)
             .toLocaleString() + "원";
