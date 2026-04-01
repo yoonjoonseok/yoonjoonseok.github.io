@@ -185,3 +185,7 @@ body {
 .middleCategory{
     font-weight: bold;
 }
+
+.modal-input{
+    width:100%;
+}
